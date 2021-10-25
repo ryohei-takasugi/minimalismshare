@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Minimalismshare</title>
+    <title>MinimalismShare</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
   </head>
 
   <body>
+    <header>
+      <h1 class="title"><%= link_to "MinimalismShare", root_path %></h1>
+      <ul class='a-lists'>
+        <% if user_signed_in? %>
+        <span class="user-menu"><%= current_user.nickname %>
+          <ul>
+            <li><%= link_to "マイページ", "/users/#{current_user.id}" %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </span>
+        <!-- <li class="a-list"><%= link_to current_user.nickname, "#", class: "btn user-nickname" %></li> -->
+        <!-- <li class="a-list"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn logout" %></li> -->
+        <% else %>
+        <li><%= link_to 'ログイン', new_user_session_path, class: "btn login" %></li>
+        <li><%= link_to '新規登録', new_user_registration_path, class: "btn sign-up" %></li>
+        <% end %>
+      </ul>
+    </header>
+    <nav>
+      <ul class='a-lists'>
+        <li><%= link_to 'about', "#", class: "btn about active" %></li>
+        <li><%= link_to 'みんなの経験', "#", class: "btn experience" %></li>
+        <li><%= link_to 'カタリバ', "#", class: "btn debate" %></li>
+        <li><%= link_to 'おすすめ本', "#", class: "btn last book" %></li>
+      </ul>
+    </nav>
     <%= yield %>
   </body>
 </html>
