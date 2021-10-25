@@ -1,0 +1,47 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sign-container {
+  width: 400px;
+  margin: 20px auto;
+  padding: 30px;
+  border: 1px solid #D8D8D8;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 5px;
+  h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 20px;
+  }
+  form {
+    input, textarea {
+      width: 100%;
+      margin: 5px 0 15px;
+      padding: 10px;
+      border: 1px solid #D8D8D8;
+      border-radius: 5px;
+    }
+    .field-flex {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      input {
+        width: 10px;
+        margin: 0px;
+        padding: 0px;
+      }
+      label {
+        margin-left: 5px;
+        width: 200px;
+      }
+    }
+    .actions input {
+      background-color: #57C3E9;
+      text-align: center;
+      color: white;
+    }
+  }
+}
