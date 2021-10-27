@@ -131,7 +131,7 @@
     * 住まいの気候　：任意、「比較的寒い地域、比較的温かい地域、寒暖差の少ない地域」
     * 同居人　　　　：任意、「１人／２人／家族」人暮らし
     * （うち未成年）：任意、「有／無」
-    * 状況　　　　　：任意、「すでにかなり物が少ない／ある程度物を減らして片付いている／ちょっとだけ減らした／まだ何もしてない」
+    * 現在の状況　　：任意、「すでにかなり物が少ない／ある程度物を減らして片付いている／ちょっとだけ減らした／まだ何もしてない」
   * ボタン
     * 新規作成：入力エリアに入力して新規作成ボタンを押す
     * 新規作成：新規作成ボタンを押して、アカウントの作成に成功した場合は、ログイン済みとなり、「経験の投稿を一覧表示／検索するページ」へ遷移する
@@ -289,6 +289,7 @@
     * いいね：クリックすることで閲覧者が評価できる
   * 表示
     * ログイン済ユーザーであれば、編集ボタンと削除ボタンを表示する
+    * 編集履歴（ユーザー名、編集前、編集後、更新日時）を閲覧することができる
 
 ## 7.14 思考の共有を編集するページ の要件
 * 状態：未ログインユーザーが画面を表示した
@@ -311,12 +312,13 @@
 
 # 9. 実装予定の機能
 
-* メール通知による更新通知機能
+* 思考の共有ページ
 * Twitter連動
   * ログイン連動
   * 投稿連動
-* スマホアプリ用にサーバーサイドのAPIサーバー化
+* サーバーサイド、フロントエンドの分離
 * スマホアプリ（ネイティブ）の製作
+* メール通知による更新通知機能の実装
 
 # 10. データベース設計
 
@@ -324,16 +326,19 @@
 
 ![経験の投稿 ER図](./doc/table-experience.jpg "経験の投稿 ER図")
 
-![思考の共有 ER図](./doc/table-idea.jpg "思考の共有 ER図")
-
 ## users テーブル
 
-| Column             | Type   | Options                   |
-| ------------------ | ------ | ------------------------- |
-| email              | string | null: false, unique: true |
-| encrypted_password | string | null: false               |
-| nickname           | string | null: false               |
-
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
+| nickname           | string  | null: false               |
+| dream              | string  | null: false               |
+| region_id          | integer | null: false               |
+| climate_id         | integer | null: false               |
+| housemate_id       | integer | null: false               |
+| children_id        | integer | null: false               |
+| status_id          | integer | null: false               |
 
 ### Association
 
@@ -343,6 +348,93 @@
 - has_many :notices
 
 
-# 11. ローカルでの動作方法
+## experiences テーブル
 
+| Column   | Type       | Options                         |
+| -------- | ---------- | ------------------------------- |
+| privacy  | integer    | null: false                     |
+| category | integer    | null: false                     |
+| title    | string     | null: false                     |
+| days     | integer    | null: false                     |
+| problem  | text       | null: false                     |
+| solved   | text       | null: false                     |
+| user     | references | null: false, foreign_key: true  |
+
+### Association
+
+- belongs_to :user
+- has_many :experience_likes
+- has_many :experience_comments
+- has_many :experience_tag_relations
+
+
+## experience_comments テーブル
+
+| Column     | Type       | Options                         |
+| ---------- | ---------- | ------------------------------- |
+| comment    | text       | null: false                     |
+| user       | references | null: false, foreign_key: true  |
+| experience | references | null: false, foreign_key: true  |
+
+### Association
+
+- belongs_to :user
+- belongs_to :experience
+
+
+## experience_likes テーブル
+| Column     | Type       | Options                         |
+| ---------- | ---------- | ------------------------------- |
+| like       | boolean    | null: false                     |
+| imitation  | boolean    | null: false                     |
+| user       | references | null: false, foreign_key: true  |
+| experience | references | null: false, foreign_key: true  |
+
+
+### Association
+
+- belongs_to :user
+- belongs_to :experience
+
+
+
+## experience_tag_relations テーブル
+| Column     | Type       | Options                         |
+| ---------- | ---------- | ------------------------------- |
+| tag        | references | null: false, foreign_key: true  |
+| experience | references | null: false, foreign_key: true  |
+
+### Association
+
+- belongs_to :tag
+- belongs_to :experience
+
+
+## notices テーブル
+| Column     | Type       | Options                         |
+| ---------- | ---------- | ------------------------------- |
+| content    | string     | null: false                     |
+| url        | string     |                                 |
+| read       | boolean    | null: false                     |
+| user       | references | null: false, foreign_key: true  |
+
+### Association
+
+- belongs_to :user
+
+
+## tags テーブル
+| Column | Type    | Options     |
+| ------ | ------- | ----------- |
+| name   | string  | null: false |
+
+
+### Association
+
+- has_many :experience_tag_relations
+
+
+
+# 11. ローカルでの動作方法
+(現状説明なし)
 
