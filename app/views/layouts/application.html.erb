@@ -11,6 +11,7 @@
   </head>
 
   <body>
+    <!-- header -->
     <header>
       <h1 class="title"><%= link_to "MinimalismShare", root_path %></h1>
       <ul class='a-lists'>
@@ -21,22 +22,25 @@
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
           </ul>
         </span>
-        <!-- <li class="a-list"><%= link_to current_user.nickname, "#", class: "btn user-nickname" %></li> -->
-        <!-- <li class="a-list"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn logout" %></li> -->
         <% else %>
         <li><%= link_to 'ログイン', new_user_session_path, class: "btn login" %></li>
         <li><%= link_to '新規登録', new_user_registration_path, class: "btn sign-up" %></li>
         <% end %>
       </ul>
     </header>
+    <!-- navigation -->
     <nav>
       <ul class='a-lists'>
-        <li><%= link_to 'みんなの経験', "#", class: "btn experience active" %></li>
+        <li><%= link_to 'みんなの経験', experiences_path, class: "btn experience active" %></li>
         <li><%= link_to 'カタリバ', "#", class: "btn debate" %></li>
         <li><%= link_to 'おすすめ本', "#", class: "btn book" %></li>
         <li><%= link_to 'about', "#", class: "btn last about" %></li>
       </ul>
     </nav>
+    <!-- contents -->
     <%= yield %>
+    <!-- footer -->
+    <footer>
+    </footer>
   </body>
 </html>
