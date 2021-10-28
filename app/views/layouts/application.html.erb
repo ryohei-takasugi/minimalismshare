@@ -7,15 +7,31 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <!-- header -->
     <header>
-      <h1 class="title"><%= link_to "MinimalismShare", root_path %></h1>
+      <h1 class="title">
+        <span class="page-menu">
+          <%= link_to "MinimalismShare", root_path %>
+          <i class="far fa-caret-square-down"></i>
+          <ul>
+            <li><%= link_to "TOP", "/" %></li>
+            <li><%= link_to "ABOUT", "#" %></li>
+            <li><%= link_to "みんなの経験", "#" %></li>
+          </ul>
+        </span>
+      </h1>
       <ul class='a-lists'>
         <% if user_signed_in? %>
+        <span class="edit-menu">投稿する <i class="fas fa-edit"></i>
+          <ul>
+            <li><%= link_to "経験の記事", "#" %></li>
+          </ul>
+        </span>
         <span class="user-menu"><%= current_user.nickname %>
           <ul>
             <li><%= link_to "マイページ", "/users/#{current_user.id}" %></li>
@@ -28,15 +44,6 @@
         <% end %>
       </ul>
     </header>
-    <!-- navigation -->
-    <nav>
-      <ul class='a-lists'>
-        <li><%= link_to 'みんなの経験', experiences_path, class: "btn experience active" %></li>
-        <li><%= link_to 'カタリバ', "#", class: "btn debate" %></li>
-        <li><%= link_to 'おすすめ本', "#", class: "btn book" %></li>
-        <li><%= link_to 'about', "#", class: "btn last about" %></li>
-      </ul>
-    </nav>
     <!-- contents -->
     <%= yield %>
     <!-- footer -->

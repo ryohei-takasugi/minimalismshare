@@ -21,6 +21,7 @@
 $line-color: #D8D8D8;
 $back-color: white;
 $font-color: black;
+$main-font: 'Zen Maru Gothic', sans-serif; 
 // -----------------------------
 //  共通mixin
 // -----------------------------
@@ -38,7 +39,6 @@ $font-color: black;
   height: $height;
   line-height: $line-height;
   width: $width;
-  border-left: 1px solid $line-color;
   display: inline-block;
   padding: 0 10px;
   text-align: center;
@@ -65,9 +65,10 @@ $font-color: black;
   align-items: center;
 }
 
-@mixin drop-down($width, $left) {
+@mixin drop-down($width, $left, $font-size) {
   position: relative;
   ul {
+    font-size: $font-size;
     position: absolute;
     visibility: hidden;
     padding: 5px 10px;
@@ -77,6 +78,7 @@ $font-color: black;
     transition: all .2s ease;
     border: 1px solid $line-color;
     background-color: $back-color;
+    font-family: $main-font;
   }
   &:hover { 
     ul {
@@ -85,11 +87,13 @@ $font-color: black;
     }
   }
 }
+
+
 // -----------------------------
 // body
 // -----------------------------
 body {
-  font-family: 'Zen Maru Gothic', sans-serif;
+  font-family: $main-font;
   margin: 0 auto;
   border-left: 1px solid $line-color;
   border-right: 1px solid $line-color;
@@ -99,52 +103,45 @@ body {
 /*  ヘッダー  */
 // -----------------------------
 header {
+  $height: 50px;
   @include menu-bar(50px, 100%);
   justify-content: space-between;
+  border-bottom: 1px solid $line-color;
   .title {
     @include a-none;
     font-size: 18px;
     font-weight: normal;
     margin-left: 20px;
     font-family: 'Rampart One', cursive;
+    .page-menu {
+      @include btn-panel($height, $height, 230px);
+      @include a-lists;
+      @include drop-down(200px, 0px, 100%);
+    }
   }
   .a-lists {
     @include a-lists;
     display: flex;
     align-items: center;
   }
-  .user-menu {
-    @include btn-panel(50px, 50px, 150px);
+  .edit-menu {
+    @include btn-panel($height, $height, 150px);
     @include a-lists;
-    @include drop-down(150px, -1px);
+    @include drop-down(150px, -1px, 100%);
+    border-left: 1px solid $line-color;
+  }
+  .user-menu {
+    @include btn-panel($height, $height, 150px);
+    @include a-lists;
+    @include drop-down(150px, -1px, 100%);
+    border-left: 1px solid $line-color;
   }
   .btn {
-    @include btn-panel(30px, 30px, 120px);
+    @include btn-panel($height, $height, 150px);
+    border-left: 1px solid $line-color;
   }
 }
 
-// -----------------------------
-/*  ナビゲーション  */
-// -----------------------------
-nav {
-  @include menu-bar(50px, 100%);
-  border-bottom: 1px solid $line-color;
-  justify-content: space-around;
-  .a-lists {
-    @include a-lists;
-    display: flex;
-    align-items: center;
-  }
-  .btn {
-    @include btn-panel(50px, 50px, 150px);
-  }
-  .last {
-    border-right: 1px solid $line-color;
-  }
-  .active {
-    border-bottom: 5px solid #57C3E9;
-  }
-}
 
 // -----------------------------
 /*  フッター  */
