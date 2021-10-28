@@ -312,10 +312,7 @@
 
 # 9. 実装予定の機能
 
-* DeviseのTrackable
-* DeviseのLockable
 * 問い合わせページ
-* パスワード変更
 * パスワードリセット
 * 思考の共有ページ（Wiki的なもの）
 * Twitterログイン連動
