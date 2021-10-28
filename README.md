@@ -441,5 +441,31 @@
 
 
 # 11. ローカルでの動作方法
-(現状説明なし)
 
+環境情報
+```
+username@pcname minimalismshare % rails about
+About your application's environment
+Rails version             6.0.4.1
+Ruby version              ruby 2.6.5p114 (2019-10-01 revision 67812) [x86_64-darwin20]
+RubyGems version          3.0.3
+Rack version              2.2.3
+Middleware                Webpacker::DevServerProxy, ActionDispatch::HostAuthorization, Rack::Sendfile, ActionDispatch::Static, ActionDispatch::Executor, ActiveSupport::Cache::Strategy::LocalCache::Middleware, Rack::Runtime, Rack::MethodOverride, ActionDispatch::RequestId, ActionDispatch::RemoteIp, Sprockets::Rails::QuietAssets, Rails::Rack::Logger, ActionDispatch::ShowExceptions, WebConsole::Middleware, ActionDispatch::DebugExceptions, ActionDispatch::ActionableExceptions, ActionDispatch::Reloader, ActionDispatch::Callbacks, ActiveRecord::Migration::CheckPending, ActionDispatch::Cookies, ActionDispatch::Session::CookieStore, ActionDispatch::Flash, ActionDispatch::ContentSecurityPolicy::Middleware, Rack::Head, Rack::ConditionalGet, Rack::ETag, Rack::TempfileReaper, Warden::Manager
+Application root          /Users/toshihiroinoue/projects/minimalismshare
+Environment               development
+Database adapter          mysql2
+Database schema version   20211024093802
+```
+
+導入手順
+```
+user@pcname project % git clone https://github.com/ryohei-takasugi/minimalismshare.git
+user@pcname project % cd minimalismshare
+user@pcname minimalismshare % bundle install
+user@pcname minimalismshare % rails db:create
+user@pcname minimalismshare % rails db:migrate
+user@pcname minimalismshare % rails s
+```
+
+環境変数の設定
+(なし)
