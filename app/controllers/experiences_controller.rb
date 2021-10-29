@@ -6,12 +6,12 @@ class ExperiencesController < ApplicationController
   end
   
   def new
-    @experience = ExperienceTag.new
+    @experience_tag = ExperienceTag.new
   end
 
   def create
-    @experience = ExperienceTag.new(experience_params)
-    if @experience.save
+    @experience_tag = ExperienceTag.new(experience_tag_params)
+    if @experience_tag.valid? && @experience_tag.save
       redirect_to root_path
     else
       render :new
@@ -26,8 +26,7 @@ class ExperiencesController < ApplicationController
   
   private
 
-    def experience_params
-      params.require(:experience).permit(:title, :tags, :content, :category_id, :period_id).merge(user_id: current_user.id)
+    def experience_tag_params
+      params.require(:experience_tag).permit(:title, :tags, :content, :category_id, :period_id).merge(user_id: current_user.id)
     end
-
 end

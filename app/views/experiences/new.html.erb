@@ -1,6 +1,6 @@
 <div class="forms-experience">
   <div class="forms-new">
-    <%= form_with model: @experience, url: experiences_path, local: true do |f| %>
+    <%= form_with model: @experience_tag, url: experiences_path, local: true do |f| %>
       <%= render 'shared/error_messages', model: f.object %>
       <div class="field">
         <%= f.label :title %><br />
@@ -9,15 +9,15 @@
       <div class="field">
         <%= f.label :tags %><br />
         <%= f.text_field :tags, id: "experience_tag_name", placeholder: "例）本, リビング, 電子書籍, 捨て方アドバイス, 残し方アドバイス" %><br>
+      </div>
         <span class="search-result">
           <ul id="search-result">
           </ul>
         </span>
-      </div>
       <div class="field">
         <%= f.label :category_id %><br />
         <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {}) %>
-        <span>　　</span>
+        <span>&emsp;</span>
         <%= f.label :period_id %><br />
         <%= f.collection_select(:period_id, Period.all, :id, :name, {}, {}) %>
       </div>

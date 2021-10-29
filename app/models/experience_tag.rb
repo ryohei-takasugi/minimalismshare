@@ -1,12 +1,18 @@
 class ExperienceTag
   include ActiveModel::Model
-  attr_accessor :title, :category_id, :period_id, :tags, :content, :user_id
+  attr_accessor :title, :category_id, :period_id, :tags, :user_id
+  attr_writer :content
 
   with_options presence: true do
     validates :title
     validates :category_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :period_id,   numericality: { other_than: 0, message: "can't be blank" }
     validates :content
+  end
+
+  def initialize(attributes={})
+    super
+    set_experience
   end
 
   def save
@@ -21,4 +27,11 @@ class ExperienceTag
     end
   end
 
+  def content
+    @experience.content
+  end
+
+  def set_experience
+    @experience = Experience.new(title: title, category_id: category_id, period_id: period_id, content: @content, user_id: user_id)
+  end
 end
