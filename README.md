@@ -375,13 +375,12 @@ URLにアクセスしていただきページを表示してください。
 
 ## experiences テーブル
 
-| Column   | Type       | Options                         |
-| -------- | ---------- | ------------------------------- |
-| privacy  | integer    | null: false                     |
-| category | integer    | null: false                     |
-| title    | string     | null: false                     |
-| days     | integer    | null: false                     |
-| user     | references | null: false, foreign_key: true  |
+| Column      | Type       | Options                         |
+| ----------- | ---------- | ------------------------------- |
+| title       | string     | null: false                     |
+| category_id | integer    | null: false                     |
+| days_id     | integer    | null: false                     |
+| user        | references | null: false, foreign_key: true  |
 
 本文はActionTextおよびActiveStorageに保存する
 
