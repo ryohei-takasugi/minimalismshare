@@ -1,0 +1,93 @@
+// -----------------------------
+//  共通変数
+// -----------------------------
+$line-color: #D8D8D8;
+$back-color: white;
+$font-color: black;
+$main-font: 'Zen Maru Gothic', sans-serif; 
+// -----------------------------
+//  共通mixin
+// -----------------------------
+@mixin btn-radius($height, $width) {
+  height: $height;
+  width: $width;
+  display: inline-block;
+  text-align: center;
+  border: 2px solid skyblue;
+  border-radius: 10px;
+  margin: 0 5px;
+}
+
+@mixin btn-panel($height, $line-height, $width) {
+  height: $height;
+  line-height: $line-height;
+  width: $width;
+  display: inline-block;
+  padding: 0 10px;
+  text-align: center;
+}
+
+@mixin a-none {
+  a {
+    text-decoration: none;
+    color: $font-color;
+  }
+}
+
+@mixin a-lists {
+  li {
+    @include a-none;
+    list-style: none;
+  }
+}
+
+@mixin menu-bar($height, $width) {
+  height: $height;
+  width: $width;
+  display: flex;
+  align-items: center;
+}
+
+@mixin drop-down($width, $left, $font-size) {
+  position: relative;
+  ul {
+    font-size: $font-size;
+    position: absolute;
+    visibility: hidden;
+    padding: 5px 10px;
+    width: $width;
+    left: $left;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    border: 1px solid $line-color;
+    background-color: $back-color;
+    font-family: $main-font;
+  }
+  &:hover { 
+    ul {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+@mixin field-pack() {
+  .field label, input, select {
+    margin: 5px 0 15px;
+    padding: 10px;
+  }
+  .field label {
+    border-top: 1px solid $line-color;
+    border-left: 1px solid $line-color;
+    border-bottom: 1px solid $line-color;
+    border-radius: 5px 0px 0px 5px;
+  }
+  .field input {
+    border: 1px solid #D8D8D8;
+    border-radius: 0px 5px 5px 0px;
+  }
+  .field select {
+    border: 1px solid #D8D8D8;
+    border-radius: 0px 5px 5px 0px;
+  }
+}

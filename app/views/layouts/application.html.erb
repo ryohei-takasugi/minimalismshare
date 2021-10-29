@@ -29,7 +29,7 @@
         <% if user_signed_in? %>
         <span class="edit-menu">投稿する <i class="fas fa-edit"></i>
           <ul>
-            <li><%= link_to "経験の記事", "#" %></li>
+            <li><%= link_to "経験の記事", new_experience_path %></li>
           </ul>
         </span>
         <span class="user-menu"><%= current_user.nickname %>

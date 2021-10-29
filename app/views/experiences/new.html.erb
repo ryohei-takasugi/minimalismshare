@@ -1,0 +1,32 @@
+<div class="forms-experience">
+  <div class="forms-new">
+    <%= form_with model: @experience, url: experiences_path, local: true do |f| %>
+      <%= render 'shared/error_messages', model: f.object %>
+      <div class="field">
+        <%= f.label :title %><br />
+        <%= f.text_field :title, class:"field-title", placeholder: "例）本を整理した" %>
+      </div>
+      <div class="field">
+        <%= f.label :tags %><br />
+        <%= f.text_field :tags, id: "experience_tag_name", placeholder: "例）本, リビング, 電子書籍, 捨て方アドバイス, 残し方アドバイス" %><br>
+        <span class="search-result">
+          <ul id="search-result">
+          </ul>
+        </span>
+      </div>
+      <div class="field">
+        <%= f.label :category_id %><br />
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {}) %>
+        <span>　　</span>
+        <%= f.label :period_id %><br />
+        <%= f.collection_select(:period_id, Period.all, :id, :name, {}, {}) %>
+      </div>
+      <div class="field-rich">
+        <%= f.rich_text_area :content, placeholder: "記述内容）ストレスになっていた点、解決した方法、解決するまでの手順・注意点、真似する人へのアドバイス、など" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "新規作成" %>
+      </div>
+    <% end %>
+  </div>
+</div>
