@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        nickname: ニックネーム
+        dream: 夢・目標
+        region_id: 住まいの地域
+        climate_id: 住まいの気候
+        housemate_id: 同居人数
+        children_id: 子供
+        clean_status_id: 現在の状況
+  activemodel:
+    attributes:
+      experience_tag:
+        title: タイトル
+        tags: タグ
+        period_id: 経過日数
+        category_id: カテゴリ
+        content: 本文

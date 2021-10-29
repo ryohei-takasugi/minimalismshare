@@ -72,25 +72,45 @@ $main-font: 'Zen Maru Gothic', sans-serif;
 }
 
 @mixin field-pack() {
-  .field label, input, select {
-    margin: 5px 0 15px;
-    padding: 10px;
-  }
-  .field label {
-    border-top: 1px solid $line-color;
-    border-left: 1px solid $line-color;
-    border-bottom: 1px solid $line-color;
-    border-radius: 5px 0px 0px 5px;
-  }
-  .field input {
-    border: 1px solid #D8D8D8;
-    border-radius: 0px 5px 5px 0px;
-  }
-  .field select {
-    border: 1px solid #D8D8D8;
-    border-radius: 0px 5px 5px 0px;
+  .field {
+    display: flex;
+    align-items: center;
+    label, input, select {
+      margin: 5px 0 15px;
+      padding: 10px;
+    }
+    label {
+      border-top: 1px solid $line-color;
+      border-left: 1px solid $line-color;
+      border-bottom: 1px solid $line-color;
+      border-radius: 5px 0px 0px 5px;
+    }
+    input {
+      border: 1px solid #D8D8D8;
+      border-radius: 0px 5px 5px 0px;
+    }
+    select {
+      border: 1px solid #D8D8D8;
+      border-radius: 0px 5px 5px 0px;
+    }
   }
 }
+
+@mixin submit-button() {
+  background-color: #00eb14;
+  border: 1px solid $line-color;
+  box-shadow: 5px 5px $line-color;
+  text-align: center;
+  color: white;
+  font-weight: bolder;
+  border-radius: 5px;
+  &:active {
+    box-shadow: none;
+    position: relative;
+    top: 5px;
+  }
+}
+
 // -----------------------------
 //  共通scss
 // -----------------------------

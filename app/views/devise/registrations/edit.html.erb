@@ -15,11 +15,11 @@
 
     <div class="field">
       <%= f.label :password %> <i>(変更したくない場合は空白のままにします)</i><br />
-      <% if @minimum_password_length %>
-        <em>(最小 <%= @minimum_password_length %>文字)</em>
-      <% end %>
       <%= f.password_field :password, autocomplete: "new-password" %>
     </div>
+    <% if @minimum_password_length %>
+      <em>(最小 <%= @minimum_password_length %>文字)</em>
+    <% end %>
 
     <div class="field">
       <%= f.label :password_confirmation %><br />
