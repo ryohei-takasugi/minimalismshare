@@ -91,3 +91,19 @@ $main-font: 'Zen Maru Gothic', sans-serif;
     border-radius: 0px 5px 5px 0px;
   }
 }
+// -----------------------------
+//  共通scss
+// -----------------------------
+* {
+  box-sizing: border-box;
+}
+.field_with_errors {
+  display: contents;
+}
+.error-alert {
+  background-color: #f54c4c;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
