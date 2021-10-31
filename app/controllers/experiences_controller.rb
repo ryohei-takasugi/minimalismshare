@@ -11,7 +11,7 @@ class ExperiencesController < ApplicationController
 
   def create
     @experience_tag = ExperienceTag.new(experience_tag_params)
-    if @experience_tag.valid? && @experience_tag.save
+    if @experience_tag.save
       redirect_to root_path
     else
       render :new
