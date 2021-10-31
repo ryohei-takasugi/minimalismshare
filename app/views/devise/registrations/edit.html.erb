@@ -13,21 +13,21 @@
       <div>現在確認を待っています for: <%= resource.unconfirmed_email %></div>
     <% end %>
 
+    <em>(パスワードは最小 <%= @minimum_password_length %> 文字、かつ、英数字を1文字以上含んでください。変更したくない場合は空白のままにしてください。)</em>
     <div class="field">
-      <%= f.label :password %> <i>(変更したくない場合は空白のままにします)</i><br />
+      <%= f.label :password %>
       <%= f.password_field :password, autocomplete: "new-password" %>
     </div>
-    <% if @minimum_password_length %>
-      <em>(最小 <%= @minimum_password_length %>文字)</em>
-    <% end %>
+
 
     <div class="field">
       <%= f.label :password_confirmation %><br />
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
 
+    <em>(変更を確認するには、現在のパスワードが必要です)</em>
     <div class="field">
-      <%= f.label :current_password %> <i>(変更を確認するには、現在のパスワードが必要です)</i><br />
+      <%= f.label :current_password %>
       <%= f.password_field :current_password, autocomplete: "current-password" %>
     </div>
 
@@ -36,9 +36,10 @@
     </div>
   <% end %>
 
-  <h3>アカウントの削除</h3>
-
-  <p>削除を希望しますか? <%= button_to "アカウントの削除", registration_path(resource_name), data: { confirm: "この操作は取り消すことができません。本当にアカウントの削除を実行しますか?" }, method: :delete %></p>
+  <div>
+    <h3>アカウントの削除</h3>
+    <p>削除を希望しますか? <%= button_to "アカウントの削除", registration_path(resource_name), data: { confirm: "この操作は取り消すことができません。本当にアカウントの削除を実行しますか?" }, method: :delete, class: "delete" %></p>
+  </div>
 
   <%= link_to "戻る", :back %>
 
