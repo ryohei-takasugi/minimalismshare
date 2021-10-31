@@ -5,22 +5,13 @@ $line-color: #D8D8D8;
 $back-color: white;
 $font-color: black;
 $main-font: 'Zen Maru Gothic', sans-serif; 
+$menu-height: 50px;
 // -----------------------------
 //  共通mixin
 // -----------------------------
-@mixin btn-radius($height, $width) {
+@mixin btn-panel($height, $width) {
   height: $height;
-  width: $width;
-  display: inline-block;
-  text-align: center;
-  border: 2px solid skyblue;
-  border-radius: 10px;
-  margin: 0 5px;
-}
-
-@mixin btn-panel($height, $line-height, $width) {
-  height: $height;
-  line-height: $line-height;
+  line-height: $height;
   width: $width;
   display: inline-block;
   padding: 0 10px;
@@ -41,9 +32,7 @@ $main-font: 'Zen Maru Gothic', sans-serif;
   }
 }
 
-@mixin menu-bar($height, $width) {
-  height: $height;
-  width: $width;
+@mixin flex-center {
   display: flex;
   align-items: center;
 }
@@ -63,7 +52,7 @@ $main-font: 'Zen Maru Gothic', sans-serif;
     background-color: $back-color;
     font-family: $main-font;
   }
-  &:hover { 
+  &:active, &:hover { 
     ul {
       visibility: visible;
       opacity: 1;
@@ -73,8 +62,7 @@ $main-font: 'Zen Maru Gothic', sans-serif;
 
 @mixin field-pack() {
   .field {
-    display: flex;
-    align-items: center;
+    @include flex-center;
     label, input, select {
       margin: 5px 0 15px;
       padding: 10px;

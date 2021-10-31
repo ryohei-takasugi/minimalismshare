@@ -54,7 +54,7 @@
     }
     .actions input {
       @include submit-button;
-      margin-top: 50px;
+      margin: 50px 0;
       width: 100%;
       height: 50px;
     }
@@ -67,4 +67,23 @@
   border-radius: 5px;
   padding: 5px 10px;
   margin-bottom: 10px;
+}
+
+
+@media (max-width: 500px) {
+  .sign-container {
+    width: 95%;
+    padding: 15px;
+    form {
+      .field {
+        font-size: small;
+        label {
+          width: 200px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1000px) {
+
 }

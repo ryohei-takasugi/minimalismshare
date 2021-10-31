@@ -29,46 +29,67 @@ body {
 /*  ヘッダー  */
 // -----------------------------
 header {
-  $height: 50px;
-  @include menu-bar(50px, 100%);
+  @include flex-center;
+  height: $menu-height;
+  width: 100%;
   justify-content: space-between;
   border-bottom: 1px solid $line-color;
   .title {
-    @include a-none;
-    font-size: 18px;
-    font-weight: normal;
-    margin-left: 20px;
-    font-family: 'Rampart One', cursive;
     .page-menu {
-      @include btn-panel($height, $height, 230px);
-      @include a-lists;
-      @include drop-down(200px, 0px, 100%);
+      @include a-none;
+      @include btn-panel($menu-height, 150px);
+      @include drop-down(150px, 0px, 100%);
+      font-size: 18px;
+      font-weight: normal;
+      margin-left: 20px;
+      font-family: 'Rampart One', cursive;
+      ul {
+        @include a-lists;
+      }
     }
   }
   .a-lists {
     @include a-lists;
-    display: flex;
-    align-items: center;
-  }
-  .edit-menu {
-    @include btn-panel($height, $height, 150px);
-    @include a-lists;
-    @include drop-down(150px, -1px, 100%);
-    border-left: 1px solid $line-color;
-  }
-  .user-menu {
-    @include btn-panel($height, $height, 150px);
-    @include a-lists;
-    @include drop-down(150px, -1px, 100%);
-    border-left: 1px solid $line-color;
-  }
-  .btn {
-    @include btn-panel($height, $height, 150px);
-    border-left: 1px solid $line-color;
+    @include flex-center;
+    .edit-menu {
+      @include btn-panel($menu-height, 150px);
+      @include a-lists;
+      @include drop-down(150px, -1px, 100%);
+      border-left: 1px solid $line-color;
+    }
+    .user-menu {
+      @include btn-panel($menu-height, 150px);
+      @include a-lists;
+      @include drop-down(150px, -1px, 100%);
+      border-left: 1px solid $line-color;
+    }
+    .btn {
+      @include btn-panel($menu-height, 150px);
+      border-left: 1px solid $line-color;
+    }
   }
 }
 
+@media (max-width: 500px) {
+  header {
+    justify-content: space-around;
+    .title {
+      .page-menu {
+        margin-left: 0px;
+        @include btn-panel($menu-height, 100%);
+      }
+      .edit-menu {
+        @include drop-down(150px, 0px, 100%);
+      }
+      .user-menu {
+        @include drop-down(150px, 0px, 100%);
+      }
+    }
+  }
+}
+@media (max-width: 1000px) {
 
+}
 // -----------------------------
 /*  フッター  */
 // -----------------------------
