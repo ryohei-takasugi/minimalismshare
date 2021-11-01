@@ -4,6 +4,9 @@
 
 @import 'share';
 
+// -----------------------------
+//  新規投稿
+// -----------------------------
 .forms-experience {
   margin-top: 20px;
   .forms-new {
@@ -35,7 +38,66 @@
     }
   }
 }
+// -----------------------------
+//  一覧画面
+// -----------------------------
+.experience-index {
+  margin: 0 auto;
+  display: flex;
+  .search-items {
+    width: 20vw;
+    height: 2000px;
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid $line-color;
+  }
+  .cards {
+    h2 {
+      font-size: 32px;
+      padding: 10px;
+    }
+    .card {
+      width: 50vw;
+      margin: 10px;
+      padding: 15px 20px;
+      border-top: 1px solid $line-color;
+      .nickname {
+        font-size: 14px;
+      }
+      .title {
+        font-size: 18px;
+        margin: 5px 0;
+      }
+      table {
+        width: 100%;
+        font-size: 14px;
+        tr {
+          width: calc(100% - 20px);
+          .header {
+            width: 20px;
+            padding: 5px;
+          }
+          .item {
+            width: calc(100% - 20px);
+            padding: 5px;
+            .tag {
+              display: inline-flex;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// -----------------------------
+//  レスポンシブデザイン（スマホ）
+// -----------------------------
 @media (max-width: 500px) {
+  // -----------------------------
+  //  新規投稿
+  // -----------------------------
   .forms-experience {
     .forms-new {
       .search-result {
@@ -44,6 +106,20 @@
         ul {
           background-color: $back-color;
         }
+      }
+    }
+  }
+  // -----------------------------
+  //  一覧画面
+  // -----------------------------
+  .experience-index {
+    display: block;
+    .search-items {
+      display: none;
+    }
+    .cards {
+      .card {
+        width: 95vw;
       }
     }
   }

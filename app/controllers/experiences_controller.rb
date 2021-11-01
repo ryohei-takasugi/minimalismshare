@@ -2,7 +2,7 @@ class ExperiencesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @experiences = Experience.all.order(update_at: :desc).includes(:user)
+    @experiences = Experience.all.order(updated_at: :desc).includes(:user, :experience_tag_relations, :tags)
   end
   
   def new
@@ -18,12 +18,15 @@ class ExperiencesController < ApplicationController
     end
   end
 
-  def search
+  def search_tag
     return nil if params[:keyword] == ""
     tag = Tag.where(['name LIKE ?', "%#{params[:keyword]}%"] )
     render json:{ keyword: tag }
   end
   
+  def search_article
+  end
+
   private
 
     def experience_tag_params
