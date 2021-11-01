@@ -1,13 +1,14 @@
 class ExperienceTag
   include ActiveModel::Model
   attr_accessor :title, :category_id, :period_id, :tags, :user_id
-  attr_writer :content
+  #attr_writer :content
 
   with_options presence: true do
     validates :title
     validates :category_id, numericality: { other_than: 0, message: "を入力してください" }
     validates :period_id,   numericality: { other_than: 0, message: "を入力してください" }
     validates :content
+    validates :user_id
   end
 
   def initialize(attributes={})
@@ -30,6 +31,12 @@ class ExperienceTag
 
   def content
     @experience.content
+  end
+
+  def content=(data)
+    set_experience
+    @experience.content = data
+    @content = @experience.content
   end
 
   def set_experience
