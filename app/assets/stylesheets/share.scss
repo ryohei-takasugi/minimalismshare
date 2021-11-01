@@ -1,0 +1,117 @@
+// -----------------------------
+//  共通変数
+// -----------------------------
+$line-color: #D8D8D8;
+$back-color: white;
+$font-color: black;
+$main-font: 'Zen Maru Gothic', sans-serif; 
+$menu-height: 50px;
+// -----------------------------
+//  共通mixin
+// -----------------------------
+@mixin btn-panel($height, $width) {
+  height: $height;
+  line-height: $height;
+  width: $width;
+  display: inline-block;
+  padding: 0 10px;
+  text-align: center;
+}
+
+@mixin a-none {
+  a {
+    text-decoration: none;
+    color: $font-color;
+  }
+}
+
+@mixin a-lists {
+  li {
+    @include a-none;
+    list-style: none;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin drop-down($width, $left, $font-size) {
+  position: relative;
+  ul {
+    font-size: $font-size;
+    position: absolute;
+    visibility: hidden;
+    padding: 5px 10px;
+    width: $width;
+    left: $left;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    border: 1px solid $line-color;
+    background-color: $back-color;
+    font-family: $main-font;
+  }
+  &:active, &:hover { 
+    ul {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+@mixin field-pack() {
+  .field {
+    @include flex-center;
+    label, input, select {
+      margin: 5px 0 15px;
+      padding: 10px;
+    }
+    label {
+      border-top: 1px solid $line-color;
+      border-left: 1px solid $line-color;
+      border-bottom: 1px solid $line-color;
+      border-radius: 5px 0px 0px 5px;
+    }
+    input {
+      border: 1px solid #D8D8D8;
+      border-radius: 0px 5px 5px 0px;
+    }
+    select {
+      border: 1px solid #D8D8D8;
+      border-radius: 0px 5px 5px 0px;
+    }
+  }
+}
+
+@mixin submit-button() {
+  background-color: #00eb14;
+  border: 1px solid $line-color;
+  box-shadow: 5px 5px $line-color;
+  text-align: center;
+  color: white;
+  font-weight: bolder;
+  border-radius: 5px;
+  &:active {
+    box-shadow: none;
+    position: relative;
+    top: 5px;
+  }
+}
+
+// -----------------------------
+//  共通scss
+// -----------------------------
+* {
+  box-sizing: border-box;
+}
+.field_with_errors {
+  display: contents;
+}
+.error-alert {
+  background-color: #f54c4c;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}

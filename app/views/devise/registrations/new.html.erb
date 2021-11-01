@@ -4,56 +4,65 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "sign_up_form") do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
+    <em>(あたなたの名前を6文字以下で入力してください)</em>
     <div class="field">
-      <%= f.label :nickname %><br />
+      <%= f.label :nickname, class: "required" %>
       <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
     </div>
 
+    <em>(同じメールアドレスがすでに登録されている場合、新たに登録はできません)</em>
     <div class="field">
-      <%= f.label :email %><br />
+      <%= f.label :email, class: "required" %>
       <%= f.email_field :email, autocomplete: "email" %>
     </div>
 
+    <% if @minimum_password_length %>
+      <em>(パスワードは最小 <%= @minimum_password_length %> 文字、かつ、英数字を1文字以上含んでください)</em>
+    <% end %><br />
     <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(最小 <%= @minimum_password_length %> 文字)</em>
-      <% end %><br />
+      <%= f.label :password, class: "required" %>
       <%= f.password_field :password, autocomplete: "new-password" %>
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation %><br />
+      <%= f.label :password_confirmation, class: "required" %><br />
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
 
+
+    <em>(あなたが、ミニマリズムを取り入れて集中したい夢や目標をお聞かせください)</em>
     <div class="field">
-      <%= f.label :dream %><br />
+      <%= f.label :dream %>
       <%= f.text_field :dream %>
     </div>
 
+    <em>(あたなたが実施したミニマリズムは地域の影響を受けているかもしれません)</em>
     <div class="field">
-      <%= f.label :region_id %><br />
+      <%= f.label :region_id %>
       <%= f.collection_select(:region_id, Region.all, :id, :name, {}, {}) %>
     </div>
 
+    <em>(あたなたが実施したミニマリズムは気候の影響を受けているかもしれません)</em>
     <div class="field">
-      <%= f.label :climate_id %><br />
+      <%= f.label :climate_id %>
       <%= f.collection_select(:climate_id, Climate.all, :id, :name, {}, {}) %>
     </div>
 
+    <em>(あたなたが実施したミニマリズムは家族や同居人の影響を受けているかもしれません)</em>
     <div class="field">
-      <%= f.label :housemate_id %><br />
+      <%= f.label :housemate_id %>
       <%= f.collection_select(:housemate_id, Housemate.all, :id, :name, {}, {}) %>
     </div>
 
+    <em>(あたなたが実施したミニマリズムは子供の影響を受けているかもしれません)</em>
     <div class="field">
-      <%= f.label :children_id %><br />
+      <%= f.label :children_id %>
       <%= f.collection_select(:children_id, Children.all, :id, :name, {}, {}) %>
     </div>
 
+    <em>(あたなたの現在状況をお聞かせください)</em>
     <div class="field">
-      <%= f.label :clean_status_id %><br />
+      <%= f.label :clean_status_id %>
       <%= f.collection_select(:clean_status_id, CleanStatus.all, :id, :name, {}, {}) %>
     </div>
 

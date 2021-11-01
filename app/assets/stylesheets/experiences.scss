@@ -2,3 +2,49 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import 'share';
+
+.forms-experience {
+  margin-top: 20px;
+  .forms-new {
+    width: 90%;
+    margin: 0 auto;
+    .search-result {
+      @include a-lists;
+      @include drop-down(200px, 50px, 100%);
+      top: -15px;
+    }
+    @include field-pack;
+    .field {
+      label {
+        width: 120px;
+      }
+      input {
+        width: 90%;
+      }
+    }
+    .actions {
+      display: flex;
+      justify-content: right;
+      input {
+        @include submit-button;
+        margin-top: 20px;
+        width: 150px;
+        height: 50px;
+      }
+    }
+  }
+}
+@media (max-width: 500px) {
+  .forms-experience {
+    .forms-new {
+      .search-result {
+        @include drop-down(90vw, 0px, 100%);
+        line-height: 40px;
+        ul {
+          background-color: $back-color;
+        }
+      }
+    }
+  }
+}
