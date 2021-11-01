@@ -183,6 +183,7 @@ URLにアクセスしていただきページを表示してください。
     * タグ　　：必須、１つ以上、インクリメント検索可能、主に対象物を登録するイメージ
     * 結果　　：必須、「成功／失敗」
     * 経過　　：必須、「０日以下、最近、１ヶ月程度、３ヶ月程度、半年程度、１年、１年以上」
+    * ストレス：必須、１文字以上
     * 本文　　：必須、１文字以上
   * ボタン
     * 投稿：入力エリアに入力して投稿ボタンを押す
@@ -380,16 +381,19 @@ URLにアクセスしていただきページを表示してください。
 | title       | string     | null: false                     |
 | category_id | integer    | null: false                     |
 | days_id     | integer    | null: false                     |
+| stress      | string     | null: false                     |
 | user        | references | null: false, foreign_key: true  |
 
 本文はActionTextおよびActiveStorageに保存する
 
 ### Association
-
+- belongs_to :period
+- belongs_to :category
 - belongs_to :user
 - has_many :experience_likes
 - has_many :experience_comments
 - has_many :experience_tag_relations
+- has_many :tags, through: :experience_tag_relations
 - has_rich_text :content
 
 
@@ -449,15 +453,15 @@ URLにアクセスしていただきページを表示してください。
 
 
 ## tags テーブル
-| Column | Type    | Options     |
-| ------ | ------- | ----------- |
-| name   | string  | null: false |
+| Column | Type    | Options                   |
+| ------ | ------- | ------------------------- |
+| name   | string  | null: false, unique: true |
 
 
 ### Association
 
 - has_many :experience_tag_relations
-
+- has_many :experiences, through: :experience_tag_relations
 
 
 # 11. ローカルでの動作方法

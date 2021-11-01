@@ -8,7 +8,7 @@ RSpec.describe ExperienceTag, type: :model do
   end
   describe '経験の投稿' do
     context '投稿できる場合' do
-      it 'title, tags, category_id, period_id, user_id が存在すれば登録できる' do
+      it 'title, tags, category_id, period_id, stress, user_id が存在すれば登録できる' do
         expect(@experience_tag).to be_valid
       end
       it 'tags は無くても登録できる' do
@@ -32,6 +32,11 @@ RSpec.describe ExperienceTag, type: :model do
         @experience_tag.period_id = nil
         @experience_tag.valid?
         expect(@experience_tag.errors.full_messages).to include("Period can't be blank")
+      end
+      it 'stress が空では登録できない' do
+        @experience_tag.stress = nil
+        @experience_tag.valid?
+        expect(@experience_tag.errors.full_messages).to include("Stress can't be blank")
       end
       it 'user_id が空では登録できない' do
         @experience_tag.user_id = nil

@@ -27,6 +27,6 @@ class ExperiencesController < ApplicationController
   private
 
     def experience_tag_params
-      params.require(:experience_tag).permit(:title, :tags, :content, :category_id, :period_id).merge(user_id: current_user.id)
+      params.require(:experience_tag).permit(:title, :tags, :content, :category_id, :period_id, :stress).merge(user_id: current_user.id)
     end
 end

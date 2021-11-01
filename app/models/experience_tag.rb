@@ -1,12 +1,13 @@
 class ExperienceTag
   include ActiveModel::Model
-  attr_accessor :title, :category_id, :period_id, :tags, :user_id
+  attr_accessor :title, :category_id, :period_id, :tags, :stress, :user_id
   #attr_writer :content
 
   with_options presence: true do
     validates :title
     validates :category_id, numericality: { other_than: 0, message: "を入力してください" }
     validates :period_id,   numericality: { other_than: 0, message: "を入力してください" }
+    validates :stress
     validates :content
     validates :user_id
   end
@@ -18,7 +19,7 @@ class ExperienceTag
 
   def save
     return false unless valid?
-    experience = Experience.create(title: title, category_id: category_id, period_id: period_id, content: content, user_id: user_id)
+    experience = Experience.create(title: title, category_id: category_id, period_id: period_id, content: content, stress: stress, user_id: user_id)
     unless tags.nil?
       tags.split(',').each do |tag_name|
         tag_name = tag_name.gsub(" ", "")
@@ -40,6 +41,6 @@ class ExperienceTag
   end
 
   def set_experience
-    @experience = Experience.new(title: title, category_id: category_id, period_id: period_id, content: @content, user_id: user_id)
+    @experience = Experience.new(title: title, category_id: category_id, period_id: period_id, content: @content, stress: stress, user_id: user_id)
   end
 end
