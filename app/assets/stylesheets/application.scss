@@ -38,10 +38,10 @@ header {
     .page-menu {
       @include a-none;
       @include btn-panel($menu-height, 150px);
-      @include drop-down(150px, 0px, 100%);
+      @include drop-down(150px, -10px, 100%);
       font-size: 18px;
       font-weight: normal;
-      margin-left: 20px;
+      margin-left: 10px;
       font-family: 'Rampart One', cursive;
       ul {
         @include a-lists;
@@ -72,17 +72,21 @@ header {
 
 @media (max-width: 500px) {
   header {
-    justify-content: space-around;
     .title {
       .page-menu {
         margin-left: 0px;
-        @include btn-panel($menu-height, 100%);
+        @include btn-panel($menu-height, calc(100vw / 3));
+        @include drop-down(100vw, 0px, 100%);
       }
+    }
+    .a-lists {
       .edit-menu {
-        @include drop-down(150px, 0px, 100%);
+        @include btn-panel($menu-height, calc(100vw / 3));
+        @include drop-down(100vw, calc(-100vw / 3), 100%);
       }
       .user-menu {
-        @include drop-down(150px, 0px, 100%);
+        @include btn-panel($menu-height, calc(100vw / 3));
+        @include drop-down(100vw, calc((-100vw / 3) * 2), 100%);
       }
     }
   }

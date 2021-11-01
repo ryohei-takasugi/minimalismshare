@@ -35,3 +35,16 @@
     }
   }
 }
+@media (max-width: 500px) {
+  .forms-experience {
+    .forms-new {
+      .search-result {
+        @include drop-down(90vw, 0px, 100%);
+        line-height: 40px;
+        ul {
+          background-color: $back-color;
+        }
+      }
+    }
+  }
+}
