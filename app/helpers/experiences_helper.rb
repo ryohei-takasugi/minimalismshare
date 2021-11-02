@@ -1,8 +1,5 @@
 module ExperiencesHelper
   def tags_join(tags)
-    # <% experience.tags.each do |tag| %>
-    #   <p class="tag"><%= tag.name %></p>
-    # <% end %>
     array = Array.new
     tags.each do |tag|
       array << tag.name
@@ -20,5 +17,12 @@ module ExperiencesHelper
 
   def set_period
     Period.all
+  end
+
+  def set_sort
+    [
+      ["更新日時 降順", 'updated_at desc'],
+      ["更新日時 昇順", 'updated_at asc']
+    ]
   end
 end
