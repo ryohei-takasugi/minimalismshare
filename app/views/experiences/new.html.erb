@@ -20,10 +20,10 @@
       </div>
       <div class="field">
         <%= f.label :category_id %><br />
-        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {}) %>
+        <%= f.collection_select(:category_id, set_category, :id, :name, {}, {}) %>
         <span>&emsp;</span>
         <%= f.label :period_id %><br />
-        <%= f.collection_select(:period_id, Period.all, :id, :name, {}, {}) %>
+        <%= f.collection_select(:period_id, set_period, :id, :name, {}, {}) %>
       </div>
       <div class="field-rich">
         <%= f.rich_text_area :content, placeholder: "記述内容）解決した方法、解決するまでの手順・注意点、真似する人へのアドバイス、解決したことにより発生するストレスと対処法、など" %>
