@@ -1,10 +1,9 @@
 class ExperiencesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :set_ransack,        only: [:index, :search_article]
-  before_action :set_tags,           only: [:index, :search_article]
+  before_action :set_tag,            only: [:index, :search_article]
 
   def index
-    @experiences = Experience.all.includes(:user, :experience_tag_relations, :tags).page(params[:page]).order(updated_at: :desc)
   end
   
   def new
@@ -27,10 +26,6 @@ class ExperiencesController < ApplicationController
   end
   
   def search_article
-    @experiences = @p.result(distinct: true)
-                     .includes(:user, :experience_tag_relations, :tags)
-                     .page(params[:page])
-                     .order(search_params[:sorts])
     render :index
   end
 
@@ -43,11 +38,16 @@ class ExperiencesController < ApplicationController
     end
 
     def set_ransack
-      @p = Experience.ransack(search_params)
+      @q = Experience.ransack(search_params)
+      search_params.nil? ? @q.sorts = 'updated_at desc' : @q.sorts = search_params[:sorts]
+      @experiences = @q.result(distinct: true)
+                       .includes(:user, :experience_tag_relations, :tags)
+                       .page(params[:page])
+                       .per(2)
     end
 
-    def set_tags
-      @search_tags = Tag.all
+    def set_tag
+      @search_tag = Tag.all
     end
 
     def search_params
