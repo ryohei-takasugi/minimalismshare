@@ -57,6 +57,21 @@
       font-size: 32px;
       padding: 10px;
     }
+    nav {
+      text-align: center;
+      span {
+        border: 1px solid $line-color;
+        border-radius: 5px;
+        display: inline-block;
+        padding: 10px;
+        min-width: 50px;
+        font-size: 16px;
+      }
+      .current {
+        color: white;
+        background-color: skyblue;
+      }
+    }
     .card {
       width: 50vw;
       margin: 10px;
@@ -66,7 +81,7 @@
         font-size: 14px;
       }
       .title {
-        font-size: 18px;
+        font-size: 23px;
         margin: 5px 0;
       }
       table {

@@ -4,7 +4,7 @@ class ExperiencesController < ApplicationController
   before_action :set_tags,           only: [:index, :search_article]
 
   def index
-    @experiences = Experience.all.includes(:user, :experience_tag_relations, :tags).order(updated_at: :desc)
+    @experiences = Experience.all.includes(:user, :experience_tag_relations, :tags).page(params[:page]).order(updated_at: :desc)
   end
   
   def new
@@ -29,6 +29,7 @@ class ExperiencesController < ApplicationController
   def search_article
     @experiences = @p.result(distinct: true)
                      .includes(:user, :experience_tag_relations, :tags)
+                     .page(params[:page])
                      .order(search_params[:sorts])
     render :index
   end
