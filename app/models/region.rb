@@ -6,7 +6,7 @@ class Region < ActiveHash::Base
     { id: 3, name: '中部' },
     { id: 4, name: '関西' },
     { id: 5, name: '中国または四国' },
-    { id: 6, name: '九州または沖縄' },
+    { id: 6, name: '九州または沖縄' }
   ]
 
   include ActiveHash::Associations

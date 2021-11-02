@@ -1,6 +1,6 @@
 module ExperiencesHelper
   def tags_join(tags)
-    array = Array.new
+    array = []
     tags.each do |tag|
       array << tag.name
     end
@@ -21,8 +21,8 @@ module ExperiencesHelper
 
   def set_sort
     [
-      ["更新日時 降順", 'updated_at desc'],
-      ["更新日時 昇順", 'updated_at asc']
+      ['更新日時 降順', 'updated_at desc'],
+      ['更新日時 昇順', 'updated_at asc']
     ]
   end
 end

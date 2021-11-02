@@ -13,5 +13,5 @@ class User < ApplicationRecord
   # association DataBase
   # なし
   # validations
-  validates :nickname, presence: true, length: { maximum: 6, message: "ニックネームは６文字以下です。" }
+  validates :nickname, presence: true, length: { maximum: 6, message: 'ニックネームは６文字以下です。' }
 end
