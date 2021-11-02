@@ -1,15 +1,16 @@
 <div class="experience-index">
+  <h1>経験の投稿記事一覧</h1>
   <div class="search-items">
-    <h2>検索</h2>
+    <h2>検&emsp;索</h2>
+    <div class="field">
     <%= search_form_for @q, url: search_article_experiences_path do |f| %>
-      <%= f.label :title_cont %>
-      <%= f.search_field :title_cont %>
+      <%= f.label :title_or_stress_or_content_body_cont, 'テキスト検索' %>
+      <%= f.search_field :title_or_stress_or_content_body_cont %>
       <br>
-      <%= f.label :tags_id_eq %>
+      <details class="option">
+      <%# FIXME: tags_id_eq の翻訳がうまくいかない %>
+      <%= f.label :tags_id_eq, 'タグ は以下と等しい' %>
       <%= f.collection_select :tags_id_eq, set_tag, :id, :name,  include_blank: '指定なし' %>
-      <br>
-      <%= f.label :stress_cont %>
-      <%= f.search_field :stress_cont %>
       <br>
       <%= f.label :category_id_eq %>
       <%= f.collection_select :category_id_eq, set_category, :id, :name,  include_blank: '指定なし' %>
@@ -18,11 +19,13 @@
       <%= f.collection_select :period_id_eq, set_period, :id, :name,  include_blank: '指定なし' %>
       <br>
       <%= f.label :sorts %>
-      <%= f.select :sorts, [ ["更新日時 昇順", 'updated_at asc'], ["更新日時 降順", 'updated_at desc'] ] %>
+      <%= f.select :sorts, set_sort %>
       <br>
+      </details>
       <%= f.submit '検索' %>
     <% end %>
     <%= link_to '検索リセット', root_path %>
+    </div>
   </div>
   <div class="cards">
     <h2>記事一覧</h2>

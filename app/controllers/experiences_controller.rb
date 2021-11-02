@@ -55,7 +55,7 @@ class ExperiencesController < ApplicationController
         params[:q]
       else
         params.require(:q)
-              .permit(:page, :title_cont, :tags_id_eq, :stress_cont, :category_id_eq, :period_id_eq, :sorts)
+              .permit(:title_or_stress_or_content_body_cont, :tags_id_eq, :category_id_eq, :period_id_eq, :sorts)
       end
     end
 end
