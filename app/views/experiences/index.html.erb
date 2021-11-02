@@ -1,6 +1,28 @@
 <div class="experience-index">
   <div class="search-items">
-    
+    <h2>検索</h2>
+    <%= search_form_for @p, url: search_article_experiences_path do |f| %>
+      <%= f.label :title_cont %>
+      <%= f.search_field :title_cont %>
+      <br>
+      <%= f.label :tags_id_eq %>
+      <%= f.collection_select :tags_id_eq, set_tag, :id, :name,  include_blank: '指定なし' %>
+      <br>
+      <%= f.label :stress_cont %>
+      <%= f.search_field :stress_cont %>
+      <br>
+      <%= f.label :category_id_eq %>
+      <%= f.collection_select :category_id_eq, set_category, :id, :name,  include_blank: '指定なし' %>
+      <br>
+      <%= f.label :period_id_eq %>
+      <%= f.collection_select :period_id_eq, set_period, :id, :name,  include_blank: '指定なし' %>
+      <br>
+      <%= f.label :sorts %>
+      <%= f.select :sorts, [ ["更新日時 昇順", 'updated_at asc'], ["更新日時 降順", 'updated_at desc'] ] %>
+      <br>
+      <%= f.submit '検索' %>
+    <% end %>
+    <%= link_to '検索リセット', root_path %>
   </div>
   <div class="cards">
     <h2>記事一覧</h2>
@@ -14,24 +36,33 @@
         </div>
         <table>
           <tr>
-            <td class="header"><i class="fas fa-tags"></i></td>
+            <td class="header"><i class="far fa-user"></i></td>
             <td class="item">
-              <% experience.tags.each do |tag| %>
-                <p class="tag"><%= tag.name %></p>
-              <% end %>
+              夢・目標：<%= experience.user.dream %>、
+              住まいの地域：<%= experience.user.region.name %>、
+              住まいの気候：<%= experience.user.climate.name %>、
+              同居人数：<%= experience.user.housemate.name %>、
+              子供の有無：<%= experience.user.children.name %>、
+              現在の状態：<%= experience.user.clean_status.name %>
             </td>
+          </tr>
+          <tr>
+            <td class="header"><i class="fas fa-tags"></i></td>
+            <td class="item"><%= tags_join(experience.tags) %></td>
           </tr>
           <tr>
             <td class="header"><i class="fas fa-angry"></i></td>
             <td class="item"><%= experience.stress %></td>
           </tr>
           <tr>
-            <td class="header"><i class="far fa-check-circle"></i></td>
-            <td class="item"><%= experience.category.name %></td>
-          </tr>
-          <tr>
-            <td class="header small"><i class="far fa-calendar-alt"></i></td>
-            <td class="item small"><%= experience.period.name %></td>
+            <tr>
+              <td class="header"><i class="far fa-check-circle"></i></td>
+              <td class="item"><%= experience.category.name %></td>
+            </tr>
+            <tr>
+              <td class="header small"><i class="far fa-calendar-alt"></i></td>
+              <td class="item small"><%= experience.period.name %></td>
+            </tr>
           </tr>
         </table>
       </div>

@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root to: "experiences#index"
   resources :experiences, only: [:index, :new, :create] do
     collection do
-      get 'search'
+      get 'search_tag'
+      get 'search_article'
     end
   end
   resources :users, only: [:show]
