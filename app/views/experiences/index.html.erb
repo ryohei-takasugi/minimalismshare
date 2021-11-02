@@ -8,7 +8,7 @@
         <%= f.label :title_or_stress_or_content_body_cont, 'テキスト検索' %>
         <%= f.search_field :title_or_stress_or_content_body_cont %>
         <br>
-        <details class="option">
+        <details>
         <%# FIXME: tags_id_eq の翻訳がうまくいかない %>
         <%= f.label :tags_id_eq, 'タグ は以下と等しい' %>
         <%= f.collection_select :tags_id_eq, set_tag, :id, :name,  include_blank: '指定なし' %>

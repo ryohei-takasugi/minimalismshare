@@ -59,6 +59,9 @@
         text-align: center;
         text-decoration:underline;
       }
+      details {
+        padding: 5px 0 15px;
+      }
       input, select, button {
         @include basic-border;
         width: 100%;
