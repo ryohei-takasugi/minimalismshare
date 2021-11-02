@@ -3,7 +3,7 @@ class Housemate < ActiveHash::Base
     { id: 0, name: '--' },
     { id: 1, name: '１人' },
     { id: 2, name: '２人' },
-    { id: 3, name: '家族' },
+    { id: 3, name: '家族' }
   ]
 
   include ActiveHash::Associations

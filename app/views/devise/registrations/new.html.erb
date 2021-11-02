@@ -39,31 +39,31 @@
     <em>(あたなたが実施したミニマリズムは地域の影響を受けているかもしれません)</em>
     <div class="field">
       <%= f.label :region_id %>
-      <%= f.collection_select(:region_id, Region.all, :id, :name, {}, {}) %>
+      <%= f.collection_select(:region_id, set_region, :id, :name, {}, {}) %>
     </div>
 
     <em>(あたなたが実施したミニマリズムは気候の影響を受けているかもしれません)</em>
     <div class="field">
       <%= f.label :climate_id %>
-      <%= f.collection_select(:climate_id, Climate.all, :id, :name, {}, {}) %>
+      <%= f.collection_select(:climate_id, set_climate, :id, :name, {}, {}) %>
     </div>
 
     <em>(あたなたが実施したミニマリズムは家族や同居人の影響を受けているかもしれません)</em>
     <div class="field">
       <%= f.label :housemate_id %>
-      <%= f.collection_select(:housemate_id, Housemate.all, :id, :name, {}, {}) %>
+      <%= f.collection_select(:housemate_id, set_housemate, :id, :name, {}, {}) %>
     </div>
 
     <em>(あたなたが実施したミニマリズムは子供の影響を受けているかもしれません)</em>
     <div class="field">
       <%= f.label :children_id %>
-      <%= f.collection_select(:children_id, Children.all, :id, :name, {}, {}) %>
+      <%= f.collection_select(:children_id, set_children, :id, :name, {}, {}) %>
     </div>
 
     <em>(あたなたの現在状況をお聞かせください)</em>
     <div class="field">
       <%= f.label :clean_status_id %>
-      <%= f.collection_select(:clean_status_id, CleanStatus.all, :id, :name, {}, {}) %>
+      <%= f.collection_select(:clean_status_id, set_cleanStatus, :id, :name, {}, {}) %>
     </div>
 
     <div class="actions">

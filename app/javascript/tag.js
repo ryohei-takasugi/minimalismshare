@@ -12,7 +12,7 @@ function tagSendServer() {
   const keywords = document.getElementById("experience_tag_name").value.split(',');
   const keyword  = keywords[keywords.length - 1].replace(/\s+/g, "");
   const xhr      = new XMLHttpRequest();
-  xhr.open("GET", `search/?keyword=${keyword}`, true);
+  xhr.open("GET", `search_tag/?keyword=${keyword}`, true);
   xhr.responseType = "json";
   xhr.send();
   xhr.onload = () => {

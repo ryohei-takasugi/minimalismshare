@@ -47,12 +47,12 @@ RSpec.describe ExperienceTag, type: :model do
       it 'category_id が0では登録できない' do
         @experience_tag.category_id = 0
         @experience_tag.valid?
-        expect(@experience_tag.errors.full_messages).to include("Category を入力してください")
+        expect(@experience_tag.errors.full_messages).to include('Category を入力してください')
       end
       it 'period_id が0では登録できない' do
         @experience_tag.period_id = 0
         @experience_tag.valid?
-        expect(@experience_tag.errors.full_messages).to include("Period を入力してください")
+        expect(@experience_tag.errors.full_messages).to include('Period を入力してください')
       end
     end
   end

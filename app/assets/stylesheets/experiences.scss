@@ -4,6 +4,9 @@
 
 @import 'share';
 
+// -----------------------------
+//  新規投稿
+// -----------------------------
 .forms-experience {
   margin-top: 20px;
   .forms-new {
@@ -35,7 +38,96 @@
     }
   }
 }
+// -----------------------------
+//  一覧画面
+// -----------------------------
+.experience-index {
+  h1 {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 32px;
+  }
+  .indexs {
+    margin: 0 auto;
+    display: flex;
+    .search-items {
+      width: 20vw;
+      @include basic-border;
+      h2 {
+        font-size: 18px;
+        padding: 10px;
+        text-align: center;
+        text-decoration:underline;
+      }
+      details {
+        padding: 5px 0 15px;
+      }
+      input, select, button {
+        @include basic-border;
+        width: 100%;
+      }
+      .submit {
+        @include submit-button;
+      }
+    }
+    .cards {
+      nav {
+        text-align: center;
+        margin: 30px 0;
+        span {
+          @include basic-border;
+          display: inline-block;
+          min-width: 50px;
+          font-size: 16px;
+        }
+        .current {
+          color: white;
+          background-color: skyblue;
+        }
+      }
+      .card {
+        width: 50vw;
+        margin: 10px;
+        padding: 15px 20px;
+        border-bottom: 1px solid $line-color;
+        .nickname {
+          font-size: 14px;
+        }
+        .title {
+          font-size: 23px;
+          margin: 5px 0;
+        }
+        table {
+          width: 100%;
+          font-size: 14px;
+          tr {
+            width: calc(100% - 20px);
+            .header {
+              width: 20px;
+              padding: 5px;
+            }
+            .item {
+              width: calc(100% - 20px);
+              padding: 5px;
+            }
+            .user-item {
+              display: inline-block;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// -----------------------------
+//  レスポンシブデザイン（スマホ）
+// -----------------------------
 @media (max-width: 500px) {
+  // -----------------------------
+  //  新規投稿
+  // -----------------------------
   .forms-experience {
     .forms-new {
       .search-result {
@@ -43,6 +135,22 @@
         line-height: 40px;
         ul {
           background-color: $back-color;
+        }
+      }
+    }
+  }
+  // -----------------------------
+  //  一覧画面
+  // -----------------------------
+  .experience-index {
+    .indexs {
+      display: block;
+      .search-items {
+        width: 95%;
+      }
+      .cards {
+        .card {
+          width: 95vw;
         }
       }
     }

@@ -9,6 +9,22 @@ ja:
         housemate_id: 同居人数
         children_id: 子供
         clean_status_id: 現在の状況
+      experience:
+        title: タイトル
+        period_id: 経過日数
+        category_id: カテゴリ
+        stress: ストレス
+        content: 本文
+        rich_text_body: 本文
+        sorts: ソート
+      experience/tag:
+        id: タグ
+      experience_tag_relation:
+        experience_id: 経験
+        tag_id: タグ
+      tag:
+        id: タグ
+        name: タグ名
   activemodel:
     attributes:
       experience_tag:
@@ -18,3 +34,11 @@ ja:
         category_id: カテゴリ
         stress: ストレス
         content: 本文
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+  words:
+    button:
+      search: 検索
+      search_reset: 検索リセット
+  title_or_stress_or_content_body_cont: 自由検索

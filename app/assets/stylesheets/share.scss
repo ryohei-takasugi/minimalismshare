@@ -84,6 +84,13 @@ $menu-height: 50px;
   }
 }
 
+@mixin basic-border() {
+  border: 1px solid $line-color;
+  border-radius: 5px;
+  margin: 5px 0 15px;
+  padding: 10px;
+}
+
 @mixin submit-button() {
   background-color: #00eb14;
   border: 1px solid $line-color;
