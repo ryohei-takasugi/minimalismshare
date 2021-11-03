@@ -15,7 +15,7 @@ class ExperienceTag
 
   def initialize(attributes = {})
     super
-    set_experience
+    @experience = set_experience
   end
 
   def save
@@ -33,18 +33,36 @@ class ExperienceTag
     end
   end
 
+  def update(experience)
+    return false unless valid?
+
+    experience.update(title: title, category_id: category_id, period_id: period_id, content: content,
+                                  stress: stress, user_id: user_id)
+    unless tags.nil?
+      tags.split(',').each do |tag_name|
+        tag_name = tag_name.gsub(' ', '')
+        tag = Tag.where(name: tag_name).first_or_initialize
+        tag.save
+        unless ExperienceTagRelation.find_by(experience_id: experience.id, tag_id: tag.id)
+          ExperienceTagRelation.create(experience_id: experience.id, tag_id: tag.id)
+        end
+      end
+    end
+  end
+
   def content
     @experience.content
   end
 
   def content=(data)
-    set_experience
+    @experience = set_experience
     @experience.content = data
     @content = @experience.content
   end
 
+  private
+
   def set_experience
-    @experience = Experience.new(title: title, category_id: category_id, period_id: period_id, content: @content, stress: stress,
-                                 user_id: user_id)
+    Experience.new(title: title, category_id: category_id, period_id: period_id, content: @content, stress: stress, user_id: user_id)
   end
 end

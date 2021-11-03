@@ -1,12 +1,5 @@
 module ExperiencesHelper
-  def tags_join(tags)
-    array = []
-    tags.each do |tag|
-      array << tag.name
-    end
-    array.join('、')
-  end
-
+  # model
   def set_tag
     Tag.all
   end
@@ -26,7 +19,17 @@ module ExperiencesHelper
     ]
   end
 
+  # method
   def confirm_author?(model)
     model.user_id == current_user.id
+  end
+
+  def tags_join(tags)
+    case
+    when tags.blank?               then nil
+    when tags.instance_of?(Array)  then tags.join(', ')
+    when tags.instance_of?(String) then tags
+    else                                tags.map { |tag| tag.name }.join('、')
+    end
   end
 end

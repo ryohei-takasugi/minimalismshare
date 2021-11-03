@@ -2,7 +2,7 @@
   <%# 編集・削除 %>
   <div>
     <% if user_signed_in? && confirm_author?(@experience) %>
-      <%= link_to "編集", "#" %>
+      <%= link_to "編集", edit_experience_path(@experience) %>
       <p>or</p>
       <%= link_to "削除", "#", method: :delete %>
     <% end %>
@@ -27,7 +27,7 @@
     <% @experience.experience_comments.each do |comment| %>
       <%= comment.user.nickname %> が <%= l comment.user.updated_at %> にコメント      
       <%= comment.comment %>
-      <% if user_signed_in? %>
+      <% if user_signed_in? && current_user.id == comment.user_id %>
         <%= link_to "編集", edit_experience_experience_comment_path(@experience, comment) %>
         <%= link_to "削除", experience_experience_comment_path(@experience, comment), method: :delete %>
       <% end %>

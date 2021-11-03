@@ -1,0 +1,32 @@
+<%= form_with model: form_model, url: form_url, method: form_method, local: true do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title, class:"field-title", placeholder: "例）本を整理した" %>
+  </div>
+  <div class="field">
+    <%= f.label :tags %><br />
+    <%= f.text_field :tags, value: tags_join(form_model.tags), id: "experience_tag_name", placeholder: "例）本, リビング, 電子書籍, 捨て方アドバイス, 残し方アドバイス" %><br>
+  </div>
+  <span class="search-result">
+    <ul id="search-result">
+    </ul>
+  </span>
+  <div class="field">
+    <%= f.label :stress %><br />
+    <%= f.text_field :stress, class:"field-stress", placeholder: "例）本に足をぶつけるときがある。新しい本を買うと置く場所がない。" %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %><br />
+    <%= f.collection_select(:category_id, set_category, :id, :name, {}, {}) %>
+    <span>&emsp;</span>
+    <%= f.label :period_id %><br />
+    <%= f.collection_select(:period_id, set_period, :id, :name, {}, {}) %>
+  </div>
+  <div class="field-rich">
+    <%= f.rich_text_area :content, placeholder: "記述内容）解決した方法、解決するまでの手順・注意点、真似する人へのアドバイス、解決したことにより発生するストレスと対処法、など" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
