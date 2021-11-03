@@ -25,4 +25,8 @@ module ExperiencesHelper
       ['更新日時 昇順', 'updated_at asc']
     ]
   end
+
+  def confirm_author?(model)
+    model.user_id == current_user.id
+  end
 end
