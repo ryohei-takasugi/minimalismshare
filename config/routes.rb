@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "experiences#index"
-  resources :experiences, only: [:index, :new, :create, :show] do
+  resources :experiences, only: [:index, :new, :create, :show, :edit, :update] do
     resources :experience_comments, only: [:create, :edit, :update, :destroy]
     collection do
       get 'search_tag'
