@@ -1,0 +1,2 @@
+class ExperienceComment < ApplicationRecord
+end
