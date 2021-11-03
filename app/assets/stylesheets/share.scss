@@ -2,8 +2,8 @@
 //  共通変数
 // -----------------------------
 $line-color: #D8D8D8;
-$back-color: white;
-$font-color: black;
+$back-color: #fef6e4;
+$font-color: #001858;
 $main-font: 'Zen Maru Gothic', sans-serif; 
 $menu-height: 50px;
 // -----------------------------
@@ -92,7 +92,7 @@ $menu-height: 50px;
 }
 
 @mixin submit-button() {
-  background-color: #00eb14;
+  background-color: #f582ae;
   border: 1px solid $line-color;
   box-shadow: 5px 5px $line-color;
   text-align: center;

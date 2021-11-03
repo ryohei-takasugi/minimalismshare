@@ -1,6 +1,7 @@
 <div class="experience-index">
   <h1>経験の投稿記事一覧</h1>
   <div class="indexs">
+    <%# 記事の検索 %>
     <div class="search-items">
       <h2>検&emsp;索</h2>
       <div class="field">
@@ -29,45 +30,10 @@
       <% end %>
       </div>
     </div>
+    <%# 記事の一覧 %>
     <div class="cards">
       <% @experiences.each do |experience| %>
-        <div class="card">
-          <div class="nickname">
-            <%= experience.user.nickname %> が <%= l experience.updated_at %> に投稿
-          </div>
-          <div class="title">
-            <%= experience.title %>
-          </div>
-          <table>
-            <tr>
-              <td class="header"><i class="far fa-user"></i></td>
-              <td class="item">
-                <p class="user-item">[<%=  t("activerecord.attributes.user.dream") %>] <%= experience.user.dream %></p>
-                <p class="user-item">[<%=  t("activerecord.attributes.user.region_id") %>] <%= experience.user.region.name %></p>
-                <p class="user-item">[<%=  t("activerecord.attributes.user.climate_id") %>] <%= experience.user.climate.name %></p>
-                <p class="user-item">[<%=  t("activerecord.attributes.user.housemate_id") %>] <%= experience.user.housemate.name %></p>
-                <p class="user-item">[<%=  t("activerecord.attributes.user.children_id") %>] <%= experience.user.children.name %></p>
-                <p class="user-item">[<%=  t("activerecord.attributes.user.clean_status_id") %>] <%= experience.user.clean_status.name %></p>
-              </td>
-            </tr>
-            <tr>
-              <td class="header"><i class="fas fa-tags"></i></td>
-              <td class="item"><%= tags_join(experience.tags) %></td>
-            </tr>
-            <tr>
-              <td class="header"><i class="fas fa-angry"></i></td>
-              <td class="item"><%= experience.stress %></td>
-            </tr>
-            <tr>
-              <td class="header"><i class="far fa-check-circle"></i></td>
-              <td class="item"><%= experience.category.name %>
-            </tr>
-            <tr>
-              <td class="header"><i class="far fa-calendar-alt"></i></td>
-              <td class="item"><%= experience.period.name %></td>
-            </tr>
-          </table>
-        </div>
+        <%= render partial: 'shared/show_experience', locals: {experience: experience} %>
       <% end %>
       <%= paginate @experiences %>
     </div>

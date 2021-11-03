@@ -1,0 +1,36 @@
+<div class="experience-show">
+  <%# 編集・削除 %>
+  <div>
+    <% if user_signed_in? && confirm_author?(@experience) %>
+      <%= link_to "編集", "#" %>
+      <p>or</p>
+      <%= link_to "削除", "#", method: :delete %>
+    <% end %>
+  </div>
+
+  <%# 基本情報 %>
+  <%= render partial: 'shared/show_experience', locals: {experience: @experience} %>
+
+  <%# 本文情報 %>
+  <h3><%=  t("activerecord.attributes.experience.content") %></h3>
+  <%= @experience.content %>
+
+  <%# コメント %>
+  <div>
+    <h3>コメント</h3>
+    <% if user_signed_in? %>
+      <%= form_with model: [@experience, @comment], local: true do |f|  %>
+        <%= f.text_area :comment %>
+        <%= f.submit 'コメントする' %>
+      <% end %>
+    <% end %>
+    <% @experience.experience_comments.each do |comment| %>
+      <%= comment.user.nickname %> が <%= l comment.user.updated_at %> にコメント      
+      <%= comment.comment %>
+      <% if user_signed_in? %>
+        <%= link_to "編集", edit_experience_experience_comment_path(@experience, comment) %>
+        <%= link_to "削除", experience_experience_comment_path(@experience, comment), method: :delete %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
