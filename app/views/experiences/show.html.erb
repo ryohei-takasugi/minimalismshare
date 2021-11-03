@@ -4,7 +4,7 @@
     <% if user_signed_in? && confirm_author?(@experience) %>
       <%= link_to "編集", edit_experience_path(@experience) %>
       <p>or</p>
-      <%= link_to "削除", "#", method: :delete %>
+      <%= link_to "削除", experience_path(@experience), data: { confirm: "この操作は取り消すことができません。本当に記事の削除を実行しますか?" }, method: :delete %>
     <% end %>
   </div>
 

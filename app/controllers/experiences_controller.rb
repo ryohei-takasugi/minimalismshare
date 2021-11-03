@@ -2,7 +2,7 @@ class ExperiencesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :set_ransack,        only: [:index, :search_article]
   before_action :set_tag,            only: [:index, :search_article]
-  before_action :set_experience,     only: [:show, :edit, :update]
+  before_action :set_experience,     only: [:show, :edit, :update, :destroy]
 
   def index
   end
@@ -51,6 +51,11 @@ class ExperiencesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @experience.destroy
+    redirect_to experiences_path
   end
 
   def search_tag
