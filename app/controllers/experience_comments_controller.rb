@@ -1,0 +1,2 @@
+class ExperienceCommentsController < ApplicationController
+end
