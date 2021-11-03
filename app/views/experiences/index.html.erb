@@ -33,7 +33,7 @@
     <%# 記事の一覧 %>
     <div class="cards">
       <% @experiences.each do |experience| %>
-        <%= render partial: 'shared/form_experience', locals: {experience: experience} %>
+        <%= render partial: 'shared/show_experience', locals: {experience: experience} %>
       <% end %>
       <%= paginate @experiences %>
     </div>

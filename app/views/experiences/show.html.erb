@@ -9,7 +9,7 @@
   </div>
 
   <%# 基本情報 %>
-  <%= render partial: 'shared/form_experience', locals: {experience: @experience} %>
+  <%= render partial: 'shared/show_experience', locals: {experience: @experience} %>
 
   <%# 本文情報 %>
   <h3><%=  t("activerecord.attributes.experience.content") %></h3>
