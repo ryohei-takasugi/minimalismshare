@@ -7,6 +7,7 @@ class Experience < ApplicationRecord
   belongs_to :user
   has_many :experience_tag_relations
   has_many :tags, through: :experience_tag_relations
+  has_many :experience_comments
   has_rich_text :content
   has_one :content, class_name: 'ActionText::RichText', as: :record
   # validation

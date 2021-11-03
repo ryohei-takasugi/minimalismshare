@@ -8,6 +8,7 @@ class ExperiencesController < ApplicationController
 
   def new
     @experience_tag = ExperienceTag.new
+    @comment = ExperienceComment.new
   end
 
   def create
@@ -17,6 +18,11 @@ class ExperiencesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    @experience = Experience.find(params[:id])
+    @comment = ExperienceComment.new
   end
 
   def search_tag
