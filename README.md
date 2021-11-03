@@ -415,7 +415,7 @@ URLにアクセスしていただきページを表示してください。
 | Column     | Type       | Options                         |
 | ---------- | ---------- | ------------------------------- |
 | like       | boolean    | null: false                     |
-| imitation  | boolean    | null: false                     |
+| imitate    | boolean    | null: false                     |
 | user       | references | null: false, foreign_key: true  |
 | experience | references | null: false, foreign_key: true  |
 

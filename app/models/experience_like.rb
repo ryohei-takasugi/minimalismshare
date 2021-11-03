@@ -1,0 +1,2 @@
+class ExperienceLike < ApplicationRecord
+end
