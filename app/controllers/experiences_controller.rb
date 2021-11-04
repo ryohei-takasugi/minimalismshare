@@ -23,6 +23,8 @@ class ExperiencesController < ApplicationController
 
   def show
     @comment = ExperienceComment.new
+    @like = ExperienceLike.find_by(experience_id: params[:id], user_id: current_user.id)
+    @like = ExperienceLike.new if @like.blank?
   end
 
   def edit

@@ -40,5 +40,13 @@
       <td class="header"><i class="far fa-calendar-alt"></i></td>
       <td class="item"><%= experience.period.name %></td>
     </tr>
+    <tr>
+      <td class="header"><i class="fas fa-heart"></i></td>
+      <td class="item"><%= experience.experience_like.where(like: true).count %></td>
+    </tr>
+    <tr>
+      <td class="header"><i class="fas fa-thumbs-up"></i></td>
+      <td class="item"><%= experience.experience_like.where(imitate: true).count %></td>
+    </tr>
   </table>
 </div>

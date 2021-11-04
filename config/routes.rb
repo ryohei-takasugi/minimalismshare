@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "experiences#index"
   resources :experiences do
     resources :experience_comments, only: [:create, :edit, :update, :destroy]
+    resources :experience_likes, only: [:create, :update]
     collection do
       get 'search_tag'
       get 'search_article'

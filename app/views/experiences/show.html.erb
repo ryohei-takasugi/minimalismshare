@@ -15,6 +15,37 @@
   <h3><%=  t("activerecord.attributes.experience.content") %></h3>
   <%= @experience.content %>
 
+  <%# 評価機能 %>
+  <div>
+    <% if @like.id.nil? %>
+      <%= button_to experience_experience_likes_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: true } } } do %>
+        <i class="fas fa-heart" style="width: 30px; height: 30px; color: gray;"></i>
+      <% end %>
+      <%= button_to experience_experience_likes_path(@experience, @like), { type: 'submit', params: { experiences_like: { imitate: true } } } do %>
+        <i class="fas fa-thumbs-up" style="width: 30px; height: 30px; color: gray;"></i>
+      <% end %>
+    <% else %>
+      <% if @experience.experience_like.first.like %>
+        <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: false } }, method: :patch } do %>
+          <i class="fas fa-heart" style="width: 30px; height: 30px; color: pink;"></i>
+        <% end %>
+      <% else %>
+        <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: true } }, method: :patch } do %>
+          <i class="fas fa-heart" style="width: 30px; height: 30px; color: gray;"></i>
+        <% end %>
+      <% end %>
+      <% if @experience.experience_like.first.imitate %>
+        <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { imitate: false } }, method: :patch } do %>
+          <i class="fas fa-thumbs-up" style="width: 30px; height: 30px; color: pink;"></i>
+        <% end %>
+      <% else %>
+        <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { imitate: true } }, method: :patch } do %>
+          <i class="fas fa-thumbs-up" style="width: 30px; height: 30px; color: gray;"></i>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
   <%# コメント %>
   <div>
     <h3>コメント</h3>
