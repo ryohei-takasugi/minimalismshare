@@ -37,7 +37,7 @@ class ExperienceTag
     return false unless valid?
 
     experience.update(title: title, category_id: category_id, period_id: period_id, content: content,
-                                  stress: stress, user_id: user_id)
+                      stress: stress, user_id: user_id)
     unless tags.nil?
       tags.split(',').each do |tag_name|
         tag_name = tag_name.gsub(' ', '')
@@ -63,6 +63,7 @@ class ExperienceTag
   private
 
   def set_experience
-    Experience.new(title: title, category_id: category_id, period_id: period_id, content: @content, stress: stress, user_id: user_id)
+    Experience.new(title: title, category_id: category_id, period_id: period_id, content: @content, stress: stress,
+                   user_id: user_id)
   end
 end
