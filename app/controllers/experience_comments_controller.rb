@@ -28,7 +28,7 @@ class ExperienceCommentsController < ApplicationController
   def comment_params
     params.require(:experience_comment).permit(:comment).merge(user_id: current_user.id, experience_id: params[:experience_id])
   end
-  
+
   def set_experience
     @experience = Experience.find(params[:experience_id])
   end

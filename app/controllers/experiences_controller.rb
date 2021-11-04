@@ -29,23 +29,23 @@ class ExperiencesController < ApplicationController
 
   def edit
     @experience_tag = ExperienceTag.new(
-      title:       @experience.title,
-      tags:        @experience.tags.map { |tag| tag.name },
-      stress:      @experience.stress,
+      title: @experience.title,
+      tags: @experience.tags.map { |tag| tag.name },
+      stress: @experience.stress,
       category_id: @experience.category_id,
-      period_id:   @experience.period_id,
-      content:     @experience.content
+      period_id: @experience.period_id,
+      content: @experience.content
     )
   end
 
   def update
     @experience_tag = ExperienceTag.new(
-      title:       experience_tag_params[:title],
-      tags:        experience_tag_params[:tags],
-      stress:      experience_tag_params[:stress],
+      title: experience_tag_params[:title],
+      tags: experience_tag_params[:tags],
+      stress: experience_tag_params[:stress],
       category_id: experience_tag_params[:category_id],
-      period_id:   experience_tag_params[:period_id],
-      content:     experience_tag_params[:content]
+      period_id: experience_tag_params[:period_id],
+      content: experience_tag_params[:content]
     )
     @experience_tag.user_id = experience_tag_params[:user_id]
     if @experience_tag.update(@experience)

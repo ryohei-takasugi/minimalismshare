@@ -29,6 +29,7 @@ class ExperienceLikesController < ApplicationController
   private
 
   def like_params
-    params.require(:experiences_like).permit(:like, :imitate).merge(experience_id: params[:experience_id], user_id: current_user.id)
+    params.require(:experiences_like).permit(:like, :imitate).merge(experience_id: params[:experience_id],
+                                                                    user_id: current_user.id)
   end
 end
