@@ -89,7 +89,7 @@ class ExperiencesController < ApplicationController
   def set_tag
     @search_tag = Tag.all
   end
-
+  
   def experience_tag_params
     params.require(:experience_tag)
           .permit(:title, :tags, :stress, :category_id, :period_id, :content)

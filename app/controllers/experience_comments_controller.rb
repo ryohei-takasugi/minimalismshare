@@ -6,6 +6,7 @@ class ExperienceCommentsController < ApplicationController
   def create
     comment = ExperienceComment.new(comment_params)
     comment.save
+    create_notice(comment)
     redirect_to experience_path(params[:experience_id])
   end
 
@@ -35,5 +36,9 @@ class ExperienceCommentsController < ApplicationController
 
   def set_experience_comment
     @comment = ExperienceComment.find(params[:id])
+  end
+
+  def create_notice(comment)
+    Notice.create(message:"#{comment.user.nickname} が、あなたの記事「#{comment.experience.title}」に「#{comment.comment}」とコメントしました", url: experience_path(comment.experience.id), user_id: comment.experience.user_id)
   end
 end

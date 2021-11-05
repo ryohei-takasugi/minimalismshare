@@ -1,3 +1,46 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-<%= link_to 'アカウントの編集', edit_user_registration_path %>
+<div>
+  <h1>マイページ</h1>
+  <nav class="tabs" data-kube="tabs" data-equal="true">
+    <a href="#tab1" class="is-active">お知らせ</a>
+    <a href="#tab2">アカウント情報</a>
+    <a href="#tab3">記事一覧</a>
+    <a href="#tab4">いいね一覧</a>
+    <a href="#tab5">真似した一覧</a>
+  </nav>
+  <%# お知らせ %>
+  <section id="tab1">
+    <h2>お知らせ</h2>
+    <table>
+      <thead>
+          <tr>
+              <th>お知らせ日時</th>
+              <th>内容</th>
+          </tr>
+      </thead>
+      <% @notices.each do |n| %>
+      <tbody>
+          <tr>
+              <td><%= l n.created_at %></td>
+              <td><%= link_to n.message, n.url %></td>
+          </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </section>
+  <%# アカウント情報 %>
+  <section id="tab2">
+    <h2>アカウント情報</h2>
+  </section>
+  <%# 投稿記事一覧 %>
+  <section id="tab3">
+    <h2>投稿記事一覧</h2>
+  </section>
+  <%# いいね一覧 %>
+  <section id="tab4">
+    <h2>いいね一覧</h2>
+  </section>
+  <%# 真似した一覧 %>
+  <section id="tab5">
+    <h2>真似した一覧</h2>
+  </section>
+</div>

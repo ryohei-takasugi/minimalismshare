@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :basic_auth
   before_action :configre_permitted_paramter, if: :devise_controller?
+  before_action :set_notice
 
   private
 
@@ -14,5 +15,9 @@ class ApplicationController < ActionController::Base
     authenticate_or_request_with_http_basic do |username, password|
       username == ENV['BASIC_AUTH_USER'] && password == ENV['BASIC_AUTH_PASSWORD']
     end
+  end
+
+  def set_notice
+    @notices = Notice.where(user_id: current_user.id).limit(10).order(created_at: :desc)
   end
 end

@@ -106,6 +106,47 @@ $menu-height: 50px;
   }
 }
 
+@mixin notice-badge() {
+  border-left: 1px solid $line-color;
+  height: $menu-height;
+  line-height: $menu-height;
+  text-align: center;
+  width: 50px;
+  padding: 3px 5px;
+  position: relative;       /* 基準値とする */
+  span {
+    position: absolute;     /* 相対位置に指定 */
+    font-size: 13px;
+    top: 10px;             /* 表示位置を上から-10pxの位置にする */
+    left: calc(100% - 25px);/* 表示位置を右から内側に10pxの位置 */
+    color: #FFF;          /* 文字色を白に指定 */
+    font-weight: bold;      /* 太文字にする */
+    line-height: 20px;      /* 行の高さを指定 */
+    text-align: center;     /* 文字を中央揃えにする */
+    background: #E68031;  /* 背景色をオレンジに指定 */
+    border-radius: 10px;    /* line-heightの半分の角丸を指定 */
+    min-width: 20px;        /* 最低幅を指定 */
+    padding: 0 3px;         /* 左右に少しだけ余白を設定 */
+    box-sizing: border-box; /* 計算しやすいように */
+  }
+  ul {
+    text-align: left;
+    p {
+      border-bottom: 1px solid $line-color;
+    }
+    li {
+      font-size: 14px;
+      line-height: 20px;
+      text-align: left;
+      border-bottom: 1px solid $line-color;
+    }
+  }
+  i {
+    width: 30px;
+    height: 30px;
+  }
+}
+
 // -----------------------------
 //  共通scss
 // -----------------------------
