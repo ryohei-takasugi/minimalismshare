@@ -442,7 +442,7 @@ URLにアクセスしていただきページを表示してください。
 ## notices テーブル
 | Column     | Type       | Options                         |
 | ---------- | ---------- | ------------------------------- |
-| content    | string     | null: false                     |
+| message    | string     | null: false                     |
 | url        | string     |                                 |
 | read       | boolean    | null: false                     |
 | user       | references | null: false, foreign_key: true  |
