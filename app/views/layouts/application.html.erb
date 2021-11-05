@@ -30,6 +30,27 @@
             <li><%= link_to "経験の記事", new_experience_path %></li>
           </ul>
         </span>
+        <div class="notice">
+          <i class="far fa-bell"></i><span><%= @notices.where(read: false).count %></span>
+          <ul>
+            <p>お知らせ（<%= link_to '一覧', user_path(@notices.first.user_id) %>）</p>
+            <% @notices.each do |n| %>
+              <li>
+                <% if n.read %>
+                  <div class="already">
+                    <%= l n.created_at %><br>
+                    <%= link_to n.message, n.url %>
+                  </div>
+                <% else %>
+                  <div class="unread">
+                    <%= l n.created_at %><br>
+                    <%= link_to n.message, n.url %>
+                  </div>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
         <span class="user-menu"><%= current_user.nickname %>
           <ul>
             <li><%= link_to "マイページ", "/users/#{current_user.id}" %></li>

@@ -69,6 +69,14 @@ header {
       @include btn-panel($menu-height, 150px);
       border-left: 1px solid $line-color;
     }
+    .notice {
+      @include notice-badge;
+      @include drop-down(400px, -300px, 100%);
+      .unread {
+        font-weight: bold;
+        background-color: #fcf0d5;
+      }
+    }
   }
 }
 // -----------------------------
