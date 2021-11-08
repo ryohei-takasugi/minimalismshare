@@ -9,6 +9,8 @@ require("@rails/activestorage").start()
 require("channels")
 require("../tag")
 require("../fontawesome-free-5.15.4-web/js/all")
+require("../kube.min")
+require("../kube-addons.min")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
