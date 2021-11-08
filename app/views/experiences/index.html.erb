@@ -1,5 +1,5 @@
 <div class="experience-index">
-  <h1>経験の投稿記事一覧</h1>
+  <h1>経験の記事一覧</h1>
   <div class="indexs">
     <%# 記事の検索 %>
     <div class="search-items">
@@ -24,18 +24,25 @@
         <%= f.select :sorts, set_sort %>
         <br>
         </details>
-        <%= button_tag type: 'submit', class: "submit" do %>
+        <%= button_tag type: 'submit', class: "button is-secondary" do %>
           検索 <i class="fas fa-search" aria-hidden="true"></i>
         <% end %>
       <% end %>
       </div>
     </div>
+
     <%# 記事の一覧 %>
     <div class="cards">
-      <% @experiences.each do |experience| %>
-        <%= render partial: 'shared/show_experience', locals: {experience: experience} %>
+      <% if @experiences.blank? %>
+        <div class="card_null">
+          記事がありません。
+        </div>
+      <% else %>
+        <% @experiences.each do |experience| %>
+          <%= render partial: 'shared/show_experience', locals: {experience: experience} %>
+        <% end %>
+        <%= paginate @experiences %>
       <% end %>
-      <%= paginate @experiences %>
     </div>
   </div>
 </div>

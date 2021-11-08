@@ -4,70 +4,68 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "sign_up_form") do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
-    <em>(あたなたの名前を6文字以下で入力してください)</em>
     <div class="field">
       <%= f.label :nickname, class: "required" %>
+      <em>(あたなたの名前を6文字以下で入力してください)</em>
       <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
     </div>
 
-    <em>(同じメールアドレスがすでに登録されている場合、新たに登録はできません)</em>
+    
     <div class="field">
       <%= f.label :email, class: "required" %>
+      <em>(同じメールアドレスがすでに登録されている場合、新たに登録はできません)</em>
       <%= f.email_field :email, autocomplete: "email" %>
     </div>
 
-    <% if @minimum_password_length %>
-      <em>(パスワードは最小 <%= @minimum_password_length %> 文字、かつ、英数字を1文字以上含んでください)</em>
-    <% end %><br />
     <div class="field">
       <%= f.label :password, class: "required" %>
+      <em>(パスワードは最小 <%= @minimum_password_length %> 文字、かつ、英数字を1文字以上含んでください)</em>
       <%= f.password_field :password, autocomplete: "new-password" %>
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation, class: "required" %><br />
+      <%= f.label :password_confirmation, class: "required" %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
 
-
-    <em>(あなたが、ミニマリズムを取り入れて集中したい夢や目標をお聞かせください)</em>
     <div class="field">
       <%= f.label :dream %>
+      <em>(あなたが、ミニマリズムを取り入れて集中したい夢や目標をお聞かせください)</em>
       <%= f.text_field :dream %>
     </div>
 
-    <em>(あたなたが実施したミニマリズムは地域の影響を受けているかもしれません)</em>
     <div class="field">
       <%= f.label :region_id %>
+      <em>(あたなたが実施したミニマリズムは地域の影響を受けているかもしれません)</em>
       <%= f.collection_select(:region_id, set_region, :id, :name, {}, {}) %>
     </div>
 
-    <em>(あたなたが実施したミニマリズムは気候の影響を受けているかもしれません)</em>
     <div class="field">
       <%= f.label :climate_id %>
+      <em>(あたなたが実施したミニマリズムは気候の影響を受けているかもしれません)</em>
       <%= f.collection_select(:climate_id, set_climate, :id, :name, {}, {}) %>
     </div>
 
-    <em>(あたなたが実施したミニマリズムは家族や同居人の影響を受けているかもしれません)</em>
     <div class="field">
       <%= f.label :housemate_id %>
+      <em>(あたなたが実施したミニマリズムは家族や同居人の影響を受けているかもしれません)</em>
       <%= f.collection_select(:housemate_id, set_housemate, :id, :name, {}, {}) %>
     </div>
 
-    <em>(あたなたが実施したミニマリズムは子供の影響を受けているかもしれません)</em>
     <div class="field">
       <%= f.label :children_id %>
+      <em>(あたなたが実施したミニマリズムは子供の影響を受けているかもしれません)</em>
       <%= f.collection_select(:children_id, set_children, :id, :name, {}, {}) %>
     </div>
 
-    <em>(あたなたの現在状況をお聞かせください)</em>
     <div class="field">
       <%= f.label :clean_status_id %>
+      <em>(あたなたの現在状況をお聞かせください)</em>
       <%= f.collection_select(:clean_status_id, set_cleanStatus, :id, :name, {}, {}) %>
     </div>
 
     <div class="actions">
-      <%= f.submit "新規作成" %>
+      <%= f.submit "新規作成", class: "button is-secondary" %>
     </div>
   <% end %>
 </div>

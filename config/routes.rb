@@ -8,6 +8,9 @@ Rails.application.routes.draw do
       get 'search_tag'
       get 'search_article'
     end
+    member do
+      get 'search_tag'
+    end
   end
   resources :users, only: [:show]
 end

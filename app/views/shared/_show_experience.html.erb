@@ -5,11 +5,11 @@
   </div>
   <%# タイトル %>
   <div class="title">
-    <h2>
+    <h1>
       <%= link_to experience_path(experience.id) do %>
         <%= experience.title %>
       <% end %>
-    </h2>
+    </h1>
   </div>
   <%# 基本情報 %>
   <table>
@@ -41,12 +41,24 @@
       <td class="item"><%= experience.period.name %></td>
     </tr>
     <tr>
-      <td class="header"><i class="fas fa-heart"></i></td>
-      <td class="item"><%= experience.experience_like.where(like: true).count %></td>
+      <td class="header">
+        <% if user_signed_in? && !experience.experience_likes.blank? && experience.experience_likes.first.like %>
+          <i class="fas fa-heart active"></i>
+        <% else %>
+          <i class="fas fa-heart inactive"></i>
+        <% end %>
+      </td>
+      <td class="item"><%= experience.experience_likes.where(like: true).count %> いいね</td>
     </tr>
     <tr>
-      <td class="header"><i class="fas fa-thumbs-up"></i></td>
-      <td class="item"><%= experience.experience_like.where(imitate: true).count %></td>
+      <td class="header">
+        <% if user_signed_in? && !experience.experience_likes.blank? && experience.experience_likes.first.imitate %>
+          <i class="fas fa-thumbs-up active"></i>
+        <% else %>
+          <i class="fas fa-thumbs-up inactive"></i>
+        <% end %>
+      </td>
+      <td class="item"><%= experience.experience_likes.where(imitate: true).count %> 真似した</td>
     </tr>
   </table>
 </div>

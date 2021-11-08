@@ -18,6 +18,19 @@ class ApplicationController < ActionController::Base
   end
 
   def set_notice
-    @notices = Notice.where(user_id: current_user.id).limit(10).order(created_at: :desc)
+    if user_signed_in?
+      @notices = Notice.where(user_id: current_user.id).limit(10).order(created_at: :desc)
+    end
+  end
+
+  # used
+  #   ExperienceCommentsController
+  #   ExperienceLikesController
+  #   ExperiencesController
+  def set_experience_like
+    if user_signed_in?
+      @like = ExperienceLike.find_by(set_like_find_params)
+      @like = ExperienceLike.new if @like.blank?
+    end
   end
 end

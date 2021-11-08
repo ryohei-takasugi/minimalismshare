@@ -1,0 +1,7 @@
+<% if flash[:notice] != nil %>
+  <p class="alert is-success"><%= flash[:notice] %></p>
+<% elsif flash[:hazard] != nil %>
+  <p class="alert is-error"><%= flash[:hazard] %></p>
+<% elsif flash[:focus] != nil %>
+  <p class="alert is-focus"><%= flash[:focus] %></p>
+<% end %>
