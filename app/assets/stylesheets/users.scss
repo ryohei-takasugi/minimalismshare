@@ -4,6 +4,9 @@
 
 @import 'share';
 
+// -----------------------------
+//  アカウントの新規作成＆ログイン
+// -----------------------------
 .sign-container {
   width: 50%;
   margin: 20px auto;
@@ -19,24 +22,20 @@
     font-size: 20px;
   }
   form {
-    @include field-pack;
     .field {
+      margin-bottom: 15px;
       .required:after {
         content: " *";
         color: red;
       }
       label {
-        width: 280px;
+        margin-bottom: 0px;
+        margin-top: 10px;
       }
-      input {
-        width: 100%;
+      em {
+        line-height: 10px;
+        font-size: small;
       }
-      select {
-        width: 100%;
-      }
-    }
-    em {
-      font-size: small;
     }
     .remember-me {
       display: flex;
@@ -68,6 +67,9 @@
   }
 }
 
+// -----------------------------
+//  Deviseのエラー表示
+// -----------------------------
 #error_explanation {
   background-color: #f54c4c;
   color: white;
@@ -77,20 +79,18 @@
 }
 
 
-@media (max-width: 500px) {
+// -----------------------------
+//  レスポンシブデザイン（スマホ）
+// -----------------------------
+@media (max-width: 768px) {
   .sign-container {
-    width: 95%;
+    width: 100%;
     padding: 15px;
-    form {
-      .field {
-        font-size: small;
-        label {
-          width: 200px;
-        }
-      }
-    }
   }
 }
-@media (max-width: 1000px) {
+// -----------------------------
+//  レスポンシブデザイン（タブレット）
+// -----------------------------
+@media (max-width: 1024px) {
 
 }

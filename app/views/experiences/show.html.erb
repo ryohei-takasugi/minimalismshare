@@ -1,67 +1,81 @@
-<div class="experience-show">
-  <%# 編集・削除 %>
-  <div>
-    <% if user_signed_in? && confirm_author?(@experience) %>
-      <%= link_to "編集", edit_experience_path(@experience) %>
-      <p>or</p>
-      <%= link_to "削除", experience_path(@experience), data: { confirm: "この操作は取り消すことができません。本当に記事の削除を実行しますか?" }, method: :delete %>
+<div class="experience-show is-container-column">
+  <%# 基本情報 %>
+  <%= render partial: 'shared/show_experience', locals: { experience: @experience } %>
+
+  <%# 評価機能 %>
+  <div class="like">
+    <% unless @like.blank? %>
+      <% if @like.id.nil? %>
+        <%= button_to experience_experience_likes_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: true } }, class: "button is-like is-secondary" } do %>
+          <i class="fas fa-heart inactive"></i>
+        <% end %>
+        <%= button_to experience_experience_likes_path(@experience, @like), { type: 'submit', params: { experiences_like: { imitate: true } }, class: "button is-like is-secondary" } do %>
+          <i class="fas fa-thumbs-up inactive"></i>
+        <% end %>
+      <% else %>
+        <% if @experience.experience_likes.first.like %>
+          <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: false } }, method: :patch, class: "button is-like is-secondary" } do %>
+            <i class="fas fa-heart active"></i>
+          <% end %>
+        <% else %>
+          <%= button_to experience_experience_likes_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: true } }, method: :patch, class: "button is-like is-secondary" } do %>
+            <i class="fas fa-heart inactive"></i>
+          <% end %>
+        <% end %>
+        <% if @experience.experience_likes.first.imitate %>
+          <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { imitate: false } }, method: :patch, class: "button is-like is-secondary" } do %>
+            <i class="fas fa-thumbs-up active"></i>
+          <% end %>
+        <% else %>
+          <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { imitate: true } }, method: :patch, class: "button is-like is-secondary" } do %>
+            <i class="fas fa-thumbs-up inactive"></i>
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 
-  <%# 基本情報 %>
-  <%= render partial: 'shared/show_experience', locals: {experience: @experience} %>
-
   <%# 本文情報 %>
-  <h3><%=  t("activerecord.attributes.experience.content") %></h3>
-  <%= @experience.content %>
+  <div class="conten">
+    <h3><%=  t("activerecord.attributes.experience.content") %></h3>
+    <%= @experience.content %>
+  </div>
 
-  <%# 評価機能 %>
-  <div>
-    <% if @like.id.nil? %>
-      <%= button_to experience_experience_likes_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: true } } } do %>
-        <i class="fas fa-heart" style="width: 30px; height: 30px; color: gray;"></i>
-      <% end %>
-      <%= button_to experience_experience_likes_path(@experience, @like), { type: 'submit', params: { experiences_like: { imitate: true } } } do %>
-        <i class="fas fa-thumbs-up" style="width: 30px; height: 30px; color: gray;"></i>
-      <% end %>
-    <% else %>
-      <% if @experience.experience_like.first.like %>
-        <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: false } }, method: :patch } do %>
-          <i class="fas fa-heart" style="width: 30px; height: 30px; color: pink;"></i>
-        <% end %>
-      <% else %>
-        <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: true } }, method: :patch } do %>
-          <i class="fas fa-heart" style="width: 30px; height: 30px; color: gray;"></i>
-        <% end %>
-      <% end %>
-      <% if @experience.experience_like.first.imitate %>
-        <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { imitate: false } }, method: :patch } do %>
-          <i class="fas fa-thumbs-up" style="width: 30px; height: 30px; color: pink;"></i>
-        <% end %>
-      <% else %>
-        <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { imitate: true } }, method: :patch } do %>
-          <i class="fas fa-thumbs-up" style="width: 30px; height: 30px; color: gray;"></i>
-        <% end %>
-      <% end %>
+  <%# 編集・削除 %>
+  <div class="edit">
+    <% if user_signed_in? && confirm_author?(@experience) %>
+      <%= link_to "編集", edit_experience_path(@experience), class: "button is-secondary" %>
+      <%= link_to "削除", experience_path(@experience), class: "button is-destructive", data: { confirm: "この操作は取り消すことができません。本当に記事の削除を実行しますか?" }, method: :delete %>
     <% end %>
   </div>
 
   <%# コメント %>
-  <div>
+  <div class="comment">
     <h3>コメント</h3>
     <% if user_signed_in? %>
       <%= form_with model: [@experience, @comment], local: true do |f|  %>
-        <%= f.text_area :comment %>
-        <%= f.submit 'コメントする' %>
+        <%= f.text_area :comment, rows: 5 %>
+        <%= f.submit 'コメントする', class: "button is-secondary is-secondary" %>
       <% end %>
     <% end %>
-    <% @experience.experience_comments.each do |comment| %>
-      <%= comment.user.nickname %> が <%= l comment.user.updated_at %> にコメント      
-      <%= comment.comment %>
-      <% if user_signed_in? && current_user.id == comment.user_id %>
-        <%= link_to "編集", edit_experience_experience_comment_path(@experience, comment) %>
-        <%= link_to "削除", experience_experience_comment_path(@experience, comment), method: :delete %>
+    <% unless @experience.experience_comments.blank? %>
+      <div class="comments">
+      <% @experience.experience_comments.each do |comment| %>
+        <div class="header">
+          <p><%= comment.user.nickname %></p>
+          <p>更新日時：<%= l comment.updated_at %></p>
+        </div>
+        <div class="contents">
+          <%= comment.comment %>
+        </div>
+        <div class="fotter">
+          <% if user_signed_in? && current_user.id == comment.user_id %>
+            <%= link_to "編集", edit_experience_experience_comment_path(@experience, comment), class: "button is-secondary" %>
+            <%= link_to "削除", experience_experience_comment_path(@experience, comment), class: "button is-destructive", data: { confirm: "この操作は取り消すことができません。本当にコメントの削除を実行しますか?" }, method: :delete %>
+          <% end %>
+        </div>
       <% end %>
     <% end %>
+    </div>
   </div>
 </div>

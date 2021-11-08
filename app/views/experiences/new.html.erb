@@ -1,6 +1,7 @@
 <div class="forms-experience">
   <div class="forms">
-  <%# 入力フォーム %>
-  <%= render partial: 'shared/form_experience', locals: {form_model: @experience_tag, form_url: new_experience_path, form_method: :post} %>
+    <h1>記事の新規作成</h1>
+    <%# 入力フォーム %>
+    <%= render partial: 'shared/form_experience', locals: { form_model: @experience_tag, form_url: experiences_path, form_method: :post } %>
   </div>
 </div>

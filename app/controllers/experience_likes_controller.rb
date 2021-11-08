@@ -1,29 +1,28 @@
 class ExperienceLikesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_like_find_params
+  before_action :set_experience_like
+  before_action :set_experience
+  before_action :set_comment
 
+  # Call Views: experience/show.html.erb
   def create
     experience_like = ExperienceLike.new(like_params)
     if experience_like.save
       create_notice(experience_like)
       redirect_to experience_path(params[:experience_id])
     else
-      @experience = Experience.find(params[:experience_id])
-      @comment = ExperienceComment.new
-      @like = ExperienceLike.new
       render 'experiences/show'
     end
   end
 
+  # Call Views: experience/show.html.erb
   def update
     experience_like = ExperienceLike.find(params[:id])
     if experience_like.update(like_params)
       create_notice(experience_like)
       redirect_to experience_path(params[:experience_id])
     else
-      @experience = Experience.find(params[:experience_id])
-      @comment = ExperienceComment.new
-      @like = ExperienceLike.find_by(params[:id])
-      @like = ExperienceLike.new if @like.blank?
       render 'experiences/show'
     end
   end
@@ -44,6 +43,18 @@ class ExperienceLikesController < ApplicationController
     else
       nil
     end
+  end
+
+  def set_like_find_params
+    { experience_id: params[:experience_id], user_id: current_user.id}
+  end
+
+  def set_experience
+    @experience = Experience.find(params[:experience_id])
+  end
+  
+  def set_comment
+    @comment = ExperienceComment.new
   end
 
   def like_params

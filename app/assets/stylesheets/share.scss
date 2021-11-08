@@ -1,11 +1,21 @@
+@import 'kube/mixins.scss';
+@import 'kube/vars.scss';
+
 // -----------------------------
 //  共通変数
 // -----------------------------
 $line-color: #D8D8D8;
+$line-pale-color: #eeded6;
+$line-back-color: #f3d2c1;
 $back-color: #fef6e4;
+$dark-back-color: #f3d2c1;
+$secondary-color: #8bd3dd;
 $font-color: #001858;
 $main-font: 'Zen Maru Gothic', sans-serif; 
 $menu-height: 50px;
+$active-color: #f582ae;
+$inactive-color: gray;
+
 // -----------------------------
 //  共通mixin
 // -----------------------------
@@ -37,15 +47,15 @@ $menu-height: 50px;
   align-items: center;
 }
 
-@mixin drop-down($width, $left, $font-size) {
+@mixin drop-down($width, $left) {
   position: relative;
   ul {
-    font-size: $font-size;
     position: absolute;
     visibility: hidden;
     padding: 5px 10px;
-    width: $width;
+    min-width: $width;
     left: $left;
+    margin-top: 10px;
     -webkit-transition: all .2s ease;
     transition: all .2s ease;
     border: 1px solid $line-color;
@@ -56,35 +66,14 @@ $menu-height: 50px;
     ul {
       visibility: visible;
       opacity: 1;
+      li {
+        margin-right: 28px;
+      }
     }
   }
 }
 
-@mixin field-pack() {
-  .field {
-    @include flex-center;
-    label, input, select {
-      margin: 5px 0 15px;
-      padding: 10px;
-    }
-    label {
-      border-top: 1px solid $line-color;
-      border-left: 1px solid $line-color;
-      border-bottom: 1px solid $line-color;
-      border-radius: 5px 0px 0px 5px;
-    }
-    input {
-      border: 1px solid #D8D8D8;
-      border-radius: 0px 5px 5px 0px;
-    }
-    select {
-      border: 1px solid #D8D8D8;
-      border-radius: 0px 5px 5px 0px;
-    }
-  }
-}
-
-@mixin basic-border() {
+@mixin basic-input() {
   border: 1px solid $line-color;
   border-radius: 5px;
   margin: 5px 0 15px;
@@ -92,11 +81,9 @@ $menu-height: 50px;
 }
 
 @mixin submit-button() {
-  background-color: #f582ae;
   border: 1px solid $line-color;
   box-shadow: 5px 5px $line-color;
   text-align: center;
-  color: white;
   font-weight: bolder;
   border-radius: 5px;
   &:active {
@@ -107,18 +94,17 @@ $menu-height: 50px;
 }
 
 @mixin notice-badge() {
-  border-left: 1px solid $line-color;
   height: $menu-height;
   line-height: $menu-height;
   text-align: center;
-  width: 50px;
+  width: 15px;
   padding: 3px 5px;
   position: relative;       /* 基準値とする */
   span {
     position: absolute;     /* 相対位置に指定 */
     font-size: 13px;
     top: 10px;             /* 表示位置を上から-10pxの位置にする */
-    left: calc(100% - 25px);/* 表示位置を右から内側に10pxの位置 */
+    left: calc(100% - 5px);/* 表示位置を右から内側に10pxの位置 */
     color: #FFF;          /* 文字色を白に指定 */
     font-weight: bold;      /* 太文字にする */
     line-height: 20px;      /* 行の高さを指定 */
@@ -131,14 +117,18 @@ $menu-height: 50px;
   }
   ul {
     text-align: left;
+    display: block;
     p {
+      text-align: center;
       border-bottom: 1px solid $line-color;
     }
     li {
+      white-space: normal;
       font-size: 14px;
       line-height: 20px;
       text-align: left;
       border-bottom: 1px solid $line-color;
+      list-style: none;
     }
   }
   i {
@@ -146,20 +136,43 @@ $menu-height: 50px;
     height: 30px;
   }
 }
-
 // -----------------------------
-//  共通scss
+// 共通
 // -----------------------------
-* {
-  box-sizing: border-box;
-}
 .field_with_errors {
   display: contents;
 }
-.error-alert {
-  background-color: #f54c4c;
-  color: white;
-  border-radius: 5px;
-  padding: 5px 10px;
-  margin-bottom: 10px;
+
+// -----------------------------
+//  Kube CSS Framework custom
+// -----------------------------
+body {
+  background-color: $back-color;
+}
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: $main-font;
+  color: $font-color;
+}
+a {
+  color: $font-color;
+}
+a:hover {
+  color: $font-color;
+  text-decoration: underline
+}
+// tbody td,tbody th {
+//   border-bottom: 1px solid $line-pale-color;
+// }
+.button.is-destructive {
+  // $back-color, $text-color
+  @include make-button(#f1929d, #fff);
+}
+.button.is-secondary {
+  // $back-color, $text-color
+  @include make-button($secondary-color, #fff);
+}
+.button.is-like {
+  // $back-color, $text-color
+  //@include make-button(rgb(252, 110, 133), #fff);
+  @include make-button($dark-back-color, #fff);
 }

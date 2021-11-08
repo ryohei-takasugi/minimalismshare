@@ -4,71 +4,101 @@
     <title>MinimalismShare</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
     <link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
   </head>
 
   <body>
-    <!-- header -->
-    <header>
-      <h1 class="title">
-        <span class="page-menu">
-          Minimal+ism
-          <ul>
-            <li><%= link_to "TOP", "/" %></li>
-            <li><%= link_to "ABOUT", "#" %></li>
-            <li><%= link_to "みんなの経験", "#" %></li>
-          </ul>
-        </span>
-      </h1>
-      <ul class='a-lists'>
-        <% if user_signed_in? %>
-        <span class="edit-menu">投稿する <i class="fas fa-edit"></i>
-          <ul>
-            <li><%= link_to "経験の記事", new_experience_path %></li>
-          </ul>
-        </span>
-        <div class="notice">
-          <i class="far fa-bell"></i><span><%= @notices.where(read: false).count %></span>
-          <ul>
-            <p>お知らせ（<%= link_to '一覧', user_path(@notices.first.user_id) %>）</p>
-            <% @notices.each do |n| %>
-              <li>
-                <% if n.read %>
-                  <div class="already">
-                    <%= l n.created_at %><br>
-                    <%= link_to n.message, n.url %>
-                  </div>
-                <% else %>
-                  <div class="unread">
-                    <%= l n.created_at %><br>
-                    <%= link_to n.message, n.url %>
-                  </div>
-                <% end %>
-              </li>
+    <div class="page">
+      <!-- header -->
+      <header class="header">
+        <div class="is-navbar-container">
+          <div class="is-brand">
+            <!-- logo -->
+            <b class="is-logo"><%= link_to "MinimalismShare", "/", class: "logo" %></b>
+            <!-- notice -->
+            <% if user_signed_in? %>
+            <div class="notice-mobile">
+              <%= link_to user_path(@notices.first.user_id) do %>
+                <i class="far fa-bell"></i><span><%= @notices.where(read: false).count %></span>
+              <% end %>
+            </div>
             <% end %>
-          </ul>
+            <!-- nav toggle element -->
+            <a href="#"
+                class="nav-toggle is-push-right-mobile is-shown-mobile icon-kube-menu"
+                data-kube="toggle"
+                data-target="#navbar-demo"></a>
+          </div>
+          <!-- collapsable navigation -->
+          <div id="navbar-demo" class="is-navbar is-hidden-mobile">
+            <nav class="is-push-right">
+              <ul>
+                <!-- notice -->
+                <% if user_signed_in? %>
+                <div class="notice">
+                  <i class="far fa-bell"></i><span><%= @notices.where(read: false).count %></span>
+                  <ul>
+                    <p>お知らせ</p>
+                    <% @notices.each do |n| %>
+                      <li>
+                        <% if n.read %>
+                          <div class="already">
+                            <%= l n.created_at %><br>
+                            <%= link_to n.message, n.url %>
+                          </div>
+                        <% else %>
+                          <div class="unread">
+                            <%= l n.created_at %><br>
+                            <%= link_to n.message, n.url %>
+                          </div>
+                        <% end %>
+                      </li>
+                    <% end %>
+                    <p><%= link_to '全てのお知らせを表示', user_path(@notices.first.user_id) %></p>
+                  </ul>
+                </div>
+                <% end %>
+                <li class="space"></li>
+                <!-- menu -->
+                <li><%= link_to "ABOUT", "#" %></li>
+                <li><%= link_to "みんなの経験", "/" %></li>
+                <li class="space"></li>
+                <% if user_signed_in? %>
+                  <li>
+                    <%= link_to new_experience_path do %>
+                      記事を書く&nbsp;<i class="fas fa-edit"></i>
+                    <% end %>
+                  </li>
+                  <li class="space"></li>
+                  <li><%= link_to "マイページ", "/users/#{current_user.id}" %></li>
+                  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+                <% else %>
+                  <li><%= link_to 'ログイン', new_user_session_path, class: "button is-small is-secondary" %></li>
+                  <li><%= link_to '新規登録', new_user_registration_path, class: "button is-small is-secondary" %></li>
+                <% end %>
+                <li class="space"></li>
+              </ul>
+            </nav>
+          </div>
         </div>
-        <span class="user-menu"><%= current_user.nickname %>
-          <ul>
-            <li><%= link_to "マイページ", "/users/#{current_user.id}" %></li>
-            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-          </ul>
-        </span>
-        <% else %>
-        <li><%= link_to 'ログイン', new_user_session_path, class: "btn login" %></li>
-        <li><%= link_to '新規登録', new_user_registration_path, class: "btn sign-up" %></li>
-        <% end %>
-      </ul>
-    </header>
-    <!-- contents -->
-    <div class="contents">
-      <%= yield %>
+      </header>
+      <!-- message -->
+      <%= render partial: 'shared/flash_message', locals: { flash: flash } %>
+      <!-- contents -->
+      <main class="contents">
+        <%= yield %>
+      </main>
+      <!-- footer -->
+      <footer class="footer">
+      </footer>
     </div>
-    <!-- footer -->
-    <footer>
-    </footer>
+    <!-- Kube css -->
+    <script>
+        $K.init();
+    </script>
   </body>
 </html>

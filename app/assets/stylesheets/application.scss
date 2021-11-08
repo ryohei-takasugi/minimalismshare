@@ -10,73 +10,40 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree
- *= require default.css
+ *= require_tree .
+ *= require kube/css/kube.min.css
+ *= require kube/addons/kube-addons.min.css
+ *= require kube/themes/kube.theme.min.css
  *= require_self
  */
 
 @import 'share';
 
 // -----------------------------
-// body
-// -----------------------------
-body {
-  font-family: $main-font;
-  margin: 0 auto;
-  background-color: $back-color;
-  color: $font-color;
-}
-
-// -----------------------------
 //  ヘッダー
 // -----------------------------
-header {
-  @include flex-center;
-  height: $menu-height;
-  width: 100%;
-  justify-content: space-between;
-  border-bottom: 1px solid $line-color;
-  .title {
-    .page-menu {
-      @include a-none;
-      @include btn-panel($menu-height, 150px);
-      @include drop-down(150px, -10px, 100%);
-      font-size: 18px;
-      font-weight: normal;
-      margin-left: 10px;
-      font-family: 'Rampart One', cursive;
-      ul {
-        @include a-lists;
-      }
-    }
+.header {
+  @include a-none;
+  .logo {
+    height: 50px;
+    padding: 3px 15px;
   }
-  .a-lists {
+  .notice {
+    margin: 0 0 0 auto;
+    @include notice-badge;
+    @include drop-down(20vw, -10vw);
+    z-index: 10;
+  }
+  .notice-mobile {
+    visibility: hidden;
+  }
+  .space {
+    border-left: 1px solid $line-color;
+    height: $menu-height;
+  }
+  .edit-menu {
     @include a-lists;
-    @include flex-center;
-    .edit-menu {
-      @include btn-panel($menu-height, 150px);
-      @include a-lists;
-      @include drop-down(150px, -1px, 100%);
-      border-left: 1px solid $line-color;
-    }
-    .user-menu {
-      @include btn-panel($menu-height, 150px);
-      @include a-lists;
-      @include drop-down(150px, -1px, 100%);
-      border-left: 1px solid $line-color;
-    }
-    .btn {
-      @include btn-panel($menu-height, 150px);
-      border-left: 1px solid $line-color;
-    }
-    .notice {
-      @include notice-badge;
-      @include drop-down(400px, -300px, 100%);
-      .unread {
-        font-weight: bold;
-        background-color: #fcf0d5;
-      }
-    }
+    @include drop-down(13vw, -5vw);
   }
 }
 // -----------------------------
@@ -87,40 +54,33 @@ header {
   margin: 0 auto;
 }
 // -----------------------------
-/*  フッター  */
+//  フッター
 // -----------------------------
 
 
 // -----------------------------
 //  レスポンシブデザイン（スマホ）
 // -----------------------------
-@media (max-width: 500px) {
-  // -----------------------------
-  //  ヘッダー
-  // -----------------------------
-  header {
-    .title {
-      .page-menu {
-        margin-left: 0px;
-        @include btn-panel($menu-height, calc(100vw / 3));
-        @include drop-down(100vw, 0px, 100%);
-      }
+@media (max-width: 768px) {
+  .header {
+    li {
+      font-size: 24px;
     }
-    .a-lists {
-      .edit-menu {
-        @include btn-panel($menu-height, calc(100vw / 3));
-        @include drop-down(100vw, calc(-100vw / 3), 100%);
-      }
-      .user-menu {
-        @include btn-panel($menu-height, calc(100vw / 3));
-        @include drop-down(100vw, calc((-100vw / 3) * 2), 100%);
-      }
+    .space {
+      border-left: none;
+      border-bottom: 1px solid $line-color;
+      height: 5px;
+    }
+    .notice {
+      visibility: hidden;
+    }
+    .notice-mobile {
+      visibility: visible;
+      @include notice-badge;
     }
   }
-}
-// -----------------------------
-//  レスポンシブデザイン（タブレット）
-// -----------------------------
-@media (max-width: 1000px) {
-
+  body {
+    width: 95vw;
+    margin: 0 auto;
+  }
 }

@@ -1,12 +1,11 @@
-if (location.pathname.match("experiences/new")){
-  document.addEventListener("DOMContentLoaded", tagKeyUpEvent);
+if (location.pathname.match("experiences")){
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById("experience_tag_name") != null) {
+      const inputElement = document.getElementById("experience_tag_name");
+      inputElement.addEventListener("keyup", tagSendServer);
+    }
+  });
 };
-
-
-function tagKeyUpEvent() {
-  const inputElement = document.getElementById("experience_tag_name");
-  inputElement.addEventListener("keyup", tagSendServer);
-}
 
 function tagSendServer() {
   const keywords = document.getElementById("experience_tag_name").value.split(',');
