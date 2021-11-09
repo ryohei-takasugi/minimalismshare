@@ -22,8 +22,10 @@
             <!-- notice -->
             <% if user_signed_in? %>
             <div class="notice-mobile">
-              <%= link_to user_path(@notices.first.user_id) do %>
-                <i class="far fa-bell"></i><span><%= @notices.where(read: false).count %></span>
+              <% unless @notices.blank? %>
+                <%= link_to user_path(current_user.id) do %>
+                  <i class="far fa-bell"></i><span><%= @notices.where(read: false).count %></span>
+                <% end %>
               <% end %>
             </div>
             <% end %>
@@ -58,7 +60,7 @@
                         <% end %>
                       </li>
                     <% end %>
-                    <p><%= link_to '全てのお知らせを表示', user_path(@notices.first.user_id) %></p>
+                    <p><%= link_to '全てのお知らせを表示', user_path(current_user.id) %></p>
                   </ul>
                 </div>
                 <% end %>

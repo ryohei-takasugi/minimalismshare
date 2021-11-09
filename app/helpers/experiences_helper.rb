@@ -1,5 +1,6 @@
 module ExperiencesHelper
-  # set_model
+  # used
+  #   experiences/new
   def set_tag
     Tag.all
   end
@@ -12,6 +13,8 @@ module ExperiencesHelper
     Period.all
   end
 
+  # used
+  #   experiences/index
   def set_sort
     [
       ['更新日時 降順', 'updated_at desc'],
@@ -19,16 +22,23 @@ module ExperiencesHelper
     ]
   end
 
-  # method
+  # used
+  #   experiences/index -> shared/_show_experience.html
+  #   experiences/show  -> shared/_show_experience.html
+  #   user/:id          -> shared/_show_experience.html
   def user_liked?(experience)
     unless experience.experience_likes.blank?
-      experience.experience_likes.where(user_id: current_user.id).first.like ? true : false
+      unless experience.experience_likes.where(user_id: current_user.id).blank?
+        experience.experience_likes.where(user_id: current_user.id).first.like ? true : false
+      end
     end
   end
 
   def user_imitated?(experience)
     unless experience.experience_likes.blank?
-      experience.experience_likes.where(user_id: current_user.id).first.imitate ? true : false
+      unless experience.experience_likes.where(user_id: current_user.id).blank?
+        experience.experience_likes.where(user_id: current_user.id).first.imitate ? true : false
+      end
     end
   end
 
@@ -40,10 +50,6 @@ module ExperiencesHelper
     imitate_group_list.blank? || imitate_group_list[experience.id].nil? ? 0 : imitate_group_list[experience.id]
   end
 
-  def confirm_author?(model)
-    model.user_id == current_user.id
-  end
-
   def tags_join(tags)
     if tags.blank? then nil
     elsif tags.instance_of?(Array)  then tags.join(', ')
@@ -51,5 +57,11 @@ module ExperiencesHelper
     else
       tags.map { |tag| tag.name }.join('、')
     end
+  end
+
+  # used
+  #   experiences/show
+  def confirm_author?(model)
+    model.user_id == current_user.id
   end
 end

@@ -20,6 +20,24 @@
         <%= f.label :period_id_eq %>
         <%= f.collection_select :period_id_eq, set_period, :id, :name,  include_blank: '指定なし' %>
         <br>
+        <%= f.label :user_high_id_eq %>
+        <%= f.collection_select :user_high_id_eq, set_high, :id, :name,  include_blank: '指定なし' %>
+        <br>
+        <%= f.label :user_low_id_eq %>
+        <%= f.collection_select :user_low_id_eq, set_low, :id, :name,  include_blank: '指定なし' %>
+        <br>
+        <%= f.label :user_housemate_id_eq %>
+        <%= f.collection_select :user_housemate_id_eq, set_housemate, :id, :name,  include_blank: '指定なし' %>
+        <br>
+        <%= f.label :user_hobby_id_eq %>
+        <%= f.collection_select :user_hobby_id_eq, set_hobby, :id, :name,  include_blank: '指定なし' %>
+        <br>
+        <%= f.label :user_clean_status_id_eq %>
+        <%= f.collection_select :user_clean_status_id_eq, set_clean_status, :id, :name,  include_blank: '指定なし' %>
+        <br>
+        <%= f.label :user_range_with_store_id_eq %>
+        <%= f.collection_select :user_range_with_store_id_eq, set_range_with_store, :id, :name,  include_blank: '指定なし' %>
+        <br>
         <%= f.label :sorts %>
         <%= f.select :sorts, set_sort %>
         <br>

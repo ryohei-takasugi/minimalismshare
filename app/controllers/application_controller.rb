@@ -7,8 +7,7 @@ class ApplicationController < ActionController::Base
 
   def configre_permitted_paramter
     devise_parameter_sanitizer.permit(:sign_up,
-                                      keys: [:nickname, :dream, :region_id, :climate_id, :housemate_id, :children_id,
-                                             :clean_status_id])
+                                      keys: [:nickname, :dream, :high_id, :low_id, :housemate_id, :hobby_id, :clean_status_id, :range_with_store_id])
   end
 
   def basic_auth

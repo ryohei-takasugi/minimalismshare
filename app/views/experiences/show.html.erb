@@ -13,16 +13,16 @@
           <i class="fas fa-thumbs-up inactive"></i>
         <% end %>
       <% else %>
-        <% if @experience.experience_likes.first.like %>
+        <% if @like.like %>
           <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: false } }, method: :patch, class: "button is-like is-secondary" } do %>
             <i class="fas fa-heart active"></i>
           <% end %>
         <% else %>
-          <%= button_to experience_experience_likes_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: true } }, method: :patch, class: "button is-like is-secondary" } do %>
+          <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: true } }, method: :patch, class: "button is-like is-secondary" } do %>
             <i class="fas fa-heart inactive"></i>
           <% end %>
         <% end %>
-        <% if @experience.experience_likes.first.imitate %>
+        <% if @like.imitate %>
           <%= button_to experience_experience_like_path(@experience, @like), { type: 'submit', params: { experiences_like: { imitate: false } }, method: :patch, class: "button is-like is-secondary" } do %>
             <i class="fas fa-thumbs-up active"></i>
           <% end %>

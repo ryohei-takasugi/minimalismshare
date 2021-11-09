@@ -89,13 +89,10 @@ class ExperiencesController < ApplicationController
   end
 
   def set_search_ransack
-    @q = Experience.ransack(search_params)
+    @q = Experience.eager_load(:user).ransack(search_params)
     @q.sorts = (search_params.nil? ? 'updated_at desc' : search_params[:sorts])
-    @experiences = @q.result(distinct: true)
-                     .preload(:experience_tag_relations, :tags)
-                     .eager_load(:user, :experience_likes)
+    @experiences = @q.result
                      .page(params[:page])
-                     .per(2)
   end
   
   def set_like_find_params
@@ -117,7 +114,7 @@ class ExperiencesController < ApplicationController
       params[:q]
     else
       params.require(:q)
-            .permit(:title_or_stress_or_content_body_cont, :tags_id_eq, :category_id_eq, :period_id_eq, :sorts)
+            .permit(:title_or_stress_or_content_body_cont, :tags_id_eq, :category_id_eq, :period_id_eq, :user_high_id_eq, :user_low_id_eq, :user_housemate_id_eq, :user_hobby_id_eq, :user_clean_status_id_eq, :user_range_with_store_id_eq, :sorts)
     end
   end
 end
