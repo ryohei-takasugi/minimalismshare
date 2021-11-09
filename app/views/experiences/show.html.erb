@@ -1,6 +1,6 @@
 <div class="experience-show is-container-column">
   <%# 基本情報 %>
-  <%= render partial: 'shared/show_experience', locals: { experience: @experience } %>
+  <%= render partial: 'shared/show_experience', locals: { experience: @experience, like_group_list: @like_group_list, imitate_group_list: @imitate_group_list } %>
 
   <%# 評価機能 %>
   <div class="like">

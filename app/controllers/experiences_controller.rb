@@ -1,10 +1,10 @@
 class ExperiencesController < ApplicationController
   before_action :authenticate_user!,   only: [:new, :create]
   before_action :set_search_ransack,   only: [:index, :search_article]
-  before_action :set_search_tag,       only: [:index, :search_article]
   before_action :set_experience,       only: [:show, :edit, :update, :destroy]
   before_action :set_like_find_params, only: [:show]
   before_action :set_experience_like,  only: [:show]
+  before_action :set_likes_count,      only: [:index, :show, :search_article]
 
   # Call Views: experience/index.html.erb
   def index
@@ -92,13 +92,10 @@ class ExperiencesController < ApplicationController
     @q = Experience.ransack(search_params)
     @q.sorts = (search_params.nil? ? 'updated_at desc' : search_params[:sorts])
     @experiences = @q.result(distinct: true)
-                     .includes(:user, :experience_tag_relations, :tags, :experience_likes, )
+                     .preload(:experience_tag_relations, :tags)
+                     .eager_load(:user, :experience_likes)
                      .page(params[:page])
                      .per(2)
-  end
-
-  def set_search_tag
-    @search_tag = Tag.all
   end
   
   def set_like_find_params

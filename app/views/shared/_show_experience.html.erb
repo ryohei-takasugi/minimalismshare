@@ -42,23 +42,23 @@
     </tr>
     <tr>
       <td class="header">
-        <% if user_signed_in? && !experience.experience_likes.blank? && experience.experience_likes.first.like %>
+        <% if user_signed_in? && user_liked?(experience) %>
           <i class="fas fa-heart active"></i>
         <% else %>
           <i class="fas fa-heart inactive"></i>
         <% end %>
       </td>
-      <td class="item"><%= experience.experience_likes.where(like: true).count %> いいね</td>
+      <td class="item"><%= experience_count_group_liked(like_group_list, experience) %> いいね</td>
     </tr>
     <tr>
       <td class="header">
-        <% if user_signed_in? && !experience.experience_likes.blank? && experience.experience_likes.first.imitate %>
+        <% if user_signed_in? && user_imitated?(experience) %>
           <i class="fas fa-thumbs-up active"></i>
         <% else %>
           <i class="fas fa-thumbs-up inactive"></i>
         <% end %>
       </td>
-      <td class="item"><%= experience.experience_likes.where(imitate: true).count %> 真似した</td>
+      <td class="item"><%= experience_count_group_imitated(imitate_group_list, experience) %> 真似した</td>
     </tr>
   </table>
 </div>
