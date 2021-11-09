@@ -9,42 +9,66 @@
   </nav>
   <%# お知らせ %>
   <section id="tab1">
-    <table>
-      <thead>
-          <tr>
-              <th>お知らせ日時</th>
-              <th>内容</th>
-          </tr>
-      </thead>
-      <% @all_notices.each do |n| %>
-      <tbody>
-          <tr>
-              <td><%= l n.created_at %></td>
-              <td><%= link_to n.message, n.url %></td>
-          </tr>
-      </tbody>
+    <div class="cards">
+      <% if @experiences.blank? %>
+        <div class="cards_null">
+          お知らせがありません。
+        </div>
+      <% else %>
+        <table>
+          <thead>
+              <tr>
+                  <th>お知らせ日時</th>
+                  <th>内容</th>
+              </tr>
+          </thead>
+          <% @all_notices.each do |n| %>
+          <tbody>
+              <tr>
+                  <td><%= l n.created_at %></td>
+                  <td><%= link_to n.message, n.url %></td>
+              </tr>
+          </tbody>
+          <% end %>
+        </table>
+        <%= paginate @all_notices %>
       <% end %>
-    </table>
-    <%= paginate @all_notices %>
+    </div>
   </section>
   <%# アカウント情報 %>
   <section id="tab2">
     <table>
       <thead>
-          <tr>
-              <th>項目名</th>
-              <th>内容</th>
-          </tr>
+        <tr>
+          <th>項目名</th>
+          <th>内容</th>
+        </tr>
       </thead>
       <tbody>
-          <tr>
-              <td><%= t("activerecord.attributes.user.dream") %></td>
-              <td><%= @user.dream %></td>
-          </tr>
-          <tr>
-              <td><%= t("activerecord.attributes.user.clean_status_id") %></td>
-              <td><%= @user.clean_status.name %></td>
-          </tr>
+        <tr>
+          <td><%= t("activerecord.attributes.user.dream") %></td>
+          <td><%= @user.dream %></td>
+        </tr>
+        <tr>
+          <td><%= t("activerecord.attributes.user.high_id") %></td>
+          <td><%= @user.high.name %></td>
+        </tr>
+        <tr>
+          <td><%= t("activerecord.attributes.user.low_id") %></td>
+          <td><%= @user.low.name %></td>
+        </tr>
+        <tr>
+          <td><%= t("activerecord.attributes.user.clean_status_id") %></td>
+          <td><%= @user.clean_status.name %></td>
+        </tr>
+        <tr>
+          <td><%= t("activerecord.attributes.user.hobby_id") %></td>
+          <td><%= @user.hobby.name %></td>
+        </tr>
+        <tr>
+          <td><%= t("activerecord.attributes.user.range_with_store_id") %></td>
+          <td><%= @user.range_with_store.name %></td>
+        </tr>
       </tbody>
     </table>
     <%= link_to 'アカウント情報の変更', "#", class: "button is-basic is-secondary" %>
