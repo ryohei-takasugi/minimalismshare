@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe ExperienceTag, type: :model do
   before do
     @experience_tag = FactoryBot.build(:experience_tag)
+    @experience_tag.content = '<div>rspec test data</div>'
     @user = FactoryBot.create(:user)
     @experience_tag.user_id = @user.id
   end
