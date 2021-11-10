@@ -35,33 +35,39 @@
     </div>
 
     <div class="field">
-      <%= f.label :region_id %>
-      <em>(あたなたが実施したミニマリズムは地域の影響を受けているかもしれません)</em>
-      <%= f.collection_select(:region_id, set_region, :id, :name, {}, {}) %>
+      <%= f.label :high_id %>
+      <em>(あたなたが実施したミニマリズムは、この1年間の最高気温から影響を受けているかもしれません)</em>
+      <%= f.collection_select(:high_id, set_high, :id, :name, {}, {}) %>
     </div>
 
     <div class="field">
-      <%= f.label :climate_id %>
-      <em>(あたなたが実施したミニマリズムは気候の影響を受けているかもしれません)</em>
-      <%= f.collection_select(:climate_id, set_climate, :id, :name, {}, {}) %>
+      <%= f.label :low_id %>
+      <em>(あたなたが実施したミニマリズムは、この1年間の最低気温から影響を受けているかもしれません)</em>
+      <%= f.collection_select(:low_id, set_low, :id, :name, {}, {}) %>
     </div>
 
     <div class="field">
       <%= f.label :housemate_id %>
-      <em>(あたなたが実施したミニマリズムは家族や同居人の影響を受けているかもしれません)</em>
+      <em>(あたなたが実施したミニマリズムは家族や同居人から影響を受けているかもしれません)</em>
       <%= f.collection_select(:housemate_id, set_housemate, :id, :name, {}, {}) %>
     </div>
 
     <div class="field">
-      <%= f.label :children_id %>
-      <em>(あたなたが実施したミニマリズムは子供の影響を受けているかもしれません)</em>
-      <%= f.collection_select(:children_id, set_children, :id, :name, {}, {}) %>
+      <%= f.label :hobby_id %>
+      <em>(あたなたが実施したミニマリズムは関心事の多さから影響を受けているかもしれません)</em>
+      <%= f.collection_select(:hobby_id, set_hobby, :id, :name, {}, {}) %>
+    </div>
+
+    <div class="field">
+      <%= f.label :range_with_store_id %>
+      <em>(あたなたが実施したミニマリズムはお店の近さから影響を受けているかもしれません)</em>
+      <%= f.collection_select(:range_with_store_id, set_range_with_store, :id, :name, {}, {}) %>
     </div>
 
     <div class="field">
       <%= f.label :clean_status_id %>
       <em>(あたなたの現在状況をお聞かせください)</em>
-      <%= f.collection_select(:clean_status_id, set_cleanStatus, :id, :name, {}, {}) %>
+      <%= f.collection_select(:clean_status_id, set_clean_status, :id, :name, {}, {}) %>
     </div>
 
     <div class="actions">

@@ -15,7 +15,10 @@ module Minimalismshare
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-
+    config.autoload_paths += %W(#{config.root}/app/models/user_hash)
+    config.autoload_paths += %W(#{config.root}/app/models/user)
+    config.autoload_paths += %W(#{config.root}/app/models/experience_hash)
+    config.autoload_paths += %W(#{config.root}/app/models/experience)
     # エラーの日本語化
     config.i18n.default_locale = :ja
     config.time_zone = 'Tokyo'

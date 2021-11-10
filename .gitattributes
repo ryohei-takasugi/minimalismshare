@@ -1,0 +1,7 @@
+app/assets/stylesheets/kube/* linguist-vendored
+app/javascript/fontawesome-free-5.15.4-web/* linguist-vendored
+app/javascript/kube.js linguist-vendored
+app/javascript/kube.min.js linguist-vendored
+app/javascript/kube-addons.js linguist-vendored
+app/javascript/kube-addons.min.js linguist-vendored
+doc/* linguist-vendored

@@ -1,4 +1,4 @@
-<div>
+<div class="user-show">
   <h1>マイページ</h1>
   <nav class="tabs" data-kube="tabs" data-equal="true">
     <a href="#tab1" class="is-active">お知らせ</a>
@@ -9,39 +9,118 @@
   </nav>
   <%# お知らせ %>
   <section id="tab1">
-    <h2>お知らせ</h2>
-    <table>
-      <thead>
-          <tr>
-              <th>お知らせ日時</th>
-              <th>内容</th>
-          </tr>
-      </thead>
-      <% @notices.each do |n| %>
-      <tbody>
-          <tr>
-              <td><%= l n.created_at %></td>
-              <td><%= link_to n.message, n.url %></td>
-          </tr>
-      </tbody>
+    <div class="cards">
+      <% if @experiences.blank? %>
+        <div class="cards_null">
+          お知らせがありません。
+        </div>
+      <% else %>
+        <table>
+          <thead>
+              <tr>
+                  <th>お知らせ日時</th>
+                  <th>内容</th>
+              </tr>
+          </thead>
+          <% @all_notices.each do |n| %>
+          <tbody>
+              <tr>
+                  <td><%= l n.created_at %></td>
+                  <td><%= link_to n.message, n.url %></td>
+              </tr>
+          </tbody>
+          <% end %>
+        </table>
+        <%= paginate @all_notices %>
       <% end %>
-    </table>
+    </div>
   </section>
   <%# アカウント情報 %>
   <section id="tab2">
-    <h2>アカウント情報</h2>
-    <%= link_to 'メールアドレスおよびパスワード変更', edit_user_registration_path(@user) %>
+    <table>
+      <thead>
+        <tr>
+          <th>項目名</th>
+          <th>内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= t("activerecord.attributes.user.dream") %></td>
+          <td><%= @user.dream %></td>
+        </tr>
+        <tr>
+          <td><%= t("activerecord.attributes.user.high_id") %></td>
+          <td><%= @user.high.name %></td>
+        </tr>
+        <tr>
+          <td><%= t("activerecord.attributes.user.low_id") %></td>
+          <td><%= @user.low.name %></td>
+        </tr>
+        <tr>
+          <td><%= t("activerecord.attributes.user.clean_status_id") %></td>
+          <td><%= @user.clean_status.name %></td>
+        </tr>
+        <tr>
+          <td><%= t("activerecord.attributes.user.hobby_id") %></td>
+          <td><%= @user.hobby.name %></td>
+        </tr>
+        <tr>
+          <td><%= t("activerecord.attributes.user.range_with_store_id") %></td>
+          <td><%= @user.range_with_store.name %></td>
+        </tr>
+      </tbody>
+    </table>
+    <%= link_to 'アカウント情報の変更', "#", class: "button is-basic is-secondary" %>
+    <%= link_to 'メールアドレスおよびパスワード変更', edit_user_registration_path(@user), class: "button is-basic is-secondary" %>
   </section>
   <%# 投稿記事一覧 %>
   <section id="tab3">
-    <h2>投稿記事一覧</h2>
+    <div class="cards">
+      <% if @experiences.blank? %>
+        <div class="cards_null">
+          記事がありません。
+        </div>
+      <% else %>
+        <% @experiences.each do |experience| %>
+          <%= render partial: 'shared/show_experience', locals: { experience: experience, like_group_list: @like_group_list, imitate_group_list: @imitate_group_list } %>
+        <% end %>
+        <%= paginate @experiences %>
+      <% end %>
+    </div>
   </section>
   <%# いいね一覧 %>
   <section id="tab4">
-    <h2>いいね一覧</h2>
+    <div class="cards">
+      <% if @experience_likes.blank? %>
+        <div class="cards_null">
+          記事がありません。
+        </div>
+      <% else %>
+        <% @experience_likes.each do |likes| %>
+          <% if likes.like %>
+            <%= render partial: 'shared/show_experience', locals: { experience: likes.experience, like_group_list: @like_group_list, imitate_group_list: @imitate_group_list } %>
+          <% end %>
+        <% end %>
+        <%= paginate @experience_likes %>
+      <% end %>
+    </div>
   </section>
   <%# 真似した一覧 %>
   <section id="tab5">
-    <h2>真似した一覧</h2>
+    <div class="cards">
+      <% if @experience_likes.blank? %>
+        <div class="cards_null">
+          記事がありません。
+        </div>
+      <% else %>
+        <% @experience_likes.each do |likes| %>
+          <% if likes.imitate %>
+            <%= render partial: 'shared/show_experience', locals: { experience: likes.experience, like_group_list: @like_group_list, imitate_group_list: @imitate_group_list } %>
+          <% end %>
+        <% end %>
+        <%= paginate @experience_likes %>
+      <% end %>
+    </div>
   </section>
 </div>

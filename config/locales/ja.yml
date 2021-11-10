@@ -4,11 +4,12 @@ ja:
       user:
         nickname: ニックネーム
         dream: 夢・目標
-        region_id: 住まいの地域
-        climate_id: 住まいの気候
+        high_id: 住まいの最高気温
+        low_id: 住まいの最低気温
         housemate_id: 同居人数
-        children_id: 子供
+        hobby_id: 趣味の多さ
         clean_status_id: 現在の状況
+        range_with_store_id: お店との距離
       experience:
         title: タイトル
         period_id: 経過日数

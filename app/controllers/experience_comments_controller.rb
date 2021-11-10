@@ -10,7 +10,7 @@ class ExperienceCommentsController < ApplicationController
     comment = ExperienceComment.new(comment_params)
     if comment.save
       create_notice(comment)
-      flash[:notice] = "コメントを追加しました"
+      flash[:notice] = 'コメントを追加しました'
       redirect_to experience_path(params[:experience_id])
     else
       @comment = ExperienceComment.new
@@ -26,7 +26,7 @@ class ExperienceCommentsController < ApplicationController
   # Call Views: experience/show.html.erb
   def update
     if @comment.update(comment_params)
-      flash[:notice] = "コメントを更新しました"
+      flash[:notice] = 'コメントを更新しました'
       redirect_to experience_path(params[:experience_id])
     else
       render 'experiences/show'
@@ -36,7 +36,7 @@ class ExperienceCommentsController < ApplicationController
   # Call Views: experience/show.html.erb
   def destroy
     if @comment.destroy
-      flash[:hazard] = "コメントを削除しました"
+      flash[:hazard] = 'コメントを削除しました'
       redirect_to experience_path(params[:experience_id])
     else
       render 'experiences/show'
@@ -58,10 +58,11 @@ class ExperienceCommentsController < ApplicationController
   end
 
   def set_like_find_params
-    { experience_id: params[:experience_id], user_id: current_user.id}
+    { experience_id: params[:experience_id], user_id: current_user.id }
   end
 
   def create_notice(comment)
-    Notice.create(message:"#{comment.user.nickname} が、あなたの記事「#{comment.experience.title}」に「#{comment.comment}」とコメントしました", url: experience_path(comment.experience.id), user_id: comment.experience.user_id)
+    Notice.create(message: "#{comment.user.nickname} が、あなたの記事「#{comment.experience.title}」に「#{comment.comment}」とコメントしました",
+                  url: experience_path(comment.experience.id), user_id: comment.experience.user_id)
   end
 end
