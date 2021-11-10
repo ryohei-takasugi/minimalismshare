@@ -1,6 +1,6 @@
 module UsersHelper
   # used
-  #   
+  #
   def set_high
     High.all
   end
@@ -24,7 +24,6 @@ module UsersHelper
   def set_range_with_store
     RangeWithStore.all
   end
-
 
   # used
   #   experiences/index

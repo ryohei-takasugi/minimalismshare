@@ -16,16 +16,5 @@ class UsersController < ApplicationController
     @experience_likes = ExperienceLike.where(user_id: current_user.id)
                                       .order(updated_at: :desc)
                                       .page(params[:page])
-=begin
-    @experiences = Experience.where(user_id: current_user.id)
-                             .preload(:experience_tag_relations, :tags, :experience_likes)
-                             .eager_load(:user)
-                             .order(updated_at: :desc)
-                             .page(params[:page])
-    @experience_likes = ExperienceLike.where(user_id: current_user.id)
-                                      .eager_load(:experience, :user)
-                                      .order(updated_at: :desc)
-                                      .page(params[:page]) 
-=end
   end
 end

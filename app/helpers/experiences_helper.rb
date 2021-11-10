@@ -27,18 +27,14 @@ module ExperiencesHelper
   #   experiences/show  -> shared/_show_experience.html
   #   user/:id          -> shared/_show_experience.html
   def user_liked?(experience)
-    unless experience.experience_likes.blank?
-      unless experience.experience_likes.where(user_id: current_user.id).blank?
-        experience.experience_likes.where(user_id: current_user.id).first.like ? true : false
-      end
+    if !experience.experience_likes.blank? && !experience.experience_likes.where(user_id: current_user.id).blank?
+      experience.experience_likes.where(user_id: current_user.id).first.like ? true : false
     end
   end
 
   def user_imitated?(experience)
-    unless experience.experience_likes.blank?
-      unless experience.experience_likes.where(user_id: current_user.id).blank?
-        experience.experience_likes.where(user_id: current_user.id).first.imitate ? true : false
-      end
+    if !experience.experience_likes.blank? && !experience.experience_likes.where(user_id: current_user.id).blank?
+      experience.experience_likes.where(user_id: current_user.id).first.imitate ? true : false
     end
   end
 

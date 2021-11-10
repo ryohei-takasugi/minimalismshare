@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
 
   def configre_permitted_paramter
     devise_parameter_sanitizer.permit(:sign_up,
-                                      keys: [:nickname, :dream, :high_id, :low_id, :housemate_id, :hobby_id, :clean_status_id, :range_with_store_id])
+                                      keys: [:nickname, :dream, :high_id, :low_id, :housemate_id, :hobby_id, :clean_status_id,
+                                             :range_with_store_id])
   end
 
   def basic_auth
@@ -17,9 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_notice
-    if user_signed_in?
-      @notices = Notice.where(user_id: current_user.id).limit(10).order(created_at: :desc)
-    end
+    @notices = Notice.where(user_id: current_user.id).limit(10).order(created_at: :desc) if user_signed_in?
   end
 
   # used
@@ -38,7 +37,7 @@ class ApplicationController < ActionController::Base
   #    UsersController
   def set_likes_count
     # OPTIMIZE: ①テーブルの変更 : like とimitate を category カラムに統一して、groupで絞り込むことで1回のアクセスになるはず
-    @like_group_list = ExperienceLike.where(like: true).group("experience_likes.experience_id").count
-    @imitate_group_list = ExperienceLike.where(imitate: true).group("experience_likes.experience_id").count
+    @like_group_list = ExperienceLike.where(like: true).group('experience_likes.experience_id').count
+    @imitate_group_list = ExperienceLike.where(imitate: true).group('experience_likes.experience_id').count
   end
 end

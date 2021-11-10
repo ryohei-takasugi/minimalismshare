@@ -19,7 +19,7 @@ class ExperiencesController < ApplicationController
   def create
     @experience_tag = ExperienceTag.new(experience_tag_params)
     if @experience_tag.save
-      flash[:notice] = "新しい記事を登録しました"
+      flash[:notice] = '新しい記事を登録しました'
       redirect_to experiences_path
     else
       render :new
@@ -55,7 +55,7 @@ class ExperiencesController < ApplicationController
     )
     @experience_tag.user_id = experience_tag_params[:user_id]
     if @experience_tag.update(@experience)
-      flash[:notice] = "記事を更新しました"
+      flash[:notice] = '記事を更新しました'
       redirect_to experience_path(params[:id])
     else
       render :edit
@@ -65,7 +65,7 @@ class ExperiencesController < ApplicationController
   # Call Views: experience/show.html.erb
   def destroy
     @experience.destroy
-    flash[:hazard] = "記事を削除しました"
+    flash[:hazard] = '記事を削除しました'
     redirect_to experiences_path
   end
 
@@ -94,10 +94,10 @@ class ExperiencesController < ApplicationController
     @experiences = @q.result
                      .page(params[:page])
   end
-  
+
   def set_like_find_params
     if user_signed_in?
-      { experience_id: params[:id], user_id: current_user.id}
+      { experience_id: params[:id], user_id: current_user.id }
     else
       { experience_id: params[:id], user_id: nil }
     end

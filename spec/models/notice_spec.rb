@@ -27,7 +27,7 @@ RSpec.describe Notice, type: :model do
       it 'user_id が空では登録できない' do
         @notice.user = nil
         @notice.valid?
-        expect(@notice.errors.full_messages).to include("User must exist")
+        expect(@notice.errors.full_messages).to include('User must exist')
       end
     end
   end
