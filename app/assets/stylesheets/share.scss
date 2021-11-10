@@ -7,7 +7,8 @@
 $line-color: #D8D8D8;
 $line-pale-color: #eeded6;
 $line-back-color: #f3d2c1;
-$back-color: #fef6e4;
+//$back-color: #fef6e4;
+$back-color: #eeeeee;
 $dark-back-color: #f3d2c1;
 $secondary-color: #8bd3dd;
 $font-color: #001858;
@@ -231,7 +232,7 @@ a {
 }
 a:hover {
   color: $font-color;
-  text-decoration: underline
+  text-decoration: underline;
 }
 // tbody td,tbody th {
 //   border-bottom: 1px solid $line-pale-color;

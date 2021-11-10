@@ -1,0 +1,108 @@
+// Place all the styles related to the homes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'share';
+
+.about {
+  h1 {
+    margin-bottom: 30px;
+  }
+  h2 {
+    border-bottom: 1px solid $font-color;
+  }
+  h3 {
+    font-size: 22px;
+    &:before {
+      content: "疑問";
+      display: inline-block;
+      text-align: center;
+      font-size: .5em;
+      background: $secondary-color;
+      color: $font-color;
+      padding: 5px 5px;
+      margin: 5px;
+      border-radius: 5px;
+      line-height: 1.2;
+    }
+  }
+  strong {
+    text-decoration: underline;
+  }
+  .box {
+    margin: 100px 0;
+    padding: 0 30px;
+    .in-box {
+      h3 {
+        color: white;
+        text-decoration: underline;
+      }
+      width: 80%;
+      margin: 50px auto;
+      padding: 20px;
+      color: white;
+      background-color:#606897;
+      border-radius: 5px;
+      img {
+        width: 100%;
+        border-radius: 5px;
+      }
+    }
+  }
+  .move-top {
+    padding: 20px;
+    font-size: large;
+    border: 1px solid $line-color;
+    border-radius: 5px;
+    display: block;
+    text-align: center;
+    width: 125px;
+    margin: 0 0 0 auto;
+    @include submit-button;
+  }
+
+  .definition {
+    margin-top: 20px;
+    padding: 25% 0px;
+    background-image: url("bench-accounting-nvzvOPQW0gc-unsplash.jpg");
+    background-position:center center; 
+    background-size: cover;
+    .goal {
+      background-color: rgba($color: lightgray, $alpha: 0.2);
+      padding: 5px 20px;
+    }
+  }
+  .link {
+    text-align: center;
+    padding: 25% 0px;
+    background-image: url("sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg");
+    background-position:center center; 
+    background-size: cover;
+    ul {
+      display: flex;
+      justify-content: center;
+      li {
+        list-style: none;
+        margin: 10px 15px;
+        @include submit-button;
+      }
+    }
+  }
+}
+// -----------------------------
+//  レスポンシブデザイン（スマホ）
+// -----------------------------
+@media (max-width: 768px) {
+  .about {
+    .box {
+      .in-box {
+        width: 100%;
+      }
+    }
+    .definition {
+      .goal {
+        background-color: rgba($color: lightgray, $alpha: 0.6);
+      }
+    }
+  }
+}

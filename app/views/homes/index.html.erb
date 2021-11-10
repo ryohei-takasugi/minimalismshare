@@ -1,0 +1,13 @@
+<div class="about">
+  <%= render partial: 'shared/about' %>
+  <div class="link">
+    <p>あなたのミニマリズムを共有してみませんか？</p>
+    <ul>
+      <li><%= link_to "みんなの経験を検索してみる", experiences_path, class: "button" %></li>
+    </ul>
+    <ul>
+      <li><%= link_to 'ログイン', new_user_session_path, class: "button" %></li>
+      <li><%= link_to '新規登録', new_user_registration_path, class: "button" %></li>
+    </ul>
+  </div>
+</div>
