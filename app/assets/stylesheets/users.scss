@@ -89,17 +89,6 @@
     @include cards;
   }
 }
-// -----------------------------
-//  Deviseのエラー表示
-// -----------------------------
-#error_explanation {
-  background-color: #f54c4c;
-  color: white;
-  border-radius: 5px;
-  padding: 5px 10px;
-  margin-bottom: 10px;
-}
-
 
 // -----------------------------
 //  レスポンシブデザイン（スマホ）
