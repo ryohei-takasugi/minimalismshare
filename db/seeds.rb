@@ -47,6 +47,7 @@ User.create([
     user_id: [1, 2].sample
   )
   experience_tag.save
+  sleep(0.5)
 end
 
 test_params_content_1 = <<~TEXT

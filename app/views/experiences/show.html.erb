@@ -4,7 +4,7 @@
 
   <%# 評価機能 %>
   <div class="like">
-    <% unless @like.blank? %>
+    <% if user_signed_in? && @like.blank? == false && current_user.id != @experience.user_id %>
       <% if @like.id.nil? %>
         <%= button_to experience_experience_likes_path(@experience, @like), { type: 'submit', params: { experiences_like: { like: true } }, class: "button is-like is-secondary" } do %>
           <i class="fas fa-heart inactive"></i>
@@ -36,7 +36,7 @@
   </div>
 
   <%# 本文情報 %>
-  <div class="conten">
+  <div class="content">
     <h3><%=  t("activerecord.attributes.experience.content") %></h3>
     <%= @experience.content %>
   </div>

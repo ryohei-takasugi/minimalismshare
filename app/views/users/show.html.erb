@@ -3,14 +3,14 @@
   <nav class="tabs" data-kube="tabs" data-equal="true">
     <a href="#tab1" class="is-active">お知らせ</a>
     <a href="#tab2">アカウント情報</a>
-    <a href="#tab3">記事一覧</a>
-    <a href="#tab4">いいね一覧</a>
-    <a href="#tab5">真似した一覧</a>
+    <%# <a href="#tab3">記事一覧</a> %>
+    <%# <a href="#tab4">いいね一覧</a> %>
+    <%# <a href="#tab5">真似した一覧</a> %>
   </nav>
   <%# お知らせ %>
   <section id="tab1">
     <div class="cards">
-      <% if @experiences.blank? %>
+      <% if @all_notices.blank? %>
         <div class="cards_null">
           お知らせがありません。
         </div>
@@ -74,6 +74,9 @@
     <%= link_to 'アカウント情報の変更', "#", class: "button is-basic is-secondary" %>
     <%= link_to 'メールアドレスおよびパスワード変更', edit_user_registration_path(@user), class: "button is-basic is-secondary" %>
   </section>
+<% 
+=begin %>
+  <%# FIXME: タブ切り替え後にページ切り替えをするとタブが初期値に戻るためコメントアウト >
   <%# 投稿記事一覧 %>
   <section id="tab3">
     <div class="cards">
@@ -123,4 +126,6 @@
       <% end %>
     </div>
   </section>
+<% 
+=end %>
 </div>
