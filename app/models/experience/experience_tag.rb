@@ -45,7 +45,7 @@ class ExperienceTag
   private
 
   def tag_save(tags, experience)
-    tags.split(',').each do |tag_name|
+    tags.split('、').each do |tag_name|
       tag_name = tag_name.gsub(' ', '')
       tag = Tag.where(name: tag_name).first_or_initialize
       tag.save

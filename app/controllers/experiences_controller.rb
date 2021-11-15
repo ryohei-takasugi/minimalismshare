@@ -92,6 +92,7 @@ class ExperiencesController < ApplicationController
     @q = Experience.eager_load(:user).ransack(search_params)
     @q.sorts = (search_params.nil? ? 'updated_at desc' : search_params[:sorts])
     @experiences = @q.result.with_rich_text_content
+                     .includes(:experience_tag_relations, :tags, :experience_likes)
                      .page(params[:page])
   end
 

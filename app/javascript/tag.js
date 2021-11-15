@@ -8,7 +8,7 @@ if (location.pathname.match("experiences")){
 };
 
 function tagSendServer() {
-  const keywords = document.getElementById("experience_tag_name").value.split(',');
+  const keywords = document.getElementById("experience_tag_name").value.split('、');
   const keyword  = keywords[keywords.length - 1].replace(/\s+/g, "");
   const xhr      = new XMLHttpRequest();
   xhr.open("GET", `search_tag/?keyword=${keyword}`, true);
@@ -54,10 +54,10 @@ function addHtmlSearchResult(tags) {
     const clickElement = document.getElementById(tag.id);
     clickElement.addEventListener("click", () => {
       const inputElement = document.getElementById("experience_tag_name")
-      const keywords = inputElement.value.split(',')
+      const keywords = inputElement.value.split('、')
       if (keywords.length >= 2) {
         keywords.splice(keywords.length - 1, 1)
-        inputElement.value = keywords.join(',') + ',' + clickElement.textContent;  
+        inputElement.value = keywords.join('、') + '、' + clickElement.textContent;  
       } else {
         inputElement.value = clickElement.textContent
       }
