@@ -2,8 +2,6 @@ class ExperienceTag
   include ActiveModel::Model
   attr_accessor :title, :category_id, :period_id, :tags, :stress, :user_id
 
-  # attr_writer :content
-
   with_options presence: true do
     validates :title
     validates :category_id, numericality: { other_than: 0, message: 'を入力してください' }
@@ -23,6 +21,7 @@ class ExperienceTag
 
     experience = Experience.create(experience_tag_params)
     tag_save(tags, experience) unless tags.nil?
+    experience
   end
 
   def update(experience)
@@ -30,6 +29,7 @@ class ExperienceTag
 
     experience.update(experience_tag_params)
     tag_save(tags, experience) unless tags.nil?
+    experience
   end
 
   def content

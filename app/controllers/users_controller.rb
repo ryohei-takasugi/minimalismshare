@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @experiences = Experience.where(user_id: current_user.id)
                              .order(updated_at: :desc)
                              .page(params[:page])
+                             .with_rich_text_content
     @experience_likes = ExperienceLike.where(user_id: current_user.id)
                                       .order(updated_at: :desc)
                                       .page(params[:page])
