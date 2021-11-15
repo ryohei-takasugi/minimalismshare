@@ -1,4 +1,5 @@
 require 'rails_helper'
+include ShowExperienceHelper
 
 RSpec.describe "記事の投稿", type: :system do
   before do
@@ -10,6 +11,12 @@ RSpec.describe "記事の投稿", type: :system do
     it 'ログインしたユーザーは新規投稿できる' do
       # ログインする
       sign_in(user: @user)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      # 「記事がありません。」と表示すること
+      within('main') do
+        expect(page).to have_content('記事がありません。')
+      end
       # 新規投稿ページへのボタンがあることを確認する
       expect(page).to have_link('記事を書く', href: new_experience_path)
       # 投稿ページに移動する
@@ -55,35 +62,37 @@ RSpec.describe '記事の閲覧', type: :system do
     @user = FactoryBot.create(:user)
     @experience_tag = create_experience_tag(user_model: @user)
   end
-  it 'ログインしたユーザーは記事閲覧ページに遷移してコメント投稿欄が表示される' do
-    # ログインする
-    sign_in(user: @user)
-    # 記事のタイトル名がリンクであることを確認する
-    expect(page).to have_link(@experience_tag.title, href: experience_path(@experience_tag))
-    # 閲覧ページへのリンクをクリックする
-    click_link(@experience_tag.title)
-    # 閲覧ページに遷移することを確認する
-    expect(current_path).to eq(experience_path(@experience_tag))
-    # 閲覧ページに記事の内容が含まれている
-    confirm_show(model: @experience_tag)
-    confirm_content(model: @experience_tag)
-    # コメント用のフォームが存在する
-    expect(page).to have_selector('form')
-  end
-  it 'ログインしていない状態で記事閲覧ページに遷移できるもののコメント投稿欄が表示されない' do
-    # トップページに移動する
-    visit experiences_path
-    # 記事のタイトル名がリンクであることを確認する
-    expect(page).to have_link(@experience_tag.title, href: experience_path(@experience_tag))
-    # 閲覧ページへのリンクをクリックする
-    click_link(@experience_tag.title)
-    # 閲覧ページに遷移することを確認する
-    expect(current_path).to eq(experience_path(@experience_tag))
-    # 閲覧ページに記事の内容が含まれている
-    confirm_show(model: @experience_tag)
-    confirm_content(model: @experience_tag)
-    # フォームが存在しないことを確認する
-    expect(page).to have_no_selector('form')
+  context '閲覧できるとき' do
+    it 'ログインしたユーザーは記事閲覧ページに遷移してコメント投稿欄が表示される' do
+      # ログインする
+      sign_in(user: @user)
+      # 記事のタイトル名がリンクであることを確認する
+      expect(page).to have_link(@experience_tag.title, href: experience_path(@experience_tag))
+      # 閲覧ページへのリンクをクリックする
+      click_link(@experience_tag.title)
+      # 閲覧ページに遷移することを確認する
+      expect(current_path).to eq(experience_path(@experience_tag))
+      # 閲覧ページに記事の内容が含まれている
+      confirm_show(model: @experience_tag)
+      confirm_content(model: @experience_tag)
+      # コメント用のフォームが存在する
+      expect(page).to have_selector('form')
+    end
+    it 'ログインしていない状態で記事閲覧ページに遷移できるもののコメント投稿欄が表示されない' do
+      # トップページに移動する
+      visit experiences_path
+      # 記事のタイトル名がリンクであることを確認する
+      expect(page).to have_link(@experience_tag.title, href: experience_path(@experience_tag))
+      # 閲覧ページへのリンクをクリックする
+      click_link(@experience_tag.title)
+      # 閲覧ページに遷移することを確認する
+      expect(current_path).to eq(experience_path(@experience_tag))
+      # 閲覧ページに記事の内容が含まれている
+      confirm_show(model: @experience_tag)
+      confirm_content(model: @experience_tag)
+      # フォームが存在しないことを確認する
+      expect(page).to have_no_selector('form')
+    end
   end
 end
 
@@ -200,6 +209,365 @@ RSpec.describe '記事の削除', type: :system do
       visit experience_path(@experience_tag2)
       # 記事2に「削除」へのリンクがないことを確認する
       expect(page).to have_no_link('削除')
+    end
+  end
+end
+
+RSpec.describe '記事の検索', type: :system do
+  before do
+    @user1 = FactoryBot.create(:user)
+    @experience_tag1 = create_experience_tag(user_model: @user1)
+    sleep 1 # ソートの並び順がはっきりするように念の為
+    @user2 = FactoryBot.create(:user)
+    @experience_tag2 = create_experience_tag(user_model: @user2)
+  end
+  context '検索に合致するものがあるとき' do
+    it 'タイトルの検索が合致する' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      within('main') do
+        within('.search-items') do
+          # 検索条件 テキスト検索 に記事1の値を入力する
+          fill_in 'テキスト検索', with: @experience_tag1.title
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致し、表示することを確認する
+      confirm_show(model: @experience_tag1)
+      # 記事2は検索に合致せず、表示しないことを確認する
+      confirm_show_no_have(model: @experience_tag2)
+    end
+    it 'ストレスの検索が合致する' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      within('main') do
+        within('.search-items') do
+          # 検索条件 テキスト検索 に記事1の値を入力する
+          fill_in 'テキスト検索', with: @experience_tag1.stress
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致し、表示することを確認する
+      confirm_show(model: @experience_tag1)
+      # 記事2は検索に合致せず、表示しないことを確認する
+      confirm_show_no_have(model: @experience_tag2)
+    end
+    it '本文の検索が合致する' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      within('main') do
+        within('.search-items') do
+          # 検索条件 テキスト検索 に記事1の値を入力する
+          fill_in 'テキスト検索', with: @experience_tag1.content.body.to_plain_text.gsub(/\n/, '').strip
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致し、表示することを確認する
+      confirm_show(model: @experience_tag1)
+      # 記事2は検索に合致せず、表示しないことを確認する
+      confirm_show_no_have(model: @experience_tag2)
+    end
+    it 'タグの検索が合致する' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      within('main') do
+        within('.search-items') do
+          tag1_list  = @experience_tag1.tags.map { |tag| tag.name }
+          tag2_list  = @experience_tag2.tags.map { |tag| tag.name }
+          for i in 0..tag1_list.size do
+            unless tag2_list.include?(tag1_list[i])
+              target_tag = tag1_list[i]
+              break
+            end
+          end
+          find('details').click
+          # 検索条件 タグ は以下と等しい に記事1の値を入力する
+          select target_tag, from: 'q_tags_id_eq'
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致し、表示することを確認する
+      confirm_show(model: @experience_tag1)
+      # 記事2は検索に合致せず、表示しないことを確認する
+      confirm_show_no_have(model: @experience_tag2)
+    end
+    it 'カテゴリの検索が合致する' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      # 記事1と記事2のカテゴリが一致しないこと
+      while @experience_tag2.category_id == @experience_tag1.category_id do
+        @experience_tag1 = create_experience_tag(user_model: @user1)
+      end
+      within('main') do
+        within('.search-items') do
+          find('details').click
+          # 検索条件 カテゴリ は以下と等しい に記事1の値を入力する
+          select @experience_tag1.category.name, from: 'q_category_id_eq'
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致し、表示することを確認する
+      confirm_show(model: @experience_tag1)
+      # 記事2は検索に合致せず、表示しないことを確認する
+      confirm_show_no_have(model: @experience_tag2)
+    end
+    it '経過日数の検索が合致する' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      # 記事1と記事2の経過日数が一致しないこと
+      while @experience_tag2.period_id == @experience_tag1.period_id do
+        @experience_tag1 = create_experience_tag(user_model: @user1)
+      end
+      within('main') do
+        within('.search-items') do
+          find('details').click
+          # 検索条件 経過日数 は以下と等しい に記事1の値を入力する
+          select @experience_tag1.period.name, from: 'q_period_id_eq'
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致し、表示することを確認する
+      confirm_show(model: @experience_tag1)
+      # 記事2は検索に合致せず、表示しないことを確認する
+      confirm_show_no_have(model: @experience_tag2)
+    end
+    it 'ユーザーの 住まいの最高気温 の検索が合致する' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      # 記事1と記事2のユーザーの 住まいの最高気温が一致しないこと
+      while @user2.high_id == @user1.high_id do
+        @user1 = FactoryBot.create(:user)
+        @experience_tag1 = create_experience_tag(user_model: @user1)
+      end
+      within('main') do
+        within('.search-items') do
+          find('details').click
+          # 検索条件 ユーザーの 住まいの最高気温 は以下と等しい に記事1の値を入力する
+          select @experience_tag1.user.high.name, from: 'q_user_high_id_eq'
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致し、表示することを確認する
+      confirm_show(model: @experience_tag1)
+      # 記事2は検索に合致せず、表示しないことを確認する
+      confirm_show_no_have(model: @experience_tag2)
+    end
+    it 'ユーザーの 住まいの最低気温 の検索が合致する' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      # 記事1と記事2の ユーザーの 住まいの最低気温 が一致しないこと
+      while @user2.low_id == @user1.low_id do
+        @user1 = FactoryBot.create(:user)
+        @experience_tag1 = create_experience_tag(user_model: @user1)
+      end
+      within('main') do
+        within('.search-items') do
+          find('details').click
+          # 検索条件 ユーザーの 住まいの最低気温 は以下と等しい に記事1の値を入力する
+          select @experience_tag1.user.low.name, from: 'q_user_low_id_eq'
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致し、表示することを確認する
+      confirm_show(model: @experience_tag1)
+      # 記事2は検索に合致せず、表示しないことを確認する
+      confirm_show_no_have(model: @experience_tag2)
+    end
+    it 'ユーザーの 同居人数 の検索が合致する' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      # 記事1と記事2の ユーザーの 同居人数 が一致しないこと
+      while @user2.housemate_id == @user1.housemate_id do
+        @user1 = FactoryBot.create(:user)
+        @experience_tag1 = create_experience_tag(user_model: @user1)
+      end
+      within('main') do
+        within('.search-items') do
+          find('details').click
+          # 検索条件 ユーザーの 同居人数 は以下と等しい に記事1の値を入力する
+          select @experience_tag1.user.housemate.name, from: 'q_user_housemate_id_eq'
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致し、表示することを確認する
+      confirm_show(model: @experience_tag1)
+      # 記事2は検索に合致せず、表示しないことを確認する
+      confirm_show_no_have(model: @experience_tag2)
+    end
+    it 'ユーザーの 趣味の多さ の検索が合致する' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      # 記事1と記事2の ユーザーの 趣味の多さ が一致しないこと
+      while @user2.hobby_id == @user1.hobby_id do
+        @user1 = FactoryBot.create(:user)
+        @experience_tag1 = create_experience_tag(user_model: @user1)
+      end
+      within('main') do
+        within('.search-items') do
+          find('details').click
+          # 検索条件 ユーザーの 趣味の多さ は以下と等しい に記事1の値を入力する
+          select @experience_tag1.user.hobby.name, from: 'q_user_hobby_id_eq'
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致し、表示することを確認する
+      confirm_show(model: @experience_tag1)
+      # 記事2は検索に合致せず、表示しないことを確認する
+      confirm_show_no_have(model: @experience_tag2)
+    end
+    it 'ユーザーの お店との距離  の検索が合致する' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      # 記事1と記事2の ユーザーの お店との距離 が一致しないこと
+      while @user2.range_with_store_id == @user1.range_with_store_id do
+        @user1 = FactoryBot.create(:user)
+        @experience_tag1 = create_experience_tag(user_model: @user1)
+      end
+      within('main') do
+        within('.search-items') do
+          find('details').click
+          # 検索条件 ユーザーの お店との距離 は以下と等しい に記事1の値を入力する
+          select @experience_tag1.user.range_with_store.name, from: 'q_user_range_with_store_id_eq'
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致し、表示することを確認する
+      confirm_show(model: @experience_tag1)
+      # 記事2は検索に合致せず、表示しないことを確認する
+      confirm_show_no_have(model: @experience_tag2)
+    end
+    it 'ユーザーの 現在の状況  の検索が合致する' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      # 記事1と記事2の ユーザーの 現在の状況 が一致しないこと
+      while @user2.clean_status_id == @user1.clean_status_id do
+        @user1 = FactoryBot.create(:user)
+        @experience_tag1 = create_experience_tag(user_model: @user1)
+      end
+      within('main') do
+        within('.search-items') do
+          find('details').click
+          # 検索条件 ユーザーの 現在の状況 は以下と等しい に記事1の値を入力する
+          select @experience_tag1.user.clean_status.name, from: 'q_user_clean_status_id_eq'
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致し、表示することを確認する
+      confirm_show(model: @experience_tag1)
+      # 記事2は検索に合致せず、表示しないことを確認する
+      confirm_show_no_have(model: @experience_tag2)
+    end
+  end
+  context '検索に合致するものがないとき' do
+    it '記事はあるが、検索条件に合致しないとき' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      within('main') do
+        within('.search-items') do
+          # 検索条件 テキスト検索 に記事1の値を入力する
+          fill_in 'テキスト検索', with: "test-data #{@experience_tag1.title}"
+          # 検索する
+          click_button '検索'
+        end
+      end
+      # 記事1は検索に合致せず、表示しないことを確認する
+      within('main') do
+        within('.cards') do
+          expect(page).to have_no_link(@experience_tag1.user.nickname, href: user_path(@experience_tag1.user))
+          expect(page).to have_no_link(@experience_tag1.title, href: experience_path(@experience_tag1))
+          expect(page).to have_no_content(@experience_tag1.stress)
+        end
+      end
+      # 記事2は検索に合致せず、表示しないことを確認する
+      within('main') do
+        within('.cards') do
+          expect(page).to have_no_link(@experience_tag2.user.nickname, href: user_path(@experience_tag2.user))
+          expect(page).to have_no_link(@experience_tag2.title, href: experience_path(@experience_tag2))
+          expect(page).to have_no_content(@experience_tag2.stress)
+        end
+      end
+      # 「記事がありません。」と表示すること
+      within('main') do
+        expect(page).to have_content('記事がありません。')
+      end
+    end
+    it '記事がないとき' do
+      skip('記事の投稿 投稿ができるとき ログインしたユーザーは新規投稿できる で実施のため')
+    end
+  end
+  context 'ソート条件を変更できる' do
+    it '更新日時 降順(デフォルト)' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      # 記事の順が更新日時の降順に並んでいること
+      within('main') do
+        within('.cards') do
+          expect(all('.card')[0]).to have_content(@experience_tag2.updated_at.strftime("%Y/%m/%d %H:%M:%S"))
+          expect(all('.card')[1]).to have_content(@experience_tag1.updated_at.strftime("%Y/%m/%d %H:%M:%S"))
+        end
+      end
+    end
+    it '更新日時 昇順' do
+      # 記事1を投稿したユーザーでログインする
+      sign_in(user: @user1)
+      # 一覧ページに遷移したことを確認する
+      expect(current_path).to eq(experiences_path)
+      # 記事の順を更新日時 昇順に変更する
+      within('main') do
+        within('.search-items') do
+          find('details').click
+          # 検索条件 ユーザーの お店との距離 は以下と等しい に記事1の値を入力する
+          select '更新日時 昇順', from: 'q_sorts'
+          # 検索する
+          click_button '検索'
+        end
+      end
+      within('main') do
+        within('.cards') do
+          expect(all('.card')[0]).to have_content(@experience_tag1.updated_at.strftime("%Y/%m/%d %H:%M:%S"))
+          expect(all('.card')[1]).to have_content(@experience_tag2.updated_at.strftime("%Y/%m/%d %H:%M:%S"))
+        end
+      end
     end
   end
 end
