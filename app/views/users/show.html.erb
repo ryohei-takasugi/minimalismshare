@@ -1,8 +1,9 @@
 <div class="user-show">
-  <h1>マイページ</h1>
+  <h1><%= @user.nickname %> の マイページ</h1>
   <nav class="tabs" data-kube="tabs" data-equal="true">
     <a href="#tab1" class="is-active">お知らせ</a>
     <a href="#tab2">アカウント情報</a>
+    <%# FIXME: タブ切り替え後にページ切り替えをするとタブが初期値に戻るためコメントアウト >
     <%# <a href="#tab3">記事一覧</a> %>
     <%# <a href="#tab4">いいね一覧</a> %>
     <%# <a href="#tab5">真似した一覧</a> %>
@@ -71,7 +72,7 @@
         </tr>
       </tbody>
     </table>
-    <%= link_to 'アカウント情報の変更', "#", class: "button is-basic is-secondary" %>
+    <%# link_to 'アカウント情報の変更', "#", class: "button is-basic is-secondary" %>
     <%= link_to 'メールアドレスおよびパスワード変更', edit_user_registration_path(@user), class: "button is-basic is-secondary" %>
   </section>
 <% 

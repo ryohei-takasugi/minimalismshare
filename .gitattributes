@@ -1,7 +1,11 @@
-app/assets/stylesheets/kube/* linguist-vendored
-app/javascript/fontawesome-free-5.15.4-web/* linguist-vendored
+# ファイルの除外
+*.less linguist-vendored
 app/javascript/kube.js linguist-vendored
 app/javascript/kube.min.js linguist-vendored
 app/javascript/kube-addons.js linguist-vendored
 app/javascript/kube-addons.min.js linguist-vendored
-doc/* linguist-vendored
+
+# フォルダの除外
+app/assets/stylesheets/kube/* linguist-generated
+app/javascript/fontawesome-free-5.15.4-web/* linguist-generated
+doc/* linguist-generated

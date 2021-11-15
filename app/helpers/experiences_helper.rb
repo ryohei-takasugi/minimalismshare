@@ -48,7 +48,7 @@ module ExperiencesHelper
 
   def tags_join(tags)
     if tags.blank? then nil
-    elsif tags.instance_of?(Array)  then tags.join(', ')
+    elsif tags.instance_of?(Array)  then tags.join('、')
     elsif tags.instance_of?(String) then tags
     else
       tags.map { |tag| tag.name }.join('、')

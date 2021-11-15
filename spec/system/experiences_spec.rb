@@ -42,8 +42,8 @@ RSpec.describe '記事の投稿', type: :system do
       expect(page).to have_link(@user.nickname)
       expect(page).to have_link(@experience_tag.title)
       expect(page).to have_content(@experience_tag.stress)
-      expect(@experience_tag.tags.split(',').size).to be >= 1
-      @experience_tag.tags.split(',').each do |tag|
+      expect(@experience_tag.tags.split('、').size).to be >= 1
+      @experience_tag.tags.split('、').each do |tag|
         expect(page).to have_content(tag)
       end
       expect(page).to have_no_content(@experience_tag.content)
@@ -117,7 +117,7 @@ RSpec.describe '記事の編集', type: :system do
       visit edit_experience_path(@experience_tag1)
       # すでに投稿済みの内容がフォームに入っていることを確認する
       expect(find('#experience_tag_title').value).to eq(@experience_tag1.title)
-      expect(find('#experience_tag_name').value).to eq(@experience_tag1.tags.map { |tag| tag.name }.join(', '))
+      expect(find('#experience_tag_name').value).to eq(@experience_tag1.tags.map { |tag| tag.name }.join('、'))
       expect(find('#experience_tag_stress').value).to eq(@experience_tag1.stress)
       expect(find('#experience_tag_category_id').value).to eq(@experience_tag1.category_id.to_s)
       expect(find('#experience_tag_period_id').value).to eq(@experience_tag1.period_id.to_s)
@@ -186,7 +186,7 @@ RSpec.describe '記事の削除', type: :system do
         sleep 0.5 # データベース削除までに少し時間が必要
       end.to change { Experience.count }.by(-1) and change do
                                                       ExperienceTagRelation.count
-                                                    end.by(@experience_tag1.tags.split(',').size) and change do
+                                                    end.by(@experience_tag1.tags.split('、').size) and change do
                                                                                                         Tag.count
                                                                                                       end.by(0)
       # 一覧ページに遷移したことを確認する
