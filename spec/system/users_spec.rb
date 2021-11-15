@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe "ユーザーの新規作成", type: :system do
+RSpec.describe 'ユーザーの新規作成', type: :system do
   before do
     @user = FactoryBot.build(:user)
   end
-  context 'ユーザー新規登録ができるとき' do 
+  context 'ユーザー新規登録ができるとき' do
     it '必須情報を入力すればユーザー新規登録ができてトップページに移動する' do
       # トップページに移動する
       basic_visit root_path
@@ -18,9 +18,9 @@ RSpec.describe "ユーザーの新規作成", type: :system do
       fill_in 'パスワード', with: @user.password
       fill_in '確認用', with: @user.password_confirmation
       # サインアップボタンを押すとユーザーモデルのカウントが1上がることを確認する
-      expect{
+      expect  do
         find('input[name="commit"]').click
-      }.to change { User.count }.by(1)
+      end.to change { User.count }.by(1)
       # 一覧ページへ遷移したことを確認する
       expect(current_path).to eq(experiences_path)
       # 「アカウント登録が完了しました」の文字があることを確認する
@@ -51,9 +51,9 @@ RSpec.describe "ユーザーの新規作成", type: :system do
       select @user.range_with_store.name, from: 'user_range_with_store_id'
       select @user.clean_status.name, from: 'user_clean_status_id'
       # サインアップボタンを押すとユーザーモデルのカウントが1上がることを確認する
-      expect{
+      expect do
         find('input[name="commit"]').click
-      }.to change { User.count }.by(1)
+      end.to change { User.count }.by(1)
       # 一覧ページへ遷移したことを確認する
       expect(current_path).to eq(experiences_path)
       # 「アカウント登録が完了しました」の文字があることを確認する
@@ -80,9 +80,9 @@ RSpec.describe "ユーザーの新規作成", type: :system do
       fill_in '確認用', with: nil
       fill_in '夢・目標', with: nil
       # サインアップボタンを押してもユーザーモデルのカウントは上がらないことを確認する
-      expect{
+      expect  do
         find('input[name="commit"]').click
-      }.to change { User.count }.by(0)
+      end.to change { User.count }.by(0)
       # 新規登録ページへ戻されることを確認する
       expect(current_path).to eq(user_registration_path)
     end

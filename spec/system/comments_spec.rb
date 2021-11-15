@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "コメント投稿", type: :system do
+RSpec.describe 'コメント投稿', type: :system do
   before do
     @user = FactoryBot.create(:user)
     @experience_tag = create_experience_tag(user_model: @user)
@@ -17,9 +17,9 @@ RSpec.describe "コメント投稿", type: :system do
       # フォームに情報を入力する
       fill_in 'experience_comment[comment]', with: @comment
       # コメントを送信すると、Commentモデルのカウントが1上がることを確認する
-      expect {
+      expect do
         find('input[name="commit"]').click
-      }.to change { ExperienceComment.count }.by(1)
+      end.to change { ExperienceComment.count }.by(1)
       # 詳細ページにリダイレクトされることを確認する
       expect(current_path).to eq(experience_path(@experience_tag))
       # 詳細ページ上に先ほどのコメント内容が含まれていることを確認する
@@ -30,7 +30,7 @@ RSpec.describe "コメント投稿", type: :system do
   end
 end
 
-RSpec.describe "コメント編集", type: :system do
+RSpec.describe 'コメント編集', type: :system do
   before do
     @user = FactoryBot.create(:user)
     @experience_tag = create_experience_tag(user_model: @user)
@@ -47,9 +47,9 @@ RSpec.describe "コメント編集", type: :system do
       # フォームに情報を入力する
       fill_in 'experience_comment[comment]', with: @comment
       # コメントを送信すると、Commentモデルのカウントが1上がることを確認する
-      expect {
+      expect do
         find('input[name="commit"]').click
-      }.to change { ExperienceComment.count }.by(1)
+      end.to change { ExperienceComment.count }.by(1)
       # 詳細ページ下部に先ほどのコメント内容が含まれていることを確認する
       expect(page).to have_content(@comment)
       # コメントの編集ボタンを押す
@@ -59,9 +59,9 @@ RSpec.describe "コメント編集", type: :system do
       # フォームに情報を入力する
       fill_in 'experience_comment[comment]', with: "#{@comment}edit"
       # コメントを送信すると、Commentモデルのカウントが1上がることを確認する
-      expect {
+      expect do
         find('input[name="commit"]').click
-      }.to change { ExperienceComment.count }.by(0)
+      end.to change { ExperienceComment.count }.by(0)
       # 詳細ページにリダイレクトされることを確認する
       expect(current_path).to eq(experience_path(@experience_tag))
       # 詳細ページ下部に先ほどのコメント内容が含まれていることを確認する
@@ -72,7 +72,7 @@ RSpec.describe "コメント編集", type: :system do
   end
 end
 
-RSpec.describe "コメント削除", type: :system do
+RSpec.describe 'コメント削除', type: :system do
   before do
     @user = FactoryBot.create(:user)
     @experience_tag = create_experience_tag(user_model: @user)
@@ -89,18 +89,18 @@ RSpec.describe "コメント削除", type: :system do
       # フォームに情報を入力する
       fill_in 'experience_comment[comment]', with: @comment
       # コメントを送信すると、Commentモデルのカウントが1上がることを確認する
-      expect {
+      expect do
         find('input[name="commit"]').click
-      }.to change { ExperienceComment.count }.by(1)
+      end.to change { ExperienceComment.count }.by(1)
       # 詳細ページ下部に先ほどのコメント内容が含まれていることを確認する
       expect(page).to have_content(@comment)
       # コメントを送信すると、Commentモデルのカウントが1下がることを確認する
-      expect{
-        page.accept_confirm("この操作は取り消すことができません。本当にコメントの削除を実行しますか?") do
+      expect do
+        page.accept_confirm('この操作は取り消すことができません。本当にコメントの削除を実行しますか?') do
           click_link('削除')
         end
         sleep 0.5 # データベース削除までに少し時間が必要
-      }.to change { ExperienceComment.count }.by(-1)
+      end.to change { ExperienceComment.count }.by(-1)
       # 詳細ページにリダイレクトされることを確認する
       expect(current_path).to eq(experience_path(@experience_tag))
       # 詳細ページ下部に先ほどのコメント内容が含まれていないことを確認する

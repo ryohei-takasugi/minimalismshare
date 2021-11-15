@@ -22,7 +22,7 @@ module LikeHelper
   def confirm_like_button(status: true)
     within('main') do
       within('.like') do
-        expect(find('input[name="experiences_like[like]"]', visible: false).value).to eq("#{status}")
+        expect(find('input[name="experiences_like[like]"]', visible: false).value).to eq(status.to_s)
       end
     end
   end
@@ -30,17 +30,17 @@ module LikeHelper
   def confirm_imitate_button(status: true)
     within('main') do
       within('.like') do
-        expect(find('input[name="experiences_like[imitate]"]', visible: false).value).to eq("#{status}")
+        expect(find('input[name="experiences_like[imitate]"]', visible: false).value).to eq(status.to_s)
       end
     end
   end
 
   def click_change_button(button_number: 0, change_count: 0)
     within('main') do
-      within('.like') do 
-        expect{
+      within('.like') do
+        expect do
           all('button')[button_number].click
-        }.to change { ExperienceLike.count }.by(change_count)
+        end.to change { ExperienceLike.count }.by(change_count)
       end
     end
   end
@@ -49,7 +49,7 @@ module LikeHelper
     within('header') do
       within('nav') do
         within('.notice') do
-          expect(find('span').text).to eq("#{notice_count}")
+          expect(find('span').text).to eq(notice_count.to_s)
           find('span').hover
           expect(page).to have_content("#{user.nickname} が、あなたの記事「#{experience_tag.title}」に「いいね」しました")
         end
@@ -67,7 +67,7 @@ module LikeHelper
     within('header') do
       within('nav') do
         within('.notice') do
-          expect(find('span').text).to eq("#{notice_count}")
+          expect(find('span').text).to eq(notice_count.to_s)
           find('span').hover
           expect(page).to have_content("#{user.nickname} が、あなたの記事「#{experience_tag.title}」に「真似した」しました")
         end

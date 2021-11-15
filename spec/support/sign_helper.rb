@@ -14,6 +14,7 @@ module SignHelper
     select user.clean_status.name, from: 'user_clean_status_id'
     find('input[name="commit"]').click
   end
+
   def sign_in(user:)
     basic_visit new_user_session_path
     fill_in 'Eメール', with: user.email

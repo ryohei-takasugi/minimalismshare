@@ -13,7 +13,7 @@ module ShowExperienceHelper
     dream            = model.user.dream
     high             = model.user.high.name
     low              = model.user.low.name
-    housemate        = model.user.housemate.name 
+    housemate        = model.user.housemate.name
     hobby            = model.user.hobby.name
     range_with_store = model.user.range_with_store.name
     clean_status     = model.user.clean_status.name
@@ -89,6 +89,7 @@ module ShowExperienceHelper
   end
 
   private
+
   def add_str
     'edit'
   end

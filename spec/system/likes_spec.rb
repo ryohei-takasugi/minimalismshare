@@ -1,7 +1,7 @@
 require 'rails_helper'
 include LikeHelper
 
-RSpec.describe "いいねの投稿／取り消し", type: :system do
+RSpec.describe 'いいねの投稿／取り消し', type: :system do
   before do
     @user1 = FactoryBot.create(:user)
     @experience_tag1 = create_experience_tag(user_model: @user1)
@@ -77,7 +77,7 @@ RSpec.describe "いいねの投稿／取り消し", type: :system do
       visit experience_path(@experience_tag1)
       # いいねボタンが表示されない
       within('main') do
-        within('.like') do 
+        within('.like') do
           expect(page).to have_no_button
         end
       end
@@ -85,7 +85,7 @@ RSpec.describe "いいねの投稿／取り消し", type: :system do
   end
 end
 
-RSpec.describe "真似したの投稿／取り消し", type: :system do
+RSpec.describe '真似したの投稿／取り消し', type: :system do
   before do
     @user1 = FactoryBot.create(:user)
     @experience_tag1 = create_experience_tag(user_model: @user1)
@@ -140,7 +140,7 @@ RSpec.describe "真似したの投稿／取り消し", type: :system do
       # 真似したボタンをクリックする
       click_change_button(button_number: 1, change_count: 1)
       # within('main') do
-      #   within('.like') do 
+      #   within('.like') do
       #     expect{
       #       all('button')[1].click
       #     }.to change { ExperienceLike.count }.by(1)
@@ -162,7 +162,7 @@ RSpec.describe "真似したの投稿／取り消し", type: :system do
       # 真似したボタンをクリックする
       click_change_button(button_number: 1, change_count: 0)
       # within('main') do
-      #   within('.like') do 
+      #   within('.like') do
       #     expect{
       #       all('button')[1].click
       #     }.to change { ExperienceLike.count }.by(0)
@@ -202,7 +202,7 @@ RSpec.describe "真似したの投稿／取り消し", type: :system do
       visit experience_path(@experience_tag1)
       # いいねボタンが表示されない
       within('main') do
-        within('.like') do 
+        within('.like') do
           expect(page).to have_no_button
         end
       end

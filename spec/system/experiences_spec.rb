@@ -1,13 +1,13 @@
 require 'rails_helper'
 include ShowExperienceHelper
 
-RSpec.describe "記事の投稿", type: :system do
+RSpec.describe '記事の投稿', type: :system do
   before do
     @user = FactoryBot.create(:user)
     @experience_tag = build_experience_tag(user_model: @user)
   end
 
-  context '投稿ができるとき'do
+  context '投稿ができるとき' do
     it 'ログインしたユーザーは新規投稿できる' do
       # ログインする
       sign_in(user: @user)
@@ -29,9 +29,11 @@ RSpec.describe "記事の投稿", type: :system do
       select '半年程度', from: 'experience_tag_period_id'
       fill_in_rich_text_area nil, with: @experience_tag.content
       # 送信するとExperienceモデルのカウントが1上がり、ExperienceTagRelationモデルのカウントが1以上、Tagモデルのカウントが0以上上がることを確認する
-      expect{
+      expect do
         find('input[name="commit"]').click
-      }.to change { Experience.count }.by(1) and change { ExperienceTagRelation.count }.by_at_least(1) and change { Tag.count }.by_at_least(0)
+      end.to change { Experience.count }.by(1) and change { ExperienceTagRelation.count }.by_at_least(1) and change do
+                                                                                                               Tag.count
+                                                                                                             end.by_at_least(0)
       # 一覧ページに遷移することを確認する
       expect(current_path).to eq(experiences_path)
       # 「新しい記事を登録しました」の文字があることを確認する
@@ -47,7 +49,7 @@ RSpec.describe "記事の投稿", type: :system do
       expect(page).to have_no_content(@experience_tag.content)
     end
   end
-  context '投稿ができないとき'do
+  context '投稿ができないとき' do
     it 'ログインしていないと新規投稿ページに遷移できない' do
       # トップページに移動する
       basic_visit root_path
@@ -123,9 +125,11 @@ RSpec.describe '記事の編集', type: :system do
       # 投稿内容を編集する
       edit_show(model: @experience_tag1)
       # 編集してもTweetモデルのカウントは変わらないことを確認する
-      expect{
+      expect do
         find('input[name="commit"]').click
-      }.to change { Experience.count }.by(0) and change { ExperienceTagRelation.count }.by(1) and change { Tag.count }.by_at_least(0)
+      end.to change { Experience.count }.by(0) and change { ExperienceTagRelation.count }.by(1) and change do
+                                                                                                      Tag.count
+                                                                                                    end.by_at_least(0)
       # 閲覧ページに遷移することを確認する
       expect(current_path).to eq(experience_path(@experience_tag1))
       # 「記事を更新しました」の文字があることを確認する
@@ -175,12 +179,16 @@ RSpec.describe '記事の削除', type: :system do
       # 記事1に「削除」へのリンクがあることを確認する
       expect(page).to have_link('削除')
       # 投稿を削除するとレコードの数が1減ることを確認する
-      expect{
-        page.accept_confirm("この操作は取り消すことができません。本当に記事の削除を実行しますか?") do
+      expect do
+        page.accept_confirm('この操作は取り消すことができません。本当に記事の削除を実行しますか?') do
           click_link('削除')
         end
         sleep 0.5 # データベース削除までに少し時間が必要
-      }.to change { Experience.count }.by(-1) and change { ExperienceTagRelation.count }.by(@experience_tag1.tags.split(',').size) and change { Tag.count }.by(0)
+      end.to change { Experience.count }.by(-1) and change do
+                                                      ExperienceTagRelation.count
+                                                    end.by(@experience_tag1.tags.split(',').size) and change do
+                                                                                                        Tag.count
+                                                                                                      end.by(0)
       # 一覧ページに遷移したことを確認する
       expect(current_path).to eq(experiences_path)
       # 「記事を更新しました」の文字があることを確認する
@@ -285,7 +293,8 @@ RSpec.describe '記事の検索', type: :system do
         within('.search-items') do
           tag1_list  = @experience_tag1.tags.map { |tag| tag.name }
           tag2_list  = @experience_tag2.tags.map { |tag| tag.name }
-          for i in 0..tag1_list.size do
+          target_tag = ''
+          (0..tag1_list.size).each do |i|
             unless tag2_list.include?(tag1_list[i])
               target_tag = tag1_list[i]
               break
@@ -309,7 +318,7 @@ RSpec.describe '記事の検索', type: :system do
       # 一覧ページに遷移したことを確認する
       expect(current_path).to eq(experiences_path)
       # 記事1と記事2のカテゴリが一致しないこと
-      while @experience_tag2.category_id == @experience_tag1.category_id do
+      while @experience_tag2.category_id == @experience_tag1.category_id
         @experience_tag1 = create_experience_tag(user_model: @user1)
       end
       within('main') do
@@ -332,9 +341,7 @@ RSpec.describe '記事の検索', type: :system do
       # 一覧ページに遷移したことを確認する
       expect(current_path).to eq(experiences_path)
       # 記事1と記事2の経過日数が一致しないこと
-      while @experience_tag2.period_id == @experience_tag1.period_id do
-        @experience_tag1 = create_experience_tag(user_model: @user1)
-      end
+      @experience_tag1 = create_experience_tag(user_model: @user1) while @experience_tag2.period_id == @experience_tag1.period_id
       within('main') do
         within('.search-items') do
           find('details').click
@@ -355,7 +362,7 @@ RSpec.describe '記事の検索', type: :system do
       # 一覧ページに遷移したことを確認する
       expect(current_path).to eq(experiences_path)
       # 記事1と記事2のユーザーの 住まいの最高気温が一致しないこと
-      while @user2.high_id == @user1.high_id do
+      while @user2.high_id == @user1.high_id
         @user1 = FactoryBot.create(:user)
         @experience_tag1 = create_experience_tag(user_model: @user1)
       end
@@ -379,7 +386,7 @@ RSpec.describe '記事の検索', type: :system do
       # 一覧ページに遷移したことを確認する
       expect(current_path).to eq(experiences_path)
       # 記事1と記事2の ユーザーの 住まいの最低気温 が一致しないこと
-      while @user2.low_id == @user1.low_id do
+      while @user2.low_id == @user1.low_id
         @user1 = FactoryBot.create(:user)
         @experience_tag1 = create_experience_tag(user_model: @user1)
       end
@@ -403,7 +410,7 @@ RSpec.describe '記事の検索', type: :system do
       # 一覧ページに遷移したことを確認する
       expect(current_path).to eq(experiences_path)
       # 記事1と記事2の ユーザーの 同居人数 が一致しないこと
-      while @user2.housemate_id == @user1.housemate_id do
+      while @user2.housemate_id == @user1.housemate_id
         @user1 = FactoryBot.create(:user)
         @experience_tag1 = create_experience_tag(user_model: @user1)
       end
@@ -427,7 +434,7 @@ RSpec.describe '記事の検索', type: :system do
       # 一覧ページに遷移したことを確認する
       expect(current_path).to eq(experiences_path)
       # 記事1と記事2の ユーザーの 趣味の多さ が一致しないこと
-      while @user2.hobby_id == @user1.hobby_id do
+      while @user2.hobby_id == @user1.hobby_id
         @user1 = FactoryBot.create(:user)
         @experience_tag1 = create_experience_tag(user_model: @user1)
       end
@@ -451,7 +458,7 @@ RSpec.describe '記事の検索', type: :system do
       # 一覧ページに遷移したことを確認する
       expect(current_path).to eq(experiences_path)
       # 記事1と記事2の ユーザーの お店との距離 が一致しないこと
-      while @user2.range_with_store_id == @user1.range_with_store_id do
+      while @user2.range_with_store_id == @user1.range_with_store_id
         @user1 = FactoryBot.create(:user)
         @experience_tag1 = create_experience_tag(user_model: @user1)
       end
@@ -475,7 +482,7 @@ RSpec.describe '記事の検索', type: :system do
       # 一覧ページに遷移したことを確認する
       expect(current_path).to eq(experiences_path)
       # 記事1と記事2の ユーザーの 現在の状況 が一致しないこと
-      while @user2.clean_status_id == @user1.clean_status_id do
+      while @user2.clean_status_id == @user1.clean_status_id
         @user1 = FactoryBot.create(:user)
         @experience_tag1 = create_experience_tag(user_model: @user1)
       end
@@ -542,8 +549,8 @@ RSpec.describe '記事の検索', type: :system do
       # 記事の順が更新日時の降順に並んでいること
       within('main') do
         within('.cards') do
-          expect(all('.card')[0]).to have_content(@experience_tag2.updated_at.strftime("%Y/%m/%d %H:%M:%S"))
-          expect(all('.card')[1]).to have_content(@experience_tag1.updated_at.strftime("%Y/%m/%d %H:%M:%S"))
+          expect(all('.card')[0]).to have_content(@experience_tag2.updated_at.strftime('%Y/%m/%d %H:%M:%S'))
+          expect(all('.card')[1]).to have_content(@experience_tag1.updated_at.strftime('%Y/%m/%d %H:%M:%S'))
         end
       end
     end
@@ -564,8 +571,8 @@ RSpec.describe '記事の検索', type: :system do
       end
       within('main') do
         within('.cards') do
-          expect(all('.card')[0]).to have_content(@experience_tag1.updated_at.strftime("%Y/%m/%d %H:%M:%S"))
-          expect(all('.card')[1]).to have_content(@experience_tag2.updated_at.strftime("%Y/%m/%d %H:%M:%S"))
+          expect(all('.card')[0]).to have_content(@experience_tag1.updated_at.strftime('%Y/%m/%d %H:%M:%S'))
+          expect(all('.card')[1]).to have_content(@experience_tag2.updated_at.strftime('%Y/%m/%d %H:%M:%S'))
         end
       end
     end
