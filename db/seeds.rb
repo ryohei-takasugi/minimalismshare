@@ -368,7 +368,8 @@ users.each do |user|
     experience = experiences.sample
     user_ids = users.map { |u| u.id }
     user_ids.delete(user.id)
-    other = users[user_ids.sample - 1]
+    other_id = user_ids.sample
+    other = users.select { |u| u.id == other_id }
     action = [0, 1].sample
     Notice.create(message: "#{other.nickname} が、あなたの記事「#{experience.title}」に「#{actions[action]}」しました" , url: "experiences/#{experience.id}", user_id: other.id)
     if action == 0
