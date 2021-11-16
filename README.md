@@ -509,6 +509,13 @@ Database adapter          mysql2
 Database schema version   20211109080537
 ```
 
+データベース情報
+```
+user@pc minimalismshare % mysql --version
+mysql  Ver 14.14 Distrib 5.6.51, for osx10.16 (x86_64) using  EditLine wrapper
+```
+
+
 導入手順
 ```
 user@pc project % git clone https://github.com/ryohei-takasugi/minimalismshare.git
