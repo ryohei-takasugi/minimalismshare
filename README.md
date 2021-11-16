@@ -303,12 +303,15 @@ URLにアクセスしていただきページを表示してください。
 * ミニマリズムは気温や家族の有無、お店が近いかによってできることが変わるのでユーザー情報を表示したり、検索が可能にした
 * ミニマリズムの是非について揉めにくくすることを目指し、思想の統一を図るため、ユーザー登録時に夢・目標を入力するようにした
 * タグを入力することにより、利用者が自由度を設けた
-* リッチテキストを導入することで記事の記述内容に自由度を設けた
+* リッチテキスト(ActionText)を導入することで記事の記述内容に自由度を設けた
 
 # 9. 使用技術(開発環境)
 
 ## 9.1. バックエンド
-Ruby on Rails6, Ruby
+Ruby on Rails6, Ruby, ImageMagick
+
+### 9.1.1. Rails Gem
+devise, active_hash, rails-i18n, ransack, kaminari, rubocop, image_processing, mini_magick
 
 ## 9.2. フロントエンド
 HTML, SCSS, Kube CSS Frame work, Font Awesome
@@ -317,7 +320,7 @@ HTML, SCSS, Kube CSS Frame work, Font Awesome
 MySQL
 
 ## 9.4. テスト
-RSpec
+RSpec, Faker, Factory bot, Capybara
 
 ## 9.5. デプロイ
 heroku
@@ -326,7 +329,7 @@ heroku
 GitHub
 
 ## 9.7. IDE
-VisualStudioCode
+Visual Studio Code
 
 
 # 10. 実装予定の機能
