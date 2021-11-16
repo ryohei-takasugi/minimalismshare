@@ -9,6 +9,17 @@
 https://minimalismshare.herokuapp.com/
 
 # 4. テスト用アカウント
+
+## 4.1. BASIC認証
+
+| 項目 | 内容 |
+| --- | --- |
+| ID | admin37052 |
+| PASSWORD | techcamp37@52 |
+
+
+## 4.2. ログインアカウント
+
 | 項目 | 内容 |
 | --- | --- |
 | 名前 | 田中太郎 |
@@ -87,6 +98,7 @@ URLにアクセスしていただきページを表示してください。
  * 自分の傾向がわからない場合でも、ランキングから多くの人が共感したり、真似したいと思う人を調べることが可能にするランキング機能
  * Twitterでミニマリズムを報告している人が継続して報告できるようにするため、Twitter連携
  * 意見が分かれる話や、誤解を解消するための、思考の共有機能
+ * 解決方法が分からない人向けの相談機能
  * 情報をいち早く知りたい人のためのウォッチ機能
 
 # 7. 洗い出した要件
@@ -107,21 +119,15 @@ URLにアクセスしていただきページを表示してください。
    * 経験の投稿を閲覧／削除（コメントを投稿／編集／削除を含む）するページ
    * 経験の投稿を編集するページ
    * 経験の投稿に関するランキングページ
- * ミニマリズムの思考を共有する機能
-   * 思考の共有を投稿するページ
-   * 思考の共有を一覧表示／検索するページ
-   * 思考の共有を閲覧／削除（コメントを投稿／編集／削除を含む）するページ
-   * 思考の共有を編集するページ
-   * 思考の共有に関するランキングページ
 
 ## 7.2 共通部 の要件
 * 状態：ログイン状態に関わらない
    * ボタン
-    * 経験の投稿：経験の投稿を一覧表示するページへ遷移できる
-    * 思考の共有：思考の共有を一覧表示するページへ遷移できる
-    * About　　：サイトに関しての説明ページへ遷移できる
+    * みんなの経験：経験の投稿を一覧表示するページへ遷移できる
+    * 思考の共有　：思考の共有を一覧表示するページへ遷移できる
+    * About　　　：サイトに関しての説明ページへ遷移できる
   * 表示
-    * 表示中のページが、「経験の投稿／思考の共有／about」のいずれかであるか判断できるように表示する
+    * 表示中のページが、「みんなの経験／思考の共有／about」のいずれかであるか判断できるように表示する
     * 全画面共通で表示する
 * 状態：未ログインユーザーが画面を表示した
    * ボタン
@@ -142,7 +148,7 @@ URLにアクセスしていただきページを表示してください。
 * 状態：未ログインユーザーが画面を表示した
   * 入力エリア
     * メールアドレス：必須、＠マークを含む
-    * パスワード　　：必須、６文字以上３２文字以下、半角英数字混合
+    * パスワード　　：必須、６文字以上、半角英数字混合
   * ボタン
     * ログイン：入力エリアを入力してログインボタンを押す
     * ログイン：ログインボタンを押して、ログインに成功した場合は、「経験の投稿を一覧表示／検索するページ」へ遷移する
@@ -158,17 +164,18 @@ URLにアクセスしていただきページを表示してください。
 ## 7.4 サインイン（手入力版／Twitter連携）ページ の要件
 * 状態：未ログインユーザーが画面を表示した
   * 入力エリア
-    * 登録方法　　　：必須、手入力／Twitter
-    * ニックネーム　：必須、１文字以上６文字以下
-    * メールアドレス：必須、＠マークを含む
-    * パスワード　　：必須、６文字以上３２文字以下、半角英数字混合
-    * パスワード確認：必須、パスワードとパスワード（確認）は、値の一致
-    * 注力したい思考：任意、テキストエリア
-    * 住まいの地域　：任意、「北海道または東北、関東、中部、関西、中国または四国、九州または沖縄」
-    * 住まいの気候　：任意、「比較的寒い地域、比較的温かい地域、寒暖差の少ない地域」
-    * 同居人　　　　：任意、「１人／２人／家族」人暮らし
-    * （うち未成年）：任意、「有／無」
-    * 現在の状況　　：任意、「すでにかなり物が少ない／ある程度物を減らして片付いている／ちょっとだけ減らした／まだ何もしてない」
+    * 登録方法　　　　：必須、手入力／Twitter
+    * ニックネーム　　：必須、１文字以上６文字以下
+    * メールアドレス　：必須、＠マークを含む
+    * パスワード　　　：必須、６文字以上、半角英数字混合
+    * パスワード確認　：必須、パスワードとパスワード（確認）は、値の一致
+    * 夢・目標　　　　：任意、テキストエリア
+    * 住まいの最高気温：任意、「10以下、15、20、25、30、35、40、45、50以上」℃
+    * 住まいの最低気温：任意、「20以上、15、10、5、0、-5、-10、-15、-20、-25以下」℃
+    * 同居人数　　　　：任意、「１人／２人／家族」人暮らし
+    * 趣味の多さ　　　：任意、「どちらかといえば無趣味／無関心事、１つの集中する趣味／関心事がある、多趣味／関心事の変化が多い」
+    * お店との距離　　：任意、「お店どころか運送業者も来れない、どの店も遠い、日用品や救急セットは近くのお店にある、だいたいの店は近い」
+    * 現在の状況　　　：任意、「すでにかなり物が少ない／ある程度物を減らして片付いている／ちょっとだけ減らした／まだ何もしてない」
   * ボタン
     * 新規作成：入力エリアに入力して新規作成ボタンを押す
     * 新規作成：新規作成ボタンを押して、アカウントの作成に成功した場合は、ログイン済みとなり、「経験の投稿を一覧表示／検索するページ」へ遷移する
@@ -194,7 +201,7 @@ URLにアクセスしていただきページを表示してください。
 * 状態：ログイン済ユーザーが画面を表示した
   * 入力エリア
     * タイトル：必須、１文字以上
-    * タグ　　：必須、１つ以上、インクリメント検索可能、主に対象物を登録するイメージ
+    * タグ　　：任意、インクリメンタルサーチ可能、主に対象物を登録するイメージ
     * 結果　　：必須、「成功／失敗」
     * 経過　　：必須、「０日以下、最近、１ヶ月程度、３ヶ月程度、半年程度、１年、１年以上」
     * ストレス：必須、１文字以上
@@ -219,7 +226,7 @@ URLにアクセスしていただきページを表示してください。
     * 経験の投稿に関わる記事を一覧表示する
     * 一覧は最初の２０件までを表示する
     * それ以降はページ切り替えで２０件ごとに表示する
-    * １つの記事には「画像、タイトル、ユーザー（登録時の内容を参照）、いいね数、真似した数、コメント数、更新日付」を表示する
+    * １つの記事には「画像、タイトル、ユーザー（登録時の内容を参照）、いいね数、真似した数、更新日付」を表示する
 
 
 ## 7.8 経験の投稿を閲覧／削除（コメントを投稿／編集／削除を含む）するページ の要件
@@ -254,8 +261,6 @@ URLにアクセスしていただきページを表示してください。
     * コメント投稿：入力エリアに入力された文字をコメントとして投稿する
     * コメント編集：自分のコメントを編集することができる
     * コメント削除：自分と他のユーザーのコメントを削除することができる
-    * いいね　　　：クリックすることで閲覧者が評価できる
-    * 真似した　　：クリックすることで閲覧者が評価できる
   * 表示
     * ログイン済ユーザー＆作者であれば、編集ボタンと削除ボタンを表示する
 
@@ -267,128 +272,131 @@ URLにアクセスしていただきページを表示してください。
   * 最初の投稿の時と同じ内容が編集できる
   * 入力チェックの判定や表示も最初の投稿と同じ
 
-
-## 7.10 経験の投稿に関するランキングページ の要件
-* 状態：ログイン状態に関わらない
-  * ボタン
-    * 投稿記事：投稿記事をクリックすることで詳細画面へ遷移する
-  * 表示
-    * １つの記事に関する表示内容は「経験の投稿を一覧表示／検索するページ」と同じ
-    * いいね数ランキングをTOP20件表示する
-    * 真似した数ランキングをTOP20件表示する
-
-
-## 7.11 思考の共有を投稿するページ の要件
-* 状態：未ログインユーザーが画面を表示した
-  * 未ログインユーザーは表示できない
-* 状態：ログイン済ユーザーが画面を表示した
-  * 入力エリア
-    * タイトル：必須
-    * 本文　　：必須
-    * タグ　　：必須（経験の投稿と同じ）
-  * ボタン
-    * 投稿：入力エリアに入力して投稿ボタンを押す
-    * 投稿：投稿に成功した場合は、「思考の共有を一覧表示／検索するページ」へ遷移する
-    * 投稿：投稿し失敗した場合は、ページにとどまり、エラーメッセージを表示する
-    * 投稿：ページにとどまった場合は、入力中のデータは消えない
-  * 表示
-    * エラーメッセージは日本語で表示する
-
-
-## 7.12 思考の共有を一覧表示／検索するページ の要件
-* 状態：ログイン状態に関わらない
-  * 入力
-    * 検索文字：任意
-  * ボタン
-    * 投稿記事　　　：投稿記事をクリックすることで詳細画面へ遷移する
-    * 検索オプション：検索オプションを折りたたみメニューとして表示する
-    * 検索　　　　　：入力エリアの文字列および検索オプションの内容を基に、対象の記事を絞り込みソートする
-  * 表示
-    * 経験の投稿に関わる記事を一覧表示する
-    * 一覧は最初の２０件までを表示する
-    * それ以降はページ切り替えで２０件ごとに表示する
-    * １つの記事には「タイトル、タグ、更新日付」を表示する
-
-
-## 7.13 思考の共有を閲覧／削除するページ の要件
-* 状態：ログイン状態に関わらない
-  * 表示
-    * 投稿した内容を閲覧することができる
-* 状態：未ログインユーザーが画面を表示した
-  * 表示
-    * 編集ボタンを表示しない
-    * 削除ボタンを表示しない
-* 状態：ログイン済ユーザーが画面を表示した
-  * ボタン
-    * 編集　：クリックすることで「経験の投稿を編集するページ」へ遷移できる
-    * 削除　：クリックすることで記事を削除できる
-    * いいね：クリックすることで閲覧者が評価できる
-  * 表示
-    * ログイン済ユーザーであれば、編集ボタンと削除ボタンを表示する
-    * 編集履歴（ユーザー名、編集前、編集後、更新日時）を閲覧することができる
-
-## 7.14 思考の共有を編集するページ の要件
-* 状態：未ログインユーザーが画面を表示した
-  * 画面を表示することはできない
-* 状態：ログイン済ユーザーが画面を表示した
-  * 前回の投稿の時と同じ内容が編集できる
-  * 入力チェックの判定や表示も最初の投稿と同じ
-
-
-## 7.15 思考の共有に関するランキングページ の要件
-* 状態：ログイン状態に関わらない
-  * ボタン
-    * 投稿記事：投稿記事をクリックすることで詳細画面へ遷移する
-  * 表示
-    * １つの記事に関する表示内容は「思考の共有を一覧表示／検索するページ」と同じ
-    * いいね数ランキングをTOP20件表示する
-
 # 8. 実装した機能についての画像やGIFおよびその説明
-(現状説明なし)
 
-# 9. 実装予定の機能
+## 8.1. DEMO
 
-* 問い合わせページ
+### 8.1.1. TOP画面
+![TOP画面](https://i.gyazo.com/3f384e94ef3824578a89631c900c2572.jpg)
+
+### 8.1.2. アカウント作成画面
+![アカウント作成画面](https://i.gyazo.com/a10a65326e9aa4f23dcad57e907f0883.png)
+
+### 8.1.3. ログイン画面
+![アカウント作成画面](https://i.gyazo.com/756d0e6ce0f0c978117296e890074e2a.png)
+
+### 8.1.4. マイページ画面
+![マイページ画面](https://i.gyazo.com/d65575340dd422d236c5f7b2d7d83876.png)
+
+### 8.1.5. 記事一覧画面（検索）
+![記事一覧画面（検索）](https://i.gyazo.com/63f9491881307c63426411e96e8fd64b.png)
+
+### 8.1.6. 記事の新規作成画面
+![記事の新規作成画面](https://i.gyazo.com/5c16da28bb7844ede7485f434fdc1306.png)
+
+### 8.1.7. 記事の閲覧画面
+![記事の閲覧画面](https://i.gyazo.com/b8a636281eabb7863e92ebb2c7e763fd.png)
+
+## 8.2. 工夫したポイント
+
+* ミニマリズムが題材なのであまり色を多く使わないようにした
+* ミニマリズムは気温や家族の有無、お店が近いかによってできることが変わるのでユーザー情報を表示したり、検索が可能にした
+* ミニマリズムの是非について揉めにくくすることを目指し、思想の統一を図るため、ユーザー登録時に夢・目標を入力するようにした
+* タグを入力することにより、利用者が自由度を設けた
+* リッチテキストを導入することで記事の記述内容に自由度を設けた
+
+# 9. 使用技術(開発環境)
+
+## 9.1. バックエンド
+Ruby on Rails6, Ruby
+
+## 9.2. フロントエンド
+HTML, SCSS, Kube CSS Frame work, Font Awesome
+
+## 9.3. データベース
+MySQL
+
+## 9.4. テスト
+RSpec
+
+## 9.5. デプロイ
+heroku
+
+## 9.6. ソースコード管理
+GitHub
+
+## 9.7. IDE
+VisualStudioCode
+
+
+# 10. 実装予定の機能
+
+* 思考の共有ページ
+  * Wikiのような使い方ができる
+  * ノウハウや思想の違いをまとめる
+* 相談ページ
+  * 自分の状況を説明してアドバイスをもらう
+  * 使用予定技術：Action Cable
+* ランキング機能
+  * いいねランキング、真似したランキング
+  * 使用予定技術：Active Job、Delayed Job
+* メール機能
+  * アカウントの作成、パスワード変更通知メール
+  * 自身の投稿した記事に評価機能（いいね、真似した）の更新通知メール
+  * ランキングの定期送信メール
+  * 問い合わせページおよび問い合わせメール送信
+  * 使用予定技術：Action Mailer
 * パスワードリセット
-* 思考の共有ページ（Wiki的なもの）
-* Twitterログイン連動
-* Twitter投稿連動
-* サーバーサイド、フロントエンドの分離
-* スマホアプリ（ネイティブ）の製作
-* メール通知による更新通知機能の実装（Action Mailer）
-* 自分の状況を説明してアドバイスをもらう機能
-* AWS S3対応
+  * パスワードを忘れた人向け機能
+* Twitter連動
+  * ログイン連動：Twitterアカウントでアカウント作成およびログインを可能にする
+  * 投稿連携：記事を投稿したことをTwitterで通知する
+  * 使用予定技術：omniauth-twitter
+* フロント／サーバーの分離、および、スマホアプリ（ネイティブ）の製作
+  * スマホからでも投稿や閲覧が可能になるようにする
+  * 今後もアプリケーション規模が大きくなることを想定してフロント／サーバーの分離
+  * 使用予定技術：Angular、Swift
+* heroku画像保存対応
+  * AWS S3対応
 
 
-# 10. データベース設計
+# 11. データベース設計
 
-## 10.1 ER図
+## 11.1. ER図
 
 ![経験の投稿 ER図](./doc/table-experience.jpg "経験の投稿 ER図")
 
-## users テーブル
+## 11.2. users テーブル
 
-| Column             | Type    | Options                   |
-| ------------------ | ------- | ------------------------- |
-| email              | string  | null: false, unique: true |
-| encrypted_password | string  | null: false               |
-| nickname           | string  | null: false               |
-| dream              | string  | null: false               |
-| region_id          | integer | null: false               |
-| climate_id         | integer | null: false               |
-| housemate_id       | integer | null: false               |
-| children_id        | integer | null: false               |
-| status_id          | integer | null: false               |
+| Column              | Type    | Options                   |
+| ------------------- | ------- | ------------------------- |
+| email               | string  | null: false, unique: true |
+| encrypted_password  | string  | null: false               |
+| nickname            | string  | null: false               |
+| dream               | string  | null: false               |
+| high_id             | integer | null: false               |
+| low_id              | integer | null: false               |
+| housemate_id        | integer | null: false               |
+| hobby_id            | integer | null: false               |
+| clean_status_id     | integer | null: false               |
+| range_with_store_id | integer | null: false               |
 
-### Association
+### 11.2.1. Association(Active Hash)
+- belongs_to :high
+- belongs_to :low
+- belongs_to :housemate
+- belongs_to :hobby
+- belongs_to :clean_status
+- belongs_to :range_with_store
 
+### 11.2.2. Association(Active Record)
 - has_many :experiences
 - has_many :experience_likes
 - has_many :experience_comments
 - has_many :notices
 
 
-## experiences テーブル
+## 11.3. experiences テーブル
 
 | Column      | Type       | Options                         |
 | ----------- | ---------- | ------------------------------- |
@@ -400,18 +408,21 @@ URLにアクセスしていただきページを表示してください。
 
 本文はActionTextおよびActiveStorageに保存する
 
-### Association
+### 11.3.1. Association(Active Hash)
 - belongs_to :period
 - belongs_to :category
+  
+### 11.3.2. Association(Active Record)
 - belongs_to :user
-- has_many :experience_likes
-- has_many :experience_comments
-- has_many :experience_tag_relations
+- has_many :experience_tag_relations, dependent: :destroy
 - has_many :tags, through: :experience_tag_relations
+- has_many :experience_comments, -> { order(updated_at: :desc) }, dependent: :destroy
+- has_many :experience_likes, dependent: :destroy
 - has_rich_text :content
+- has_one :content, class_name: 'ActionText::RichText', as: :record, dependent: :destroy
 
 
-## experience_comments テーブル
+## 11.4. experience_comments テーブル
 
 | Column     | Type       | Options                         |
 | ---------- | ---------- | ------------------------------- |
@@ -419,13 +430,13 @@ URLにアクセスしていただきページを表示してください。
 | user       | references | null: false, foreign_key: true  |
 | experience | references | null: false, foreign_key: true  |
 
-### Association
+### 11.4.1. Association(Active Record)
 
 - belongs_to :user
 - belongs_to :experience
 
 
-## experience_likes テーブル
+## 11.5. experience_likes テーブル
 | Column     | Type       | Options                         |
 | ---------- | ---------- | ------------------------------- |
 | like       | boolean    | null: false                     |
@@ -434,26 +445,26 @@ URLにアクセスしていただきページを表示してください。
 | experience | references | null: false, foreign_key: true  |
 
 
-### Association
+### 11.5.1. Association(Active Record)
 
 - belongs_to :user
 - belongs_to :experience
 
 
 
-## experience_tag_relations テーブル
+## 11.6. experience_tag_relations テーブル
 | Column     | Type       | Options                         |
 | ---------- | ---------- | ------------------------------- |
 | tag        | references | null: false, foreign_key: true  |
 | experience | references | null: false, foreign_key: true  |
 
-### Association
+### 11.6.1. Association(Active Record)
 
 - belongs_to :tag
 - belongs_to :experience
 
 
-## notices テーブル
+## 11.7. notices テーブル
 | Column     | Type       | Options                         |
 | ---------- | ---------- | ------------------------------- |
 | message    | string     | null: false                     |
@@ -461,28 +472,28 @@ URLにアクセスしていただきページを表示してください。
 | read       | boolean    | null: false                     |
 | user       | references | null: false, foreign_key: true  |
 
-### Association
+### 11.7.1. Association(Active Record)
 
 - belongs_to :user
 
 
-## tags テーブル
+## 11.8. tags テーブル
 | Column | Type    | Options                   |
 | ------ | ------- | ------------------------- |
 | name   | string  | null: false, unique: true |
 
 
-### Association
+### 11.8.1. Association(Active Record)
 
 - has_many :experience_tag_relations
 - has_many :experiences, through: :experience_tag_relations
 
 
-# 11. ローカルでの動作方法
+# 12. ローカルでの動作方法
 
 環境情報
 ```
-username@pcname minimalismshare % rails about
+user@pc minimalismshare % rails about
 About your application's environment
 Rails version             6.0.4.1
 Ruby version              ruby 2.6.5p114 (2019-10-01 revision 67812) [x86_64-darwin20]
@@ -492,18 +503,25 @@ Middleware                Webpacker::DevServerProxy, ActionDispatch::HostAuthori
 Application root          /Users/toshihiroinoue/projects/minimalismshare
 Environment               development
 Database adapter          mysql2
-Database schema version   20211024093802
+Database schema version   20211109080537
 ```
 
 導入手順
 ```
-user@pcname project % git clone https://github.com/ryohei-takasugi/minimalismshare.git
-user@pcname project % cd minimalismshare
-user@pcname minimalismshare % bundle install
-user@pcname minimalismshare % rails db:create
-user@pcname minimalismshare % rails db:migrate
-user@pcname minimalismshare % rails s
+user@pc project % git clone https://github.com/ryohei-takasugi/minimalismshare.git
+user@pc project % cd minimalismshare
+user@pc minimalismshare % bundle install
+user@pc minimalismshare % rails db:create
+user@pc minimalismshare % rails db:migrate
+user@pc minimalismshare % rails s
 ```
 
 環境変数の設定
-(なし)
+```
+user@pc minimalismshare % cat ~/.zshrc 
+eval "$(rbenv init -)"
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export PATH="/usr/local/opt/node@14/bin:$PATH"
+export BASIC_AUTH_USER='admin37052'
+export BASIC_AUTH_PASSWORD='techcamp37@52'
+```
