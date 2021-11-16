@@ -500,7 +500,7 @@ Ruby version              ruby 2.6.5p114 (2019-10-01 revision 67812) [x86_64-dar
 RubyGems version          3.0.3
 Rack version              2.2.3
 Middleware                Webpacker::DevServerProxy, ActionDispatch::HostAuthorization, Rack::Sendfile, ActionDispatch::Static, ActionDispatch::Executor, ActiveSupport::Cache::Strategy::LocalCache::Middleware, Rack::Runtime, Rack::MethodOverride, ActionDispatch::RequestId, ActionDispatch::RemoteIp, Sprockets::Rails::QuietAssets, Rails::Rack::Logger, ActionDispatch::ShowExceptions, WebConsole::Middleware, ActionDispatch::DebugExceptions, ActionDispatch::ActionableExceptions, ActionDispatch::Reloader, ActionDispatch::Callbacks, ActiveRecord::Migration::CheckPending, ActionDispatch::Cookies, ActionDispatch::Session::CookieStore, ActionDispatch::Flash, ActionDispatch::ContentSecurityPolicy::Middleware, Rack::Head, Rack::ConditionalGet, Rack::ETag, Rack::TempfileReaper, Warden::Manager
-Application root          /Users/toshihiroinoue/projects/minimalismshare
+Application root          /Users/username/projects/minimalismshare
 Environment               development
 Database adapter          mysql2
 Database schema version   20211109080537
