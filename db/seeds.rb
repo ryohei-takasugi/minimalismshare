@@ -361,9 +361,9 @@ end
 
 # いいね＆通知サンプルの追加
 users    = User.all
-user_ids = users.map { |u| u.id }
 actions  = ['いいね', '真似した']
 users.each do |user|
+  user_ids = users.map { |u| u.id }
   user_ids.delete(user.id)
   experiences = Experience.where.not(user_id: user.id)
   rand(3..10).times do
