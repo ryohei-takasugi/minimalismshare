@@ -20,7 +20,7 @@ class ExperienceTag
     return false unless valid?
 
     experience = Experience.create(experience_tag_params)
-    tag_save(tags, experience) unless tags.nil?
+    save_tags(tags, experience) unless tags.nil?
     experience
   end
 
@@ -28,7 +28,8 @@ class ExperienceTag
     return false unless valid?
 
     experience.update(experience_tag_params)
-    tag_save(tags, experience) unless tags.nil?
+    save_tags(tags, experience) unless tags.nil?
+    delete_tag_relation(tags, experience)
     experience
   end
 
@@ -44,13 +45,30 @@ class ExperienceTag
 
   private
 
-  def tag_save(tags, experience)
+  def save_tags(tags, experience)
     tags.split('、').each do |tag_name|
       tag_name = tag_name.gsub(' ', '')
       tag = Tag.where(name: tag_name).first_or_initialize
       tag.save
-      unless ExperienceTagRelation.find_by(experience_id: experience.id, tag_id: tag.id)
-        ExperienceTagRelation.create(experience_id: experience.id, tag_id: tag.id)
+      save_tag_relation(experience, tag)
+    end
+  end
+
+  def save_tag_relation(experience, tag)
+    unless ExperienceTagRelation.find_by(experience_id: experience.id, tag_id: tag.id)
+      ExperienceTagRelation.create(experience_id: experience.id, tag_id: tag.id)
+    end
+  end
+
+  def delete_tag_relation(tags, experience)
+    tag_relation = ExperienceTagRelation.where(experience_id: experience.id)
+    regist_tags  = tag_relation.map { |r| r.tag.name }
+    new_tags     = tags.split('、')
+    diff = regist_tags - new_tags
+    unless diff.nil?
+      diff.each do |d|
+        tag_id = Tag.find_by(name: d)
+        ExperienceTagRelation.find_by(tag_id: tag_id).destroy
       end
     end
   end
