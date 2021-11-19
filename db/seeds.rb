@@ -360,22 +360,24 @@ test_params.each do |param|
 end
 
 # いいね＆通知サンプルの追加
-users = User.all
-experiences = Experience.all
-actions = ['いいね', '真似した']
+users    = User.all
+user_ids = users.map { |u| u.id }
+actions  = ['いいね', '真似した']
 users.each do |user|
+  user_ids.delete(user.id)
+  experiences = Experience.where.not(user_id: user.id)
   rand(3..10).times do
     experience = experiences.sample
-    user_ids = users.map { |u| u.id }
-    user_ids.delete(user.id)
-    other_id = user_ids.sample
-    other = users.select { |u| u.id == other_id }
-    action = [0, 1].sample
-    Notice.create(message: "#{other.first.nickname} が、あなたの記事「#{experience.title}」に「#{actions[action]}」しました" , url: "experiences/#{experience.id}", user_id: other.first.id)
+    other_id   = user_ids.sample
+    other      = users.select { |u| u.id == other_id }.first
+    action     = [0, 1].sample
+    Notice.create(message: "#{other.nickname} が、あなたの記事「#{experience.title}」に「#{actions[action]}」しました" ,
+                  url: "experiences/#{experience.id}", 
+                  user_id: other.id)
     if action == 0
-      ExperienceLike.create(like: true, imitate: false, user_id: other.first.id, experience_id: experience.id)
+      ExperienceLike.create(like: true, imitate: false, user_id: other.id, experience_id: experience.id)
     else
-      ExperienceLike.create(like: false, imitate: true, user_id: other.first.id, experience_id: experience.id)
+      ExperienceLike.create(like: false, imitate: true, user_id: other.id, experience_id: experience.id)
     end
   end
 end
