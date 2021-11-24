@@ -282,89 +282,26 @@ a {
 <div id="div_group_1" class="example_group passed">
   <dl style="margin-left: 0px;">
   <dt id="example_group_1" class="passed">コメント投稿</dt>
-    <script type="text/javascript">makeRed('rspec-header');</script>
-    <script type="text/javascript">makeRed('div_group_1');</script>
-    <script type="text/javascript">makeRed('example_group_1');</script>
     <script type="text/javascript">moveProgressBar('33.3');</script>
-    <dd class="example failed">
-      <span class="failed_spec_name">ログインしたユーザーは記事閲覧ページでコメント投稿できる</span>
-      <span class="duration">4.14624s</span>
-      <div class="failure" id="failure_1">
-        <div class="message"><pre>  Failure/Error: [0mvisit [31m[1;31m&quot;[0m[31mhttp://#{username}[0m[31m:#{password}[0m[31m@#{Capybara.current_session.server.host}[0m[31m:#{Capybara.current_session.server.port}[0m[31m#{path}[0m[31m[1;31m&quot;[0m[31m[0m
-
-  Selenium::WebDriver::Error::UnknownError:
-    unknown error: Chrome failed to start: crashed.
-      (chrome not reachable)
-      (The process started from chrome location /Applications/Google Chrome.app/Contents/MacOS/Google Chrome is no longer running, so ChromeDriver is assuming that Chrome has crashed.)
-
-  [Screenshot]: /Users/toshihiroinoue/projects/minimalismshare/tmp/screenshots/failures_r_spec_example_groups_nested_ログインしたユーザーは記事閲覧ページでコメント投稿できる_624.png
-
-
-  # 0   chromedriver                        0x0000000100aa6269 __gxx_personality_v0 + 582729
-  # 1   chromedriver                        0x0000000100a31c33 __gxx_personality_v0 + 106003
-  # 2   chromedriver                        0x00000001005eee28 chromedriver + 171560
-  # 3   chromedriver                        0x0000000100611c2f chromedriver + 314415
-  # 4   chromedriver                        0x000000010060d6c6 chromedriver + 296646
-  # 5   chromedriver                        0x00000001006479c3 chromedriver + 534979
-  # 6   chromedriver                        0x0000000100641723 chromedriver + 509731
-  # 7   chromedriver                        0x000000010061775e chromedriver + 337758
-  # 8   chromedriver                        0x0000000100618a95 chromedriver + 342677
-  # 9   chromedriver                        0x0000000100a628ab __gxx_personality_v0 + 305803
-  # 10  chromedriver                        0x0000000100a79863 __gxx_personality_v0 + 399939
-  # 11  chromedriver                        0x0000000100a7ec7f __gxx_personality_v0 + 421471
-  # 12  chromedriver                        0x0000000100a7abba __gxx_personality_v0 + 404890
-  # 13  chromedriver                        0x0000000100a56e51 __gxx_personality_v0 + 258097
-  # 14  chromedriver                        0x0000000100a96158 __gxx_personality_v0 + 516920
-  # 15  chromedriver                        0x0000000100a962e1 __gxx_personality_v0 + 517313
-  # 16  chromedriver                        0x0000000100aad6f8 __gxx_personality_v0 + 612568
-  # 17  libsystem_pthread.dylib             0x00007ff80eff5514 _pthread_start + 125
-  # 18  libsystem_pthread.dylib             0x00007ff80eff102f thread_start + 15
-  # ./spec/support/basic_auth_helper.rb:5:in `basic_visit&#39;
-  # ./spec/support/sign_helper.rb:19:in `sign_in&#39;
-  # ./spec/system/comments_spec.rb:11:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
-        <div class="backtrace"><pre>0   chromedriver                        0x0000000100aa6269 __gxx_personality_v0 + 582729
-1   chromedriver                        0x0000000100a31c33 __gxx_personality_v0 + 106003
-2   chromedriver                        0x00000001005eee28 chromedriver + 171560
-3   chromedriver                        0x0000000100611c2f chromedriver + 314415
-4   chromedriver                        0x000000010060d6c6 chromedriver + 296646
-5   chromedriver                        0x00000001006479c3 chromedriver + 534979
-6   chromedriver                        0x0000000100641723 chromedriver + 509731
-7   chromedriver                        0x000000010061775e chromedriver + 337758
-8   chromedriver                        0x0000000100618a95 chromedriver + 342677
-9   chromedriver                        0x0000000100a628ab __gxx_personality_v0 + 305803
-10  chromedriver                        0x0000000100a79863 __gxx_personality_v0 + 399939
-11  chromedriver                        0x0000000100a7ec7f __gxx_personality_v0 + 421471
-12  chromedriver                        0x0000000100a7abba __gxx_personality_v0 + 404890
-13  chromedriver                        0x0000000100a56e51 __gxx_personality_v0 + 258097
-14  chromedriver                        0x0000000100a96158 __gxx_personality_v0 + 516920
-15  chromedriver                        0x0000000100a962e1 __gxx_personality_v0 + 517313
-16  chromedriver                        0x0000000100aad6f8 __gxx_personality_v0 + 612568
-17  libsystem_pthread.dylib             0x00007ff80eff5514 _pthread_start + 125
-18  libsystem_pthread.dylib             0x00007ff80eff102f thread_start + 15
-./spec/support/basic_auth_helper.rb:5:in `basic_visit&#39;
-./spec/support/sign_helper.rb:19:in `sign_in&#39;
-./spec/system/comments_spec.rb:11:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for 0   chromedriver                        0x0000000100aa6269 __gxx_personality_v0 + 582729</span></code></pre>
-      </div>
-    </dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページでコメント投稿できる</span><span class='duration'>8.22262s</span></dd>
   </dl>
 </div>
 <div id="div_group_2" class="example_group passed">
   <dl style="margin-left: 0px;">
   <dt id="example_group_2" class="passed">コメント編集</dt>
     <script type="text/javascript">moveProgressBar('66.6');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページでコメントを編集できる</span><span class='duration'>4.00943s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページでコメントを編集できる</span><span class='duration'>2.37383s</span></dd>
   </dl>
 </div>
 <div id="div_group_3" class="example_group passed">
   <dl style="margin-left: 0px;">
   <dt id="example_group_3" class="passed">コメント削除</dt>
     <script type="text/javascript">moveProgressBar('100.0');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページでコメントを削除できる</span><span class='duration'>2.39076s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページでコメントを削除できる</span><span class='duration'>1.95149s</span></dd>
   </dl>
 </div>
-<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>10.57739 seconds</strong>";</script>
-<script type="text/javascript">document.getElementById('totals').innerHTML = "3 examples, 1 failure";</script>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>12.54990 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "3 examples, 0 failures";</script>
 </div>
 </div>
 </body>

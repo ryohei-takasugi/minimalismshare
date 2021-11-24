@@ -51,7 +51,7 @@ module LikeHelper
         within('.notice') do
           expect(find('span').text).to eq(notice_count.to_s)
           find('span').hover
-          expect(page).to have_content("#{user.nickname} が、あなたの記事「#{experience_tag.title}」に「いいね」しました")
+          expect(page).to have_content("#{user.nickname} が、あなたの記事「#{experience_tag.title}」に 「いいね」しました")
         end
       end
     end
@@ -59,7 +59,7 @@ module LikeHelper
 
   def confirm_mypage_notice_like(user:, experience_tag:)
     within('main') do
-      expect(page).to have_content("#{user.nickname} が、あなたの記事「#{experience_tag.title}」に「いいね」しました")
+      expect(page).to have_content("#{user.nickname} が、あなたの記事「#{experience_tag.title}」に 「いいね」しました")
     end
   end
 
@@ -69,7 +69,7 @@ module LikeHelper
         within('.notice') do
           expect(find('span').text).to eq(notice_count.to_s)
           find('span').hover
-          expect(page).to have_content("#{user.nickname} が、あなたの記事「#{experience_tag.title}」に「真似した」しました")
+          expect(page).to have_content("#{user.nickname} が、あなたの記事「#{experience_tag.title}」に 「真似した」しました")
         end
       end
     end
@@ -77,7 +77,7 @@ module LikeHelper
 
   def confirm_mypage_notice_imitate(user:, experience_tag:)
     within('main') do
-      expect(page).to have_content("#{user.nickname} が、あなたの記事「#{experience_tag.title}」に「真似した」しました")
+      expect(page).to have_content("#{user.nickname} が、あなたの記事「#{experience_tag.title}」に 「真似した」しました")
     end
   end
 end
