@@ -1,18 +1,15 @@
 class UsersController < ApplicationController
   include ExperienceLikeConcern
+  include NoticeConcern
   before_action :authenticate_user!
   before_action :confirm_identification
-  before_action :set_likes_count
 
-  # Call Views: users/show.html.erb
+  # GET /users/:id
   def show
+    set_instance_likes_count
+    read_notice
     @user = User.find(params[:id])
-    user_notice = Notice.where(user_id: current_user.id)
-    user_notice.update(read: true)
-    @all_notices = Notice.where(user_id: current_user.id)
-                         .limit(100)
-                         .order(updated_at: :desc)
-                         .page(params[:page])
+    @all_notices = Notice.recent_100(current_user.id).page(params[:page])
     # <%# FIXME: タブ切り替え後にページ切り替えをするとタブが初期値に戻るためコメントアウト >
     # @experiences = Experience.where(user_id: current_user.id)
     #                          .includes(:experience_tag_relations, :tags, :experience_likes)

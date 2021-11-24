@@ -1,15 +1,12 @@
 class ExperienceCommentsController < ApplicationController
   include ExperienceLikeConcern
-  include NoticeParamConcern
+  include NoticeConcern
   before_action :authenticate_user!
-  before_action :set_experience
-  before_action :set_comment,          only: [:edit, :update, :destroy]
-  before_action :set_like_find_params, only: [:edit, :update, :destroy]
-  before_action :set_experience_like,  only: [:edit, :update, :destroy]
 
-  # Call Views: experience/show.html.erb
+  # POST /experiences/:experience_id/experience_comments
   def create
-    comment = ExperienceComment.new(set_comment_params)
+    set_instance_experience
+    comment = ExperienceComment.new(set_params_comment)
     if comment.save
       create_notice(comment)
       flash[:notice] = 'コメントを追加しました'
@@ -20,14 +17,20 @@ class ExperienceCommentsController < ApplicationController
     end
   end
 
-  # Call Views: experience/show.html.erb
+  # GET /experiences/:experience_id/experience_comments/:id/edit
   def edit
+    set_instance_experience
+    set_instance_comment
+    set_instance_like
     render 'experiences/show'
   end
 
-  # Call Views: experience/show.html.erb
+  # PATCH/PUT /experiences/:experience_id/experience_comments/:id
   def update
-    if @comment.update(set_comment_params)
+    set_instance_experience
+    set_instance_comment
+    set_instance_like
+    if @comment.update(set_params_comment)
       flash[:notice] = 'コメントを更新しました'
       redirect_to experience_path(params[:experience_id])
     else
@@ -35,8 +38,11 @@ class ExperienceCommentsController < ApplicationController
     end
   end
 
-  # Call Views: experience/show.html.erb
+  # DELETE /experiences/:experience_id/experience_comments/:id
   def destroy
+    set_instance_experience
+    set_instance_comment
+    set_instance_like
     if @comment.destroy
       flash[:hazard] = 'コメントを削除しました'
       redirect_to experience_path(params[:experience_id])
@@ -47,24 +53,19 @@ class ExperienceCommentsController < ApplicationController
 
   private
 
-  def set_comment_params
+  def set_params_comment
     params.require(:experience_comment).permit(:comment).merge(user_id: current_user.id, experience_id: params[:experience_id])
   end
 
-  def set_experience
-    @experience = Experience.find(params[:experience_id])
-  end
-
-  def set_comment
-    @comment = ExperienceComment.find(params[:id])
-  end
-
-  def set_like_find_params
+  def set_params_like
     { experience_id: params[:experience_id], user_id: current_user.id }
   end
 
-  def create_notice(comment)
-    notice = Notice.new(set_notice_params(comment, comment.comment))
-    notice.save
+  def set_instance_experience
+    @experience = Experience.find(params[:experience_id])
+  end
+
+  def set_instance_comment
+    @comment = ExperienceComment.find(params[:id])
   end
 end

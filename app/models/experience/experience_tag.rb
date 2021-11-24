@@ -19,7 +19,7 @@ class ExperienceTag
   def save
     return false unless valid?
 
-    experience = Experience.create(set_experience_tag_params)
+    experience = Experience.create(set_params_experience_tag)
     save_tags(tags, experience) unless tags.nil?
     experience
   end
@@ -27,7 +27,7 @@ class ExperienceTag
   def update(experience)
     return false unless valid?
 
-    experience.update(set_experience_tag_params)
+    experience.update(set_params_experience_tag)
     save_tags(tags, experience) unless tags.nil?
     delete_tag_relation(tags, experience)
     experience
@@ -74,10 +74,10 @@ class ExperienceTag
   end
 
   def set_experience
-    Experience.new(set_experience_tag_params)
+    Experience.new(set_params_experience_tag)
   end
 
-  def set_experience_tag_params
+  def set_params_experience_tag
     { title: title, category_id: category_id, period_id: period_id, content: @content, stress: stress, user_id: user_id }
   end
 end

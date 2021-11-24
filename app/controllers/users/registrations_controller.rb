@@ -3,8 +3,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   include HashModelConcern
   before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_account_update_params, only: [:update]
-  before_action :set_user_hash, only: [:new, :create]
+  # before_action :configure_account_update_params, only: [:update]
+  before_action :set_instance_hash_user, only: [:new, :create]
 
   # GET /resource/sign_up
   def new
@@ -44,13 +44,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :dream, :high_id, :low_id, :housemate_id, :hobby_id, :clean_status_id,:range_with_store_id])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
-  def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  end
+  # def configure_account_update_params
+  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+  # end
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
