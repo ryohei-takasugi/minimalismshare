@@ -1,30 +1,5 @@
 module ExperiencesHelper
   # used
-  #   experiences/new
-  def set_tag
-    Tag.all
-  end
-
-  def set_category
-    Category.all
-  end
-
-  def set_period
-    Period.all
-  end
-
-  # used
-  #   experiences/index
-  def set_sort
-    [
-      ['作成日時 降順', 'created_at desc'],
-      ['作成日時 昇順', 'created_at asc'],
-      ['更新日時 降順', 'updated_at desc'],
-      ['更新日時 昇順', 'updated_at asc']
-    ]
-  end
-
-  # used
   #   experiences/index -> shared/_show_experience.html
   #   experiences/show  -> shared/_show_experience.html
   #   user/:id          -> shared/_show_experience.html

@@ -1,12 +1,14 @@
 class ExperiencesController < ApplicationController
   include ExperienceLikeConcern
-  include ExperienceLikeCountConcern
+  include HashModelConcern
   before_action :authenticate_user!,   only: [:new, :create]
   before_action :set_ransack,          only: [:index, :search_index]
   before_action :set_experience,       only: [:show, :edit, :update, :destroy]
   before_action :set_like_find_params, only: [:show]
   before_action :set_experience_like,  only: [:show]
   before_action :set_likes_count,      only: [:index, :show, :search_index]
+  before_action :set_user_hash,        only: [:index, :search_index]
+  before_action :set_exprience_hash,   only: [:index, :new, :edit, :search_index]
 
   # Call Views: experience/index.html.erb
   def index
