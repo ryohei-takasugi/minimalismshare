@@ -17,6 +17,8 @@ module ExperiencesHelper
   #   experiences/index
   def set_sort
     [
+      ['作成日時 降順', 'created_at desc'],
+      ['作成日時 昇順', 'created_at asc'],
       ['更新日時 降順', 'updated_at desc'],
       ['更新日時 昇順', 'updated_at asc']
     ]
@@ -27,26 +29,35 @@ module ExperiencesHelper
   #   experiences/show  -> shared/_show_experience.html
   #   user/:id          -> shared/_show_experience.html
   def user_liked?(experience)
-    if !experience.experience_likes.blank? && !experience.experience_likes.where(user_id: current_user.id).blank?
-      experience.experience_likes.where(user_id: current_user.id).first.like ? true : false
+    if check_likes_no_blank(experience.experience_likes)
+      experience.experience_likes.where(user_id: current_user.id).first.like
     end
   end
 
   def user_imitated?(experience)
-    if !experience.experience_likes.blank? && !experience.experience_likes.where(user_id: current_user.id).blank?
-      experience.experience_likes.where(user_id: current_user.id).first.imitate ? true : false
+    if check_likes_no_blank(experience.experience_likes)
+      experience.experience_likes.where(user_id: current_user.id).first.imitate
     end
   end
 
-  def experience_count_group_liked(like_group_list, experience)
+  def check_likes_no_blank(experience_likes)
+    unless experience_likes.blank?
+      unless experience_likes.where(user_id: current_user.id).blank?
+        return true
+      end
+    end
+    return false
+  end
+
+  def count_liked(like_group_list, experience)
     like_group_list.blank? || like_group_list[experience.id].nil? ? 0 : like_group_list[experience.id]
   end
 
-  def experience_count_group_imitated(imitate_group_list, experience)
+  def count_imitated(imitate_group_list, experience)
     imitate_group_list.blank? || imitate_group_list[experience.id].nil? ? 0 : imitate_group_list[experience.id]
   end
 
-  def tags_join(tags)
+  def join_tags(tags)
     if tags.blank? then nil
     elsif tags.instance_of?(Array)  then tags.join('、')
     elsif tags.instance_of?(String) then tags

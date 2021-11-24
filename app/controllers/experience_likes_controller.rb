@@ -1,4 +1,6 @@
 class ExperienceLikesController < ApplicationController
+  include ExperienceLikeConcern
+  include NoticeParamConcern
   before_action :authenticate_user!
   before_action :set_like_find_params
   before_action :set_experience_like
@@ -7,7 +9,7 @@ class ExperienceLikesController < ApplicationController
 
   # Call Views: experience/show.html.erb
   def create
-    experience_like = ExperienceLike.new(like_params)
+    experience_like = ExperienceLike.new(set_like_params)
     if experience_like.save
       create_notice(experience_like)
       redirect_to experience_path(params[:experience_id])
@@ -19,7 +21,7 @@ class ExperienceLikesController < ApplicationController
   # Call Views: experience/show.html.erb
   def update
     experience_like = ExperienceLike.find(params[:id])
-    if experience_like.update(like_params)
+    if experience_like.update(set_like_params)
       create_notice(experience_like)
       redirect_to experience_path(params[:experience_id])
     else
@@ -28,21 +30,6 @@ class ExperienceLikesController < ApplicationController
   end
 
   private
-
-  def create_notice(experience_like)
-    unless set_action.nil?
-      Notice.create(message: "#{experience_like.user.nickname} が、あなたの記事「#{experience_like.experience.title}」に「#{set_action}」しました",
-                    url: experience_path(experience_like.experience.id), user_id: experience_like.experience.user_id)
-    end
-  end
-
-  def set_action
-    if like_params.include?(:like) && like_params[:like].match(/(true|True|TRUE)/)
-      action = 'いいね'
-    elsif like_params.include?(:imitate) && like_params[:imitate].match(/(true|True|TRUE)/)
-      action = '真似した'
-    end
-  end
 
   def set_like_find_params
     { experience_id: params[:experience_id], user_id: current_user.id }
@@ -56,8 +43,26 @@ class ExperienceLikesController < ApplicationController
     @comment = ExperienceComment.new
   end
 
-  def like_params
-    params.require(:experiences_like).permit(:like, :imitate).merge(experience_id: params[:experience_id],
-                                                                    user_id: current_user.id)
+  def set_like_params
+    params.require(:experiences_like)
+          .permit(:like, :imitate)
+          .merge(experience_id: params[:experience_id], user_id: current_user.id)
+  end
+
+  def create_notice(experience_like)
+    unless set_action.nil?
+      notice = Notice.new(set_notice_params(experience_like, set_action))
+      notice.save
+    end
+  end
+
+  def set_action
+    if set_like_params.include?(:like) && set_like_params[:like].match(/(true|True|TRUE)/)
+      action = 'いいね'
+    elsif set_like_params.include?(:imitate) && set_like_params[:imitate].match(/(true|True|TRUE)/)
+      action = '真似した'
+    else
+      action = nil
+    end
   end
 end

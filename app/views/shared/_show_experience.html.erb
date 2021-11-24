@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <td class="header"><i class="fas fa-tags"></i></td>
-      <td class="item"><%= tags_join(experience.tags) %></td>
+      <td class="item"><%= join_tags(experience.tags) %></td>
     </tr>
     <tr>
       <td class="header"><i class="fas fa-angry"></i></td>
@@ -49,7 +49,7 @@
           <i class="fas fa-heart inactive"></i>
         <% end %>
       </td>
-      <td class="item"><%= experience_count_group_liked(like_group_list, experience) %> いいね</td>
+      <td class="item"><%= count_liked(like_group_list, experience) %> いいね</td>
     </tr>
     <tr>
       <td class="header">
@@ -59,7 +59,7 @@
           <i class="fas fa-thumbs-up inactive"></i>
         <% end %>
       </td>
-      <td class="item"><%= experience_count_group_imitated(imitate_group_list, experience) %> 真似した</td>
+      <td class="item"><%= count_imitated(imitate_group_list, experience) %> 真似した</td>
     </tr>
   </table>
 </div>

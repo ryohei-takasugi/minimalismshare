@@ -12,10 +12,10 @@ class User < ApplicationRecord
   belongs_to :clean_status
   belongs_to :range_with_store
   # association DataBase
-  has_many :experiences
-  has_many :experience_likes
-  has_many :experience_comments
-  has_many :notices
+  has_many :experiences, dependent: :destroy
+  has_many :experience_likes, dependent: :destroy
+  has_many :experience_comments, dependent: :destroy
+  has_many :notices, dependent: :destroy
   # validations
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   # PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W_])[!-~]{6,}+\z/

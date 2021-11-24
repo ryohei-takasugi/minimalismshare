@@ -1,13 +1,15 @@
 class ExperienceCommentsController < ApplicationController
+  include ExperienceLikeConcern
+  include NoticeParamConcern
   before_action :authenticate_user!
   before_action :set_experience
-  before_action :set_experience_comment, only: [:edit, :update, :destroy]
+  before_action :set_comment,          only: [:edit, :update, :destroy]
   before_action :set_like_find_params, only: [:edit, :update, :destroy]
-  before_action :set_experience_like, only: [:edit, :update, :destroy]
+  before_action :set_experience_like,  only: [:edit, :update, :destroy]
 
   # Call Views: experience/show.html.erb
   def create
-    comment = ExperienceComment.new(comment_params)
+    comment = ExperienceComment.new(set_comment_params)
     if comment.save
       create_notice(comment)
       flash[:notice] = 'コメントを追加しました'
@@ -25,7 +27,7 @@ class ExperienceCommentsController < ApplicationController
 
   # Call Views: experience/show.html.erb
   def update
-    if @comment.update(comment_params)
+    if @comment.update(set_comment_params)
       flash[:notice] = 'コメントを更新しました'
       redirect_to experience_path(params[:experience_id])
     else
@@ -45,7 +47,7 @@ class ExperienceCommentsController < ApplicationController
 
   private
 
-  def comment_params
+  def set_comment_params
     params.require(:experience_comment).permit(:comment).merge(user_id: current_user.id, experience_id: params[:experience_id])
   end
 
@@ -53,7 +55,7 @@ class ExperienceCommentsController < ApplicationController
     @experience = Experience.find(params[:experience_id])
   end
 
-  def set_experience_comment
+  def set_comment
     @comment = ExperienceComment.find(params[:id])
   end
 
@@ -62,7 +64,7 @@ class ExperienceCommentsController < ApplicationController
   end
 
   def create_notice(comment)
-    Notice.create(message: "#{comment.user.nickname} が、あなたの記事「#{comment.experience.title}」に「#{comment.comment}」とコメントしました",
-                  url: experience_path(comment.experience.id), user_id: comment.experience.user_id)
+    notice = Notice.new(set_notice_params(comment, comment.comment))
+    notice.save
   end
 end

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include ExperienceLikeCountConcern
   before_action :authenticate_user!
   before_action :confirm_identification
   before_action :set_likes_count

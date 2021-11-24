@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :experience_likes, only: [:create, :update]
     collection do
       get 'search_tag'
-      get 'search_article'
+      get 'search_index'
     end
     member do
       get 'search_tag'
