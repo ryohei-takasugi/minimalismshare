@@ -1,7 +1,7 @@
 module ShowExperienceHelper
   def edit_show(model:)
     fill_in 'タイトル', with: "#{@experience_tag1.title}#{add_str}"
-    fill_in 'experience_tag[tags]', with: "#{@experience_tag1.tags}、#{add_str}"
+    fill_in 'experience_tag[tags]', with: "#{set_tags_list(@experience_tag1.tags).join('、')}、#{add_str}"
     fill_in 'ストレス', with: "#{@experience_tag1.stress}#{add_str}"
     select edit_category(model).name, from: 'experience_tag_category_id'
     select edit_period(model).name, from: 'experience_tag_period_id'
