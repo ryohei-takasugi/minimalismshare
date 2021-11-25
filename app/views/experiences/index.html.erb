@@ -57,7 +57,7 @@
         </div>
       <% else %>
         <% @experiences.each do |experience| %>
-          <%= render partial: 'shared/show_experience', locals: { experience: experience, like_group_list: @like_group_list, imitate_group_list: @imitate_group_list } %>
+          <%= render partial: 'shared/show_experience', locals: { experience: experience, likes_count: @likes_count, imitates_count: @imitates_count } %>
         <% end %>
         <%= paginate @experiences %>
       <% end %>

@@ -24,12 +24,12 @@ module ExperiencesHelper
     return false
   end
 
-  def count_liked(like_group_list, experience)
-    like_group_list.blank? || like_group_list[experience.id].nil? ? 0 : like_group_list[experience.id]
+  def count_liked(likes_count, experience)
+    likes_count.blank? || likes_count[experience.id].nil? ? 0 : likes_count[experience.id]
   end
 
-  def count_imitated(imitate_group_list, experience)
-    imitate_group_list.blank? || imitate_group_list[experience.id].nil? ? 0 : imitate_group_list[experience.id]
+  def count_imitated(imitates_count, experience)
+    imitates_count.blank? || imitates_count[experience.id].nil? ? 0 : imitates_count[experience.id]
   end
 
   def join_tags(tags)

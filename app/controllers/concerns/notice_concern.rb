@@ -23,6 +23,10 @@ module NoticeConcern
     Notice.recent(user_id)
   end
 
+  def set_instance_notice_100(user_id, page)
+    Notice.recent_100(user_id).page(page)
+  end
+
   private
 
   def set_params_notice(model, str)

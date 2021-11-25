@@ -10,11 +10,11 @@ class ExperiencesController < ApplicationController
   # GET /experiences
   def index
     @q = set_instance_ransack(set_params_search)
-    @experiences = set_instance_ransack_experiences(@q, params[:page])
-    @user_hash = set_instance_hash_user
+    @experiences    = set_instance_ransack_experiences(@q, params[:page])
+    @user_hash      = set_instance_hash_user
     @exprience_hash = set_instance_hash_exprience
-    @like_group_list = set_instance_likes_count
-    @imitate_group_list = set_instance_imitates_count
+    @likes_count    = set_instance_likes_count
+    @imitates_count = set_instance_imitates_count
   end
 
   # GET /experiences/new
@@ -36,23 +36,23 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/:id
   def show
-    @experience = set_instance_experience_find(params[:id])
-    @like = set_instance_like if user_signed_in?
-    @like_group_list = set_instance_likes_count
-    @imitate_group_list = set_instance_imitates_count
-    @comment = set_instance_comment_new()
+    @experience     = set_instance_experience_find(params[:id])
+    @like           = set_instance_like if user_signed_in?
+    @likes_count    = set_instance_likes_count
+    @imitates_count = set_instance_imitates_count
+    @comment        = set_instance_comment_new()
   end
 
   # GET /experiences/:id/edit
   def edit
-    @experience = set_instance_experience_find(params[:id])
+    @experience     = set_instance_experience_find(params[:id])
     @exprience_hash = set_instance_hash_exprience
     @experience_tag = set_instance_exptag_new(set_params_experience_tag_edit(@experience))
   end
 
   # PATCH/PUT /experiences/:id
   def update
-    @experience = set_instance_experience_find(params[:id])
+    @experience     = set_instance_experience_find(params[:id])
     @experience_tag = set_instance_exptag_new(set_params_experience_tag)
     @experience_tag.user_id = set_params_experience_tag[:user_id]
     if @experience_tag.update(@experience)
@@ -82,11 +82,11 @@ class ExperiencesController < ApplicationController
   # GET /experiences/search_index
   def search_index
     @q = set_instance_ransack(set_params_search)
-    @experiences = set_instance_ransack_experiences(@q, params[:page])
-    @user_hash = set_instance_hash_user
+    @experiences    = set_instance_ransack_experiences(@q, params[:page])
+    @user_hash      = set_instance_hash_user
     @exprience_hash = set_instance_hash_exprience
-    @like_group_list = set_instance_likes_count
-    @imitate_group_list = set_instance_imitates_count
+    @likes_count    = set_instance_likes_count
+    @imitates_count = set_instance_imitates_count
     render :index
   end
 
