@@ -4,15 +4,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   include HashModelConcern
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  before_action :set_instance_hash_user, only: [:new, :create]
 
   # GET /resource/sign_up
   def new
+    @user_hash = set_instance_hash_user
     super
   end
 
   # POST /resource
   def create
+    @user_hash = set_instance_hash_user
     super
   end
 

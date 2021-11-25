@@ -9,10 +9,21 @@ module NoticeConcern
     when "ExperienceComment"
       notice = Notice.new(set_params_notice(model, 'コメント'))
     when "ExperienceLike"
-      notice = Notice.new(set_params_notice(model, set_action)) unless set_action.nil?
+      notice = Notice.new(set_params_notice(model, select_action)) unless select_action.nil?
     end
     notice.save unless notice.nil?
   end
+
+  def read_notice(user_id)
+    user_notice = Notice.where(user_id: user_id)
+    user_notice.update(read: true)
+  end
+
+  def set_instance_notice_recent(user_id)
+    Notice.recent(user_id)
+  end
+
+  private
 
   def set_params_notice(model, str)
     notice_params = {}
@@ -22,7 +33,7 @@ module NoticeConcern
     notice_params
   end
 
-  def set_action
+  def select_action
     if set_params_update_like.include?(:like) && set_params_update_like[:like].match(/(true|True|TRUE)/)
       action = '「いいね」'
     elsif set_params_update_like.include?(:imitate) && set_params_update_like[:imitate].match(/(true|True|TRUE)/)
@@ -30,10 +41,5 @@ module NoticeConcern
     else
       action = nil
     end
-  end
-
-  def read_notice
-    user_notice = Notice.where(user_id: current_user.id)
-    user_notice.update(read: true)
   end
 end

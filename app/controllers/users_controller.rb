@@ -6,8 +6,9 @@ class UsersController < ApplicationController
 
   # GET /users/:id
   def show
-    set_instance_likes_count
-    read_notice
+    @like_group_list = set_instance_likes_count
+    @imitate_group_list = set_instance_imitates_count
+    read_notice(current_user.id)
     @user = User.find(params[:id])
     @all_notices = Notice.recent_100(current_user.id).page(params[:page])
     # <%# FIXME: タブ切り替え後にページ切り替えをするとタブが初期値に戻るためコメントアウト >

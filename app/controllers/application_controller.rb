@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include NoticeConcern
   before_action :confirm_basic_auth
   before_action :set_instance_notices
 
@@ -11,6 +12,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_instance_notices
-    @notices = Notice.recent(current_user.id) if user_signed_in?
+    @notices = set_instance_notice_recent(current_user.id) if user_signed_in?
   end
 end

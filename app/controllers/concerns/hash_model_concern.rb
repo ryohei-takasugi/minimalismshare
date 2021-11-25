@@ -5,7 +5,7 @@ module HashModelConcern
 
   # Set hash model
   def set_instance_hash_user
-    @user_hash = {
+    {
       high: High.all,
       low: Low.all,
       housemate: Housemate.all,
@@ -16,7 +16,7 @@ module HashModelConcern
   end
 
   def set_instance_hash_exprience
-    @exprience_hash = {
+    {
       tag: Tag.all,
       category: Category.all,
       period: Period.all,
