@@ -287,46 +287,15 @@ a {
 <div id="div_group_2" class="example_group passed">
   <dl style="margin-left: 15px;">
   <dt id="example_group_2" class="passed">投稿ができるとき</dt>
-    <script type="text/javascript">makeRed('rspec-header');</script>
-    <script type="text/javascript">makeRed('div_group_2');</script>
-    <script type="text/javascript">makeRed('example_group_2');</script>
     <script type="text/javascript">moveProgressBar('3.8');</script>
-    <dd class="example failed">
-      <span class="failed_spec_name">ログインしたユーザーは新規投稿できる</span>
-      <span class="duration">6.95694s</span>
-      <div class="failure" id="failure_1">
-        <div class="message"><pre>  Failure/Error: [0mtags = set_instance_search_tags(params[[33m:keyword[0m])
-
-  NoMethodError:
-    undefined method `set_instance_search_tags&#39; for #&lt;ExperiencesController:0x00007f881bf49b88&gt;
-    Did you mean?  set_instance_hash_user
-    Did you mean?  set_instance_hash_user
-  # ./app/controllers/experiences_controller.rb:78:in `search_tag&#39;
-  # ------------------
-  # --- Caused by: ---
-  # Capybara::CapybaraError:
-  #   Your application server raised an error - It has been raised in your test code because Capybara.raise_server_errors == true
-  #   /Users/toshihiroinoue/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/capybara-3.35.3/lib/capybara/session.rb:160:in `raise_server_error!&#39;</pre></div>
-        <div class="backtrace"><pre>./app/controllers/experiences_controller.rb:78:in `search_tag&#39;
-------------------
---- Caused by: ---
-Capybara::CapybaraError:
-  Your application server raised an error - It has been raised in your test code because Capybara.raise_server_errors == true
-  /Users/toshihiroinoue/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/capybara-3.35.3/lib/capybara/session.rb:160:in `raise_server_error!&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">76</span>    <span class="keyword">return</span> <span class="predefined-constant">nil</span> <span class="keyword">if</span> params[<span class="symbol">:keyword</span>].blank?
-<span class="linenum">77</span>
-<span class="offending"><span class="linenum">78</span>    tags = set_instance_search_tags(params[<span class="symbol">:keyword</span>])</span>
-<span class="linenum">79</span>    render <span class="key">json</span>: { <span class="key">keyword</span>: tags }
-<span class="linenum">80</span>  <span class="keyword">end</span></code></pre>
-      </div>
-    </dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは新規投稿できる</span><span class='duration'>7.09522s</span></dd>
   </dl>
 </div>
 <div id="div_group_3" class="example_group passed">
   <dl style="margin-left: 15px;">
   <dt id="example_group_3" class="passed">投稿ができないとき</dt>
     <script type="text/javascript">moveProgressBar('7.6');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしていないと新規投稿ページに遷移できない</span><span class='duration'>0.66696s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしていないと新規投稿ページに遷移できない</span><span class='duration'>0.71192s</span></dd>
   </dl>
 </div>
 <div id="div_group_4" class="example_group passed">
@@ -338,9 +307,9 @@ Capybara::CapybaraError:
   <dl style="margin-left: 15px;">
   <dt id="example_group_5" class="passed">閲覧できるとき</dt>
     <script type="text/javascript">moveProgressBar('11.5');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページに遷移してコメント投稿欄が表示される</span><span class='duration'>1.34664s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページに遷移してコメント投稿欄が表示される</span><span class='duration'>1.25891s</span></dd>
     <script type="text/javascript">moveProgressBar('15.3');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしていない状態で記事閲覧ページに遷移できるもののコメント投稿欄が表示されない</span><span class='duration'>0.81268s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしていない状態で記事閲覧ページに遷移できるもののコメント投稿欄が表示されない</span><span class='duration'>0.86865s</span></dd>
   </dl>
 </div>
 <div id="div_group_6" class="example_group passed">
@@ -351,47 +320,17 @@ Capybara::CapybaraError:
 <div id="div_group_7" class="example_group passed">
   <dl style="margin-left: 15px;">
   <dt id="example_group_7" class="passed">記事編集ができるとき</dt>
-    <script type="text/javascript">makeRed('div_group_7');</script>
-    <script type="text/javascript">makeRed('example_group_7');</script>
     <script type="text/javascript">moveProgressBar('19.2');</script>
-    <dd class="example failed">
-      <span class="failed_spec_name">ログインしたユーザーは自分が投稿したものであれば編集ができる</span>
-      <span class="duration">2.84273s</span>
-      <div class="failure" id="failure_2">
-        <div class="message"><pre>  Failure/Error: [0mtags = set_instance_search_tags(params[[33m:keyword[0m])
-
-  NoMethodError:
-    undefined method `set_instance_search_tags&#39; for #&lt;ExperiencesController:0x00007f87f83e1340&gt;
-    Did you mean?  set_instance_hash_user
-    Did you mean?  set_instance_hash_user
-  # ./app/controllers/experiences_controller.rb:78:in `search_tag&#39;
-  # ------------------
-  # --- Caused by: ---
-  # Capybara::CapybaraError:
-  #   Your application server raised an error - It has been raised in your test code because Capybara.raise_server_errors == true
-  #   /Users/toshihiroinoue/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/capybara-3.35.3/lib/capybara/session.rb:160:in `raise_server_error!&#39;</pre></div>
-        <div class="backtrace"><pre>./app/controllers/experiences_controller.rb:78:in `search_tag&#39;
-------------------
---- Caused by: ---
-Capybara::CapybaraError:
-  Your application server raised an error - It has been raised in your test code because Capybara.raise_server_errors == true
-  /Users/toshihiroinoue/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/capybara-3.35.3/lib/capybara/session.rb:160:in `raise_server_error!&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">76</span>    <span class="keyword">return</span> <span class="predefined-constant">nil</span> <span class="keyword">if</span> params[<span class="symbol">:keyword</span>].blank?
-<span class="linenum">77</span>
-<span class="offending"><span class="linenum">78</span>    tags = set_instance_search_tags(params[<span class="symbol">:keyword</span>])</span>
-<span class="linenum">79</span>    render <span class="key">json</span>: { <span class="key">keyword</span>: tags }
-<span class="linenum">80</span>  <span class="keyword">end</span></code></pre>
-      </div>
-    </dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは自分が投稿したものであれば編集ができる</span><span class='duration'>2.02718s</span></dd>
   </dl>
 </div>
 <div id="div_group_8" class="example_group passed">
   <dl style="margin-left: 15px;">
   <dt id="example_group_8" class="passed">記事編集ができないとき</dt>
     <script type="text/javascript">moveProgressBar('23.0');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは自分以外が投稿したものであれば編集画面には遷移できない</span><span class='duration'>0.89360s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは自分以外が投稿したものであれば編集画面には遷移できない</span><span class='duration'>0.82300s</span></dd>
     <script type="text/javascript">moveProgressBar('26.9');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしていないと編集画面には遷移できない</span><span class='duration'>0.66589s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしていないと編集画面には遷移できない</span><span class='duration'>0.73068s</span></dd>
   </dl>
 </div>
 <div id="div_group_9" class="example_group passed">
@@ -403,16 +342,16 @@ Capybara::CapybaraError:
   <dl style="margin-left: 15px;">
   <dt id="example_group_10" class="passed">記事削除ができるとき</dt>
     <script type="text/javascript">moveProgressBar('30.7');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは自らが投稿した記事の削除ができる</span><span class='duration'>1.58208s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは自らが投稿した記事の削除ができる</span><span class='duration'>1.59726s</span></dd>
   </dl>
 </div>
 <div id="div_group_11" class="example_group passed">
   <dl style="margin-left: 15px;">
   <dt id="example_group_11" class="passed">記事削除ができないとき</dt>
     <script type="text/javascript">moveProgressBar('34.6');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは自分以外が投稿した記事の削除ができない</span><span class='duration'>0.86306s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは自分以外が投稿した記事の削除ができない</span><span class='duration'>1.53405s</span></dd>
     <script type="text/javascript">moveProgressBar('38.4');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしていないと記事の削除ボタンがない</span><span class='duration'>0.66498s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ログインしていないと記事の削除ボタンがない</span><span class='duration'>0.70213s</span></dd>
   </dl>
 </div>
 <div id="div_group_12" class="example_group passed">
@@ -424,36 +363,37 @@ Capybara::CapybaraError:
   <dl style="margin-left: 15px;">
   <dt id="example_group_13" class="passed">検索に合致するものがあるとき</dt>
     <script type="text/javascript">moveProgressBar('42.3');</script>
-    <dd class="example passed"><span class="passed_spec_name">タイトルの検索が合致する</span><span class='duration'>2.39014s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">タイトルの検索が合致する</span><span class='duration'>2.29650s</span></dd>
     <script type="text/javascript">moveProgressBar('46.1');</script>
-    <dd class="example passed"><span class="passed_spec_name">ストレスの検索が合致する</span><span class='duration'>2.39062s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ストレスの検索が合致する</span><span class='duration'>2.30137s</span></dd>
     <script type="text/javascript">moveProgressBar('50.0');</script>
-    <dd class="example passed"><span class="passed_spec_name">本文の検索が合致する</span><span class='duration'>2.40809s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">本文の検索が合致する</span><span class='duration'>2.33347s</span></dd>
     <script type="text/javascript">moveProgressBar('53.8');</script>
-    <dd class="example passed"><span class="passed_spec_name">タグの検索が合致する</span><span class='duration'>2.39173s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">タグの検索が合致する</span><span class='duration'>2.39781s</span></dd>
     <script type="text/javascript">moveProgressBar('57.6');</script>
-    <dd class="example passed"><span class="passed_spec_name">カテゴリの検索が合致する</span><span class='duration'>2.33758s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">カテゴリの検索が合致する</span><span class='duration'>2.40712s</span></dd>
     <script type="text/javascript">moveProgressBar('61.5');</script>
-    <dd class="example passed"><span class="passed_spec_name">経過日数の検索が合致する</span><span class='duration'>2.34856s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">経過日数の検索が合致する</span><span class='duration'>2.27858s</span></dd>
     <script type="text/javascript">moveProgressBar('65.3');</script>
-    <dd class="example passed"><span class="passed_spec_name">ユーザーの 住まいの最高気温 の検索が合致する</span><span class='duration'>2.38630s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ユーザーの 住まいの最高気温 の検索が合致する</span><span class='duration'>2.40165s</span></dd>
     <script type="text/javascript">moveProgressBar('69.2');</script>
-    <dd class="example passed"><span class="passed_spec_name">ユーザーの 住まいの最低気温 の検索が合致する</span><span class='duration'>2.35665s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ユーザーの 住まいの最低気温 の検索が合致する</span><span class='duration'>2.29820s</span></dd>
     <script type="text/javascript">moveProgressBar('73.0');</script>
-    <dd class="example passed"><span class="passed_spec_name">ユーザーの 同居人数 の検索が合致する</span><span class='duration'>2.32183s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ユーザーの 同居人数 の検索が合致する</span><span class='duration'>2.36917s</span></dd>
     <script type="text/javascript">moveProgressBar('76.9');</script>
-    <dd class="example passed"><span class="passed_spec_name">ユーザーの 趣味の多さ の検索が合致する</span><span class='duration'>2.32623s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ユーザーの 趣味の多さ の検索が合致する</span><span class='duration'>2.28718s</span></dd>
     <script type="text/javascript">moveProgressBar('80.7');</script>
-    <dd class="example passed"><span class="passed_spec_name">ユーザーの お店との距離  の検索が合致する</span><span class='duration'>2.35246s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ユーザーの お店との距離  の検索が合致する</span><span class='duration'>2.28535s</span></dd>
     <script type="text/javascript">moveProgressBar('84.6');</script>
-    <dd class="example passed"><span class="passed_spec_name">ユーザーの 現在の状況  の検索が合致する</span><span class='duration'>2.33500s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">ユーザーの 現在の状況  の検索が合致する</span><span class='duration'>2.33948s</span></dd>
   </dl>
 </div>
 <div id="div_group_14" class="example_group passed">
   <dl style="margin-left: 15px;">
   <dt id="example_group_14" class="passed">検索に合致するものがないとき</dt>
     <script type="text/javascript">moveProgressBar('88.4');</script>
-    <dd class="example passed"><span class="passed_spec_name">記事はあるが、検索条件に合致しないとき</span><span class='duration'>2.18448s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">記事はあるが、検索条件に合致しないとき</span><span class='duration'>2.08353s</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
     <script type="text/javascript">makeYellow('div_group_14');</script>
     <script type="text/javascript">makeYellow('example_group_14');</script>
     <script type="text/javascript">moveProgressBar('92.3');</script>
@@ -464,13 +404,13 @@ Capybara::CapybaraError:
   <dl style="margin-left: 15px;">
   <dt id="example_group_15" class="passed">ソート条件を変更できる</dt>
     <script type="text/javascript">moveProgressBar('96.1');</script>
-    <dd class="example passed"><span class="passed_spec_name">更新日時 降順(デフォルト)</span><span class='duration'>1.91290s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">更新日時 降順(デフォルト)</span><span class='duration'>1.79927s</span></dd>
     <script type="text/javascript">moveProgressBar('100.0');</script>
-    <dd class="example passed"><span class="passed_spec_name">更新日時 昇順</span><span class='duration'>2.17194s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">更新日時 昇順</span><span class='duration'>2.12820s</span></dd>
   </dl>
 </div>
-<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>53.09533 seconds</strong>";</script>
-<script type="text/javascript">document.getElementById('totals').innerHTML = "26 examples, 2 failures, 1 pending";</script>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>52.48049 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "26 examples, 0 failures, 1 pending";</script>
 </div>
 </div>
 </body>
