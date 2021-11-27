@@ -3,7 +3,7 @@ require 'active_support'
 module TagConcern
   extend ActiveSupport::Concern
 
-  def set_instance_search_tags(keyword)
-    Tag.where(['name LIKE ?', "%#{keyword}%"])
+  def set_tags_search(keyword)
+    Tag.tags_serch(keyword)
   end
 end
