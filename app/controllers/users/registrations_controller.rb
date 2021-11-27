@@ -7,13 +7,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    @user_hash = set_instance_hash_user
+    @user_hash = set_hash_user
     super
   end
 
   # POST /resource
   def create
-    @user_hash = set_instance_hash_user
+    @user_hash = set_hash_user
     super
   end
 

@@ -4,7 +4,7 @@ module HashModelConcern
   extend ActiveSupport::Concern
 
   # Set hash model
-  def set_instance_hash_user
+  def set_hash_user
     {
       high: High.all,
       low: Low.all,
@@ -15,7 +15,7 @@ module HashModelConcern
     }
   end
 
-  def set_instance_hash_exprience
+  def set_hash_exprience
     {
       tag: Tag.all,
       category: Category.all,

@@ -5,27 +5,28 @@ class ExperiencesController < ApplicationController
   include ExperienceCommentConcern
   include HashModelConcern
   include RansackConcern
+  include TagConcern
   before_action :authenticate_user!, only: [:new, :create]
 
   # GET /experiences
   def index
-    @q = set_instance_ransack(set_params_search)
-    @experiences    = set_instance_ransack_experiences(@q, params[:page])
-    @user_hash      = set_instance_hash_user
-    @exprience_hash = set_instance_hash_exprience
-    @likes_count    = set_instance_likes_count
-    @imitates_count = set_instance_imitates_count
+    @q = set_ransack_query(set_params_search)
+    @experiences    = set_ransack_experiences(@q, params[:page])
+    @user_hash      = set_hash_user
+    @exprience_hash = set_hash_exprience
+    @likes_count    = set_likes_count
+    @imitates_count = set_imitates_count
   end
 
   # GET /experiences/new
   def new
-    @exprience_hash = set_instance_hash_exprience
-    @experience_tag = set_instance_exptag_new
+    @exprience_hash = set_hash_exprience
+    @experience_tag = set_experience_tag_new
   end
 
   # POST /experiences
   def create
-    @experience_tag = set_instance_exptag_new(set_params_experience_tag)
+    @experience_tag = set_experience_tag_new(set_params_experience_tag)
     if @experience_tag.save
       flash[:notice] = '新しい記事を登録しました'
       redirect_to experiences_path
@@ -36,24 +37,24 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/:id
   def show
-    @experience     = set_instance_experience_find(params[:id])
-    @like           = set_instance_like if user_signed_in?
-    @likes_count    = set_instance_likes_count
-    @imitates_count = set_instance_imitates_count
-    @comment        = set_instance_comment_new()
+    @like           = set_like_find_by(set_params_like) if user_signed_in?
+    @experience     = set_experience_find(params[:id])
+    @likes_count    = set_likes_count
+    @imitates_count = set_imitates_count
+    @comment        = set_comment_new
   end
 
   # GET /experiences/:id/edit
   def edit
-    @experience     = set_instance_experience_find(params[:id])
-    @exprience_hash = set_instance_hash_exprience
-    @experience_tag = set_instance_exptag_new(set_params_experience_tag_edit(@experience))
+    @experience     = set_experience_find(params[:id])
+    @exprience_hash = set_hash_exprience
+    @experience_tag = set_experience_tag_new(set_params_experience_tag_edit(@experience))
   end
 
   # PATCH/PUT /experiences/:id
   def update
-    @experience     = set_instance_experience_find(params[:id])
-    @experience_tag = set_instance_exptag_new(set_params_experience_tag)
+    @experience     = set_experience_find(params[:id])
+    @experience_tag = set_experience_tag_new(set_params_experience_tag)
     @experience_tag.user_id = set_params_experience_tag[:user_id]
     if @experience_tag.update(@experience)
       flash[:notice] = '記事を更新しました'
@@ -65,7 +66,7 @@ class ExperiencesController < ApplicationController
 
   # DELETE /experiences/:id
   def destroy
-    @experience = set_instance_experience_find(params[:id])
+    @experience = set_experience_find(params[:id])
     @experience.destroy
     flash[:hazard] = '記事を削除しました'
     redirect_to experiences_path
@@ -75,18 +76,18 @@ class ExperiencesController < ApplicationController
   def search_tag
     return nil if params[:keyword].blank?
 
-    tags = set_instance_search_tags(params[:keyword])
+    tags = set_tags_search(params[:keyword])
     render json: { keyword: tags }
   end
 
   # GET /experiences/search_index
   def search_index
-    @q = set_instance_ransack(set_params_search)
-    @experiences    = set_instance_ransack_experiences(@q, params[:page])
-    @user_hash      = set_instance_hash_user
-    @exprience_hash = set_instance_hash_exprience
-    @likes_count    = set_instance_likes_count
-    @imitates_count = set_instance_imitates_count
+    @q = set_ransack_query(set_params_search)
+    @experiences    = set_ransack_experiences(@q, params[:page])
+    @user_hash      = set_hash_user
+    @exprience_hash = set_hash_exprience
+    @likes_count    = set_likes_count
+    @imitates_count = set_imitates_count
     render :index
   end
 

@@ -19,11 +19,11 @@ module NoticeConcern
     user_notice.update(read: true)
   end
 
-  def set_instance_notice_recent(user_id)
+  def set_notice_recent(user_id)
     Notice.recent(user_id)
   end
 
-  def set_instance_notice_100(user_id, page)
+  def set_notice_100(user_id, page)
     Notice.recent_100(user_id).page(page)
   end
 
