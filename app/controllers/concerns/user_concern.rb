@@ -3,7 +3,7 @@ require 'active_support'
 module UserConcern
   extend ActiveSupport::Concern
 
-  def set_user_find(id)
+  def find_user(id)
     User.find(id)
   end
 end

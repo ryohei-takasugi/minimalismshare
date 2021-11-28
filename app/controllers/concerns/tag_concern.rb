@@ -3,7 +3,7 @@ require 'active_support'
 module TagConcern
   extend ActiveSupport::Concern
 
-  def set_tags_search(keyword)
+  def search_tags(keyword)
     Tag.tags_serch(keyword)
   end
 end

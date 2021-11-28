@@ -7,9 +7,9 @@ class UsersController < ApplicationController
 
   # GET /users/:id
   def show
-    @likes_count    = set_likes_count
-    @imitates_count = set_imitates_count
-    @user           = set_user_find(params[:id])
+    @likes_count    = count_likes
+    @imitates_count = count_imitates
+    @user           = find_user(params[:id])
     @all_notices    = set_notice_100(current_user.id, params[:page])
     read_notice(current_user.id)
     # <%# FIXME: タブ切り替え後にページ切り替えをするとタブが初期値に戻るためコメントアウト >

@@ -14,19 +14,19 @@ class ExperiencesController < ApplicationController
     @experiences    = set_ransack_experiences(@q, params[:page])
     @user_hash      = set_hash_user
     @exprience_hash = set_hash_exprience
-    @likes_count    = set_likes_count
-    @imitates_count = set_imitates_count
+    @likes_count    = count_likes
+    @imitates_count = count_imitates
   end
 
   # GET /experiences/new
   def new
     @exprience_hash = set_hash_exprience
-    @experience_tag = set_experience_tag_new
+    @experience_tag = new_experience_tag
   end
 
   # POST /experiences
   def create
-    @experience_tag = set_experience_tag_new(set_params_experience_tag)
+    @experience_tag = new_experience_tag(set_params_experience_tag)
     if @experience_tag.save
       flash[:notice] = '新しい記事を登録しました'
       redirect_to experiences_path
@@ -37,24 +37,24 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/:id
   def show
-    @like           = set_like_find_by(set_params_like) if user_signed_in?
-    @experience     = set_experience_find(params[:id])
-    @likes_count    = set_likes_count
-    @imitates_count = set_imitates_count
-    @comment        = set_comment_new
+    @like           = find_by_like(set_params_like) if user_signed_in?
+    @experience     = find_experience(params[:id])
+    @likes_count    = count_likes
+    @imitates_count = count_imitates
+    @comment        = new_comment
   end
 
   # GET /experiences/:id/edit
   def edit
-    @experience     = set_experience_find(params[:id])
+    @experience     = find_experience(params[:id])
     @exprience_hash = set_hash_exprience
-    @experience_tag = set_experience_tag_new(set_params_experience_tag_edit(@experience))
+    @experience_tag = new_experience_tag(set_params_experience_tag_edit(@experience))
   end
 
   # PATCH/PUT /experiences/:id
   def update
-    @experience     = set_experience_find(params[:id])
-    @experience_tag = set_experience_tag_new(set_params_experience_tag)
+    @experience     = find_experience(params[:id])
+    @experience_tag = new_experience_tag(set_params_experience_tag)
     @experience_tag.user_id = set_params_experience_tag[:user_id]
     if @experience_tag.update(@experience)
       flash[:notice] = '記事を更新しました'
@@ -66,7 +66,7 @@ class ExperiencesController < ApplicationController
 
   # DELETE /experiences/:id
   def destroy
-    @experience = set_experience_find(params[:id])
+    @experience = find_experience(params[:id])
     @experience.destroy
     flash[:hazard] = '記事を削除しました'
     redirect_to experiences_path
@@ -76,7 +76,7 @@ class ExperiencesController < ApplicationController
   def search_tag
     return nil if params[:keyword].blank?
 
-    tags = set_tags_search(params[:keyword])
+    tags = search_tags(params[:keyword])
     render json: { keyword: tags }
   end
 
@@ -86,8 +86,8 @@ class ExperiencesController < ApplicationController
     @experiences    = set_ransack_experiences(@q, params[:page])
     @user_hash      = set_hash_user
     @exprience_hash = set_hash_exprience
-    @likes_count    = set_likes_count
-    @imitates_count = set_imitates_count
+    @likes_count    = count_likes
+    @imitates_count = count_imitates
     render :index
   end
 

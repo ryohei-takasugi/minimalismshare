@@ -7,31 +7,31 @@ class ExperienceCommentsController < ApplicationController
 
   # POST /experiences/:experience_id/experience_comments
   def create
-    @experience = set_experience_find(params[:experience_id])
-    comment     = set_comment_new(set_params_comment)
+    @experience = find_experience(params[:experience_id])
+    comment     = new_comment(set_params_comment)
     if comment.save
       create_notice(comment)
       flash[:notice] = 'コメントを追加しました'
       redirect_to experience_path(params[:experience_id])
     else
-      @comment = set_comment_new
+      @comment = new_comment
       render 'experiences/show'
     end
   end
 
   # GET /experiences/:experience_id/experience_comments/:id/edit
   def edit
-    @like       = set_like_find_by(set_params_like) if user_signed_in?
-    @experience = set_experience_find(params[:experience_id])
-    @comment    = set_comment_find(params[:id])
+    @like       = find_by_like(set_params_like) if user_signed_in?
+    @experience = find_experience(params[:experience_id])
+    @comment    = find_comment(params[:id])
     render 'experiences/show'
   end
 
   # PATCH/PUT /experiences/:experience_id/experience_comments/:id
   def update
-    @like       = set_like_find_by(set_params_like) if user_signed_in?
-    @experience = set_experience_find(params[:experience_id])
-    @comment    = set_comment_find(params[:id])
+    @like       = find_by_like(set_params_like) if user_signed_in?
+    @experience = find_experience(params[:experience_id])
+    @comment    = find_comment(params[:id])
     if @comment.update(set_params_comment)
       flash[:notice] = 'コメントを更新しました'
       redirect_to experience_path(params[:experience_id])
@@ -42,9 +42,9 @@ class ExperienceCommentsController < ApplicationController
 
   # DELETE /experiences/:experience_id/experience_comments/:id
   def destroy
-    @like       = set_like_find_by(set_params_like) if user_signed_in?
-    @experience = set_experience_find(params[:experience_id])
-    @comment    = set_comment_find(params[:id])
+    @like       = find_by_like(set_params_like) if user_signed_in?
+    @experience = find_experience(params[:experience_id])
+    @comment    = find_comment(params[:id])
     if @comment.destroy
       flash[:hazard] = 'コメントを削除しました'
       redirect_to experience_path(params[:experience_id])

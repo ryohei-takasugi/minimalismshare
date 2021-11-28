@@ -3,7 +3,7 @@ require 'active_support'
 module ExperienceConcern
   extend ActiveSupport::Concern
 
-  def set_experience_find(id)
+  def find_experience(id)
     Experience.find(id)
   end
 end
