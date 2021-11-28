@@ -14,7 +14,7 @@ class ExperienceCommentsController < ApplicationController
       flash[:notice] = 'コメントを追加しました'
       redirect_to experience_path(params[:experience_id])
     else
-      @comment = set_comment_new()
+      @comment = set_comment_new
       render 'experiences/show'
     end
   end

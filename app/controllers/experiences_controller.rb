@@ -112,16 +112,16 @@ class ExperiencesController < ApplicationController
       params[:q]
     else
       params.require(:q)
-            .permit(:title_or_stress_or_content_body_cont, 
-                    :tags_id_eq, 
-                    :category_id_eq, 
-                    :period_id_eq, 
-                    :user_high_id_eq, 
-                    :user_low_id_eq, 
-                    :user_housemate_id_eq, 
-                    :user_hobby_id_eq, 
-                    :user_clean_status_id_eq, 
-                    :user_range_with_store_id_eq, 
+            .permit(:title_or_stress_or_content_body_cont,
+                    :tags_id_eq,
+                    :category_id_eq,
+                    :period_id_eq,
+                    :user_high_id_eq,
+                    :user_low_id_eq,
+                    :user_housemate_id_eq,
+                    :user_hobby_id_eq,
+                    :user_clean_status_id_eq,
+                    :user_range_with_store_id_eq,
                     :sorts)
     end
   end

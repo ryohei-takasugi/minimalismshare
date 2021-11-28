@@ -2,13 +2,13 @@ require 'active_support'
 
 module NoticeConcern
   extend ActiveSupport::Concern
-  
+
   def create_notice(model)
     notice = nil
     case model.model_name.name
-    when "ExperienceComment"
+    when 'ExperienceComment'
       notice = Notice.new(set_params_notice(model, 'コメント'))
-    when "ExperienceLike"
+    when 'ExperienceLike'
       notice = Notice.new(set_params_notice(model, select_action)) unless select_action.nil?
     end
     notice.save unless notice.nil?
@@ -38,12 +38,10 @@ module NoticeConcern
   end
 
   def select_action
-    if set_params_update_like.include?(:like) && set_params_update_like[:like].match(/(true|True|TRUE)/)
-      action = '「いいね」'
-    elsif set_params_update_like.include?(:imitate) && set_params_update_like[:imitate].match(/(true|True|TRUE)/)
-      action = '「真似した」'
-    else
-      action = nil
-    end
+    action = if set_params_update_like.include?(:like) && set_params_update_like[:like].match(/(true|True|TRUE)/)
+               '「いいね」'
+             elsif set_params_update_like.include?(:imitate) && set_params_update_like[:imitate].match(/(true|True|TRUE)/)
+               '「真似した」'
+             end
   end
 end

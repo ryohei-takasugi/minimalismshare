@@ -10,7 +10,7 @@ module ExperienceLikeConcern
   def set_like_find(id)
     ExperienceLike.find(id)
   end
-  
+
   def set_like_find_by(params)
     like = ExperienceLike.find_by(params)
     like ||= ExperienceLike.new

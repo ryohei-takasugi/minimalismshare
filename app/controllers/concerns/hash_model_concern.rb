@@ -11,7 +11,7 @@ module HashModelConcern
       housemate: Housemate.all,
       hobby: Hobby.all,
       clean_status: CleanStatus.all,
-      range_with_store: RangeWithStore.all,
+      range_with_store: RangeWithStore.all
     }
   end
 
