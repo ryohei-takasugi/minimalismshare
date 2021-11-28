@@ -87,35 +87,7 @@
 .experience-show {
   @include a-none;
   .card {
-    margin: 10px;
-    .nickname {
-      font-size: 14px;
-    }
-    .title {
-      font-size: 23px;
-      margin: 5px 0;
-    }
-    table {
-      tr {
-        line-height: normal;
-        width: calc(100% - 20px);
-        .header {
-          width: 20px;
-          padding: 10px;
-        }
-        .item {
-          width: calc(100% - 20px);
-          padding: 10px;
-          p {
-            margin-bottom: 0px;
-          }
-        }
-        .user-item {
-          display: inline-block;
-          margin-right: 10px;
-        }
-      }
-    }
+    @include show-experience;
   }
   .like {
     display: flex;
