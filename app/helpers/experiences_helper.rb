@@ -12,9 +12,7 @@ module ExperiencesHelper
   end
 
   def check_likes_no_blank(experience_likes)
-    return true if !experience_likes.blank? && !experience_likes.where(user_id: current_user.id).blank?
-
-    false
+    experience_likes.blank? == false && experience_likes.where(user_id: current_user.id).blank? == false
   end
 
   def count_liked(likes_count, experience)

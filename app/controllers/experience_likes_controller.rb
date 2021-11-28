@@ -1,34 +1,28 @@
 class ExperienceLikesController < ApplicationController
   include ExperienceConcern
-  include ExperienceLikeConcern
-  include ExperienceCommentConcern
   include NoticeConcern
   before_action :authenticate_user!
 
   # POST /experiences/:experience_id/experience_likes
   def create
-    @like       = find_by_like(set_params_like) if user_signed_in?
-    @experience = find_experience(params[:experience_id])
-    @comment    = new_comment
-    experience_like = new_like(set_params_update_like)
+    experience_like = ExperienceLike.new(set_params_update_like)
     if experience_like.save
       create_notice(experience_like)
       redirect_to experience_path(params[:experience_id])
     else
+      set_view_instance_show(params[:experience_id], set_params_like)
       render 'experiences/show'
     end
   end
 
   # PATCH/PUT /experiences/:experience_id/experience_likes/:id
   def update
-    @like       = find_by_like(set_params_like) if user_signed_in?
-    @experience = find_experience(params[:experience_id])
-    @comment    = new_comment
-    experience_like = find_like(params[:id])
+    experience_like = ExperienceLike.find(params[:id])
     if experience_like.update(set_params_update_like)
       create_notice(experience_like)
       redirect_to experience_path(params[:experience_id])
     else
+      set_view_instance_show(params[:experience_id], set_params_like)
       render 'experiences/show'
     end
   end

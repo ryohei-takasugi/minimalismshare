@@ -12,6 +12,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_instance_notices
-    @notices = set_notice_recent(current_user.id) if user_signed_in?
+    @notices = Notice.recent(current_user.id) if user_signed_in?
   end
 end

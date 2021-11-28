@@ -18,15 +18,7 @@ module NoticeConcern
     user_notice = Notice.where(user_id: user_id)
     user_notice.update(read: true)
   end
-
-  def set_notice_recent(user_id)
-    Notice.recent(user_id)
-  end
-
-  def set_notice_100(user_id, page)
-    Notice.recent_100(user_id).page(page)
-  end
-
+  
   private
 
   def set_params_notice(model, str)
