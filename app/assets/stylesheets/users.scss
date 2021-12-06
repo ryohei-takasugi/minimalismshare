@@ -5,103 +5,102 @@
 @import 'share';
 
 // -----------------------------
-//  アカウントの新規作成＆ログイン
+//  レスポンシブデザイン（PC）
 // -----------------------------
-.sign-container {
-  width: 50%;
-  margin: 20px auto;
-  padding: 30px;
-  border: 1px solid $line-color;
-  background-color: white;
-  box-sizing: border-box;
-  border-radius: 5px;
-  h2 {
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: normal;
-    font-size: 20px;
+body {
+  // アカウントの新規作成＆ログイン
+  .sign-container {
+    width: 50%;
+    margin: 20px auto;
+    padding: 30px;
+    border: 1px solid $line-color;
+    background-color: white;
+    box-sizing: border-box;
+    border-radius: 5px;
+    h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: normal;
+      font-size: 20px;
+    }
+    form {
+      .field {
+        margin-bottom: 15px;
+        .required:after {
+          content: " *";
+          color: red;
+        }
+        label {
+          margin-bottom: 0px;
+          margin-top: 10px;
+        }
+        em {
+          line-height: 10px;
+          font-size: small;
+        }
+      }
+      .remember-me {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        input {
+          width: 10px;
+          margin: 0px;
+          padding: 0px;
+        }
+        label {
+          margin-left: 5px;
+          width: 200px;
+        }
+      }
+      .actions input {
+        @include submit-button;
+        margin: 50px 0;
+        width: 100%;
+        height: 50px;
+      }
+      .delete {
+        @include submit-button;
+        background-color: #f54c4c;
+        margin: 50px 0;
+        width: 100%;
+        height: 50px;
+      }
+    }
   }
-  form {
-    .field {
-      margin-bottom: 15px;
-      .required:after {
-        content: " *";
-        color: red;
+  // ユーザー情報画面
+  .user-show {
+    nav {
+      text-align: center;
+      margin: 30px 0;
+      span {
+        @include basic-input;
+        display: inline-block;
+        min-width: 50px;
+        font-size: 16px;
       }
-      label {
-        margin-bottom: 0px;
-        margin-top: 10px;
-      }
-      em {
-        line-height: 10px;
-        font-size: small;
-      }
-    }
-    .remember-me {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-      input {
-        width: 10px;
-        margin: 0px;
-        padding: 0px;
-      }
-      label {
-        margin-left: 5px;
-        width: 200px;
+      .current {
+        color: $back-color;
+        background-color: #8bd3dd;
       }
     }
-    .actions input {
-      @include submit-button;
-      margin: 50px 0;
-      width: 100%;
-      height: 50px;
+    .cards_null {
+      @include cards-null;
     }
-    .delete {
-      @include submit-button;
-      background-color: #f54c4c;
-      margin: 50px 0;
-      width: 100%;
-      height: 50px;
+    .cards {
+      @include cards;
     }
   }
 }
-
-.user-show {
-  nav {
-    text-align: center;
-    margin: 30px 0;
-    span {
-      @include basic-input;
-      display: inline-block;
-      min-width: 50px;
-      font-size: 16px;
-    }
-    .current {
-      color: $back-color;
-      background-color: #8bd3dd;
-    }
-  }
-  .cards_null {
-    @include cards-null;
-  }
-  .cards {
-    @include cards;
-  }
-}
-
 // -----------------------------
 //  レスポンシブデザイン（スマホ）
 // -----------------------------
 @media (max-width: 768px) {
-  .sign-container {
-    width: 100%;
-    padding: 15px;
+  body {
+    // アカウントの新規作成＆ログイン
+    .sign-container {
+      width: 100%;
+      padding: 15px;
+    }
   }
-}
-// -----------------------------
-//  レスポンシブデザイン（タブレット）
-// -----------------------------
-@media (max-width: 1024px) {
-
 }

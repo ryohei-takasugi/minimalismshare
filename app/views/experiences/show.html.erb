@@ -68,7 +68,7 @@
         <div class="contents">
           <%= comment.comment %>
         </div>
-        <div class="fotter">
+        <div class="footer">
           <% if user_signed_in? && current_user.id == comment.user_id %>
             <%= link_to "編集", edit_experience_experience_comment_path(@experience, comment), class: "button is-secondary" %>
             <%= link_to "削除", experience_experience_comment_path(@experience, comment), class: "button is-destructive", data: { confirm: "この操作は取り消すことができません。本当にコメントの削除を実行しますか?" }, method: :delete %>
