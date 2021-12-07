@@ -359,7 +359,7 @@ Visual Studio Code
 * 可読性等の見直し
   * FormObject
     * 記事の内容とタグを同時に保存するのでFormObjectを使用したが、Railsの恩恵が少なく感じる＆可読性が低くなっているとおもうので見直す
-    * FormObjectをやめる場合は、タグを記事保存前にJavaScriptでチェックしてエラーがない場合に、記事の保存ボタンが押せるようにする
+    * FormObjectをやめる場合は、タグをあとから編集可能にする
     * FormObjectをやめない場合は、Serviceやconcernsを作成して可読性を改善を検討する
   * set_like_find_paramsメソッド
     * set_like_find_paramsが各コントローラーにあり、その戻り値が必要なメソッドはApplicationControllerのset_experience_likeになっているため、可読性が良くないと思うので統一する
