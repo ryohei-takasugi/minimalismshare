@@ -20,68 +20,67 @@
 @import 'share';
 
 // -----------------------------
-//  ヘッダー
+//  レスポンシブデザイン（PC）
 // -----------------------------
-.header {
-  @include a-none;
-  .logo {
-    height: 50px;
-    padding: 3px 15px;
+// ヘッダー
+body {
+  .header {
+    @include a-none;
+    .logo {
+      height: 50px;
+      padding: 3px 15px;
+    }
+    .notice {
+      @include notice-badge;
+      @include drop-down(30vw, -10vw);
+      margin: 0 0 0 auto;
+      z-index: 10;
+    }
+    .notice-mobile {
+      visibility: hidden;
+    }
+    .space {
+      border-left: 1px solid $line-color;
+      height: $menu-height;
+    }
+    .edit-menu {
+      @include a-lists;
+      @include drop-down(13vw, -5vw);
+    }
   }
-  .notice {
-    margin: 0 0 0 auto;
-    @include notice-badge;
-    @include drop-down(30vw, -10vw);
-    z-index: 10;
-  }
-  .notice-mobile {
-    visibility: hidden;
-  }
-  .space {
-    border-left: 1px solid $line-color;
-    height: $menu-height;
-  }
-  .edit-menu {
-    @include a-lists;
-    @include drop-down(13vw, -5vw);
+  // メインコンテンツ
+  .contents {
+    max-width: 1100px;
+    width: 95vw;
+    margin: 0 auto;
   }
 }
-// -----------------------------
-//  メインコンテンツ
-// -----------------------------
-.contents {
-  max-width: 1100px;
-  width: 95vw;
-  margin: 0 auto;
-}
-// -----------------------------
-//  フッター
-// -----------------------------
 
 
 // -----------------------------
 //  レスポンシブデザイン（スマホ）
 // -----------------------------
 @media (max-width: 768px) {
-  .header {
-    li {
-      font-size: 24px;
-    }
-    .space {
-      border-left: none;
-      border-bottom: 1px solid $line-color;
-      height: 5px;
-    }
-    .notice {
-      visibility: hidden;
-    }
-    .notice-mobile {
-      visibility: visible;
-      @include notice-badge;
-    }
-  }
   body {
     width: 95vw;
     margin: 0 auto;
+    // ヘッダー
+    .header {
+      li {
+        font-size: 24px;
+      }
+      .space {
+        border-left: none;
+        border-bottom: 1px solid $line-color;
+        height: 5px;
+      }
+      .notice {
+        visibility: hidden;
+      }
+      .notice-mobile {
+        visibility: visible;
+        @include notice-badge;
+      }
+    }
   }
 }

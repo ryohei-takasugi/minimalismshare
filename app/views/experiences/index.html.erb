@@ -5,41 +5,41 @@
     <div class="search-items">
       <h2>検&emsp;索</h2>
       <div class="field">
-      <%= search_form_for @q, url: search_article_experiences_path do |f| %>
+      <%= search_form_for @q, url: search_index_experiences_path do |f| %>
         <%= f.label :title_or_stress_or_content_body_cont, 'テキスト検索' %>
         <%= f.search_field :title_or_stress_or_content_body_cont %>
         <br>
         <details>
         <%# FIXME: tags_id_eq の翻訳がうまくいかない %>
         <%= f.label :tags_id_eq, 'タグ は以下と等しい' %>
-        <%= f.collection_select :tags_id_eq, set_tag, :id, :name,  include_blank: '指定なし' %>
+        <%= f.collection_select :tags_id_eq, @exprience_hash[:tag], :id, :name,  include_blank: '指定なし' %>
         <br>
         <%= f.label :category_id_eq %>
-        <%= f.collection_select :category_id_eq, set_category, :id, :name,  include_blank: '指定なし' %>
+        <%= f.collection_select :category_id_eq, @exprience_hash[:category], :id, :name,  include_blank: '指定なし' %>
         <br>
         <%= f.label :period_id_eq %>
-        <%= f.collection_select :period_id_eq, set_period, :id, :name,  include_blank: '指定なし' %>
+        <%= f.collection_select :period_id_eq, @exprience_hash[:period], :id, :name,  include_blank: '指定なし' %>
         <br>
         <%= f.label :user_high_id_eq %>
-        <%= f.collection_select :user_high_id_eq, set_high, :id, :name,  include_blank: '指定なし' %>
+        <%= f.collection_select :user_high_id_eq, @user_hash[:high], :id, :name,  include_blank: '指定なし' %>
         <br>
         <%= f.label :user_low_id_eq %>
-        <%= f.collection_select :user_low_id_eq, set_low, :id, :name,  include_blank: '指定なし' %>
+        <%= f.collection_select :user_low_id_eq, @user_hash[:low], :id, :name,  include_blank: '指定なし' %>
         <br>
         <%= f.label :user_housemate_id_eq %>
-        <%= f.collection_select :user_housemate_id_eq, set_housemate, :id, :name,  include_blank: '指定なし' %>
+        <%= f.collection_select :user_housemate_id_eq, @user_hash[:housemate], :id, :name,  include_blank: '指定なし' %>
         <br>
         <%= f.label :user_hobby_id_eq %>
-        <%= f.collection_select :user_hobby_id_eq, set_hobby, :id, :name,  include_blank: '指定なし' %>
+        <%= f.collection_select :user_hobby_id_eq, @user_hash[:hobby], :id, :name,  include_blank: '指定なし' %>
         <br>
         <%= f.label :user_clean_status_id_eq %>
-        <%= f.collection_select :user_clean_status_id_eq, set_clean_status, :id, :name,  include_blank: '指定なし' %>
+        <%= f.collection_select :user_clean_status_id_eq, @user_hash[:clean_status], :id, :name,  include_blank: '指定なし' %>
         <br>
         <%= f.label :user_range_with_store_id_eq %>
-        <%= f.collection_select :user_range_with_store_id_eq, set_range_with_store, :id, :name,  include_blank: '指定なし' %>
+        <%= f.collection_select :user_range_with_store_id_eq, @user_hash[:range_with_store], :id, :name,  include_blank: '指定なし' %>
         <br>
         <%= f.label :sorts %>
-        <%= f.select :sorts, set_sort %>
+        <%= f.select :sorts, @exprience_hash[:sort] %>
         <br>
         </details>
         <%= button_tag type: 'submit', class: "button is-secondary" do %>
@@ -57,7 +57,7 @@
         </div>
       <% else %>
         <% @experiences.each do |experience| %>
-          <%= render partial: 'shared/show_experience', locals: { experience: experience, like_group_list: @like_group_list, imitate_group_list: @imitate_group_list } %>
+          <%= render partial: 'shared/show_experience', locals: { experience: experience, likes_count: @likes_count, imitates_count: @imitates_count } %>
         <% end %>
         <%= paginate @experiences %>
       <% end %>

@@ -6,7 +6,7 @@
   </div>
   <div class="field">
     <%= f.label :tags %>
-    <%= f.text_field :tags, value: tags_join(form_model.tags), id: "experience_tag_name", placeholder: "例）本、リビング、電子書籍、捨て方アドバイス、残し方アドバイス" %>
+    <%= f.text_field :tags, value: join_tags(form_model.tags), id: "experience_tag_name", placeholder: "例）本、リビング、電子書籍、捨て方アドバイス、残し方アドバイス" %>
   </div>
   <span class="search-result">
     <ul id="search-result">
@@ -19,10 +19,10 @@
   </div>
   <div class="field flex">
     <%= f.label :category_id %>
-    <%= f.collection_select(:category_id, set_category, :id, :name, {}, {}) %>
+    <%= f.collection_select(:category_id,  @exprience_hash[:category], :id, :name, {}, {}) %>
     <span>&emsp;</span>
     <%= f.label :period_id %>
-    <%= f.collection_select(:period_id, set_period, :id, :name, {}, {}) %>
+    <%= f.collection_select(:period_id,  @exprience_hash[:period], :id, :name, {}, {}) %>
   </div>
   <div class="field-rich">
     <%= f.rich_text_area :content, placeholder: "記述内容）解決した方法、解決するまでの手順・注意点、真似する人へのアドバイス、解決したことにより発生するストレスと対処法、など" %>

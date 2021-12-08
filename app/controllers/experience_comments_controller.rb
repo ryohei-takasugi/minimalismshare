@@ -1,68 +1,59 @@
 class ExperienceCommentsController < ApplicationController
+  include ExperienceConcern
+  include NoticeConcern
   before_action :authenticate_user!
-  before_action :set_experience
-  before_action :set_experience_comment, only: [:edit, :update, :destroy]
-  before_action :set_like_find_params, only: [:edit, :update, :destroy]
-  before_action :set_experience_like, only: [:edit, :update, :destroy]
 
-  # Call Views: experience/show.html.erb
+  # POST /experiences/:experience_id/experience_comments
   def create
-    comment = ExperienceComment.new(comment_params)
+    comment = ExperienceComment.new(set_params_comment)
     if comment.save
       create_notice(comment)
       flash[:notice] = 'コメントを追加しました'
       redirect_to experience_path(params[:experience_id])
     else
-      @comment = ExperienceComment.new
+      set_view_instance_show(params[:experience_id], set_params_like)
       render 'experiences/show'
     end
   end
 
-  # Call Views: experience/show.html.erb
+  # GET /experiences/:experience_id/experience_comments/:id/edit
   def edit
+    set_view_instance_show(params[:experience_id], set_params_like)
+    @comment = ExperienceComment.find(params[:id])
     render 'experiences/show'
   end
 
-  # Call Views: experience/show.html.erb
+  # PATCH/PUT /experiences/:experience_id/experience_comments/:id
   def update
-    if @comment.update(comment_params)
+    @comment = ExperienceComment.find(params[:id])
+    if @comment.update(set_params_comment)
       flash[:notice] = 'コメントを更新しました'
       redirect_to experience_path(params[:experience_id])
     else
+      set_view_instance_show(params[:experience_id], set_params_like)
       render 'experiences/show'
     end
   end
 
-  # Call Views: experience/show.html.erb
+  # DELETE /experiences/:experience_id/experience_comments/:id
   def destroy
+    @comment = ExperienceComment.find(params[:id])
     if @comment.destroy
       flash[:hazard] = 'コメントを削除しました'
       redirect_to experience_path(params[:experience_id])
     else
+      set_view_instance_show(params[:experience_id], set_params_like)
       render 'experiences/show'
     end
   end
 
   private
 
-  def comment_params
+  def set_params_comment
     params.require(:experience_comment).permit(:comment).merge(user_id: current_user.id, experience_id: params[:experience_id])
   end
 
-  def set_experience
-    @experience = Experience.find(params[:experience_id])
-  end
-
-  def set_experience_comment
-    @comment = ExperienceComment.find(params[:id])
-  end
-
-  def set_like_find_params
+  def set_params_like
     { experience_id: params[:experience_id], user_id: current_user.id }
-  end
-
-  def create_notice(comment)
-    Notice.create(message: "#{comment.user.nickname} が、あなたの記事「#{comment.experience.title}」に「#{comment.comment}」とコメントしました",
-                  url: experience_path(comment.experience.id), user_id: comment.experience.user_id)
   end
 end

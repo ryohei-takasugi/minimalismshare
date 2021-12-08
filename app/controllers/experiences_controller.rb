@@ -1,23 +1,22 @@
 class ExperiencesController < ApplicationController
-  before_action :authenticate_user!,   only: [:new, :create]
-  before_action :set_search_ransack,   only: [:index, :search_article]
-  before_action :set_experience,       only: [:show, :edit, :update, :destroy]
-  before_action :set_like_find_params, only: [:show]
-  before_action :set_experience_like,  only: [:show]
-  before_action :set_likes_count,      only: [:index, :show, :search_article]
+  include ExperienceConcern
+  include HashModelConcern
+  include RansackConcern
+  before_action :authenticate_user!, only: [:new, :create]
 
-  # Call Views: experience/index.html.erb
+  # GET /experiences
   def index
+    set_view_instance_index(params, set_params_search)
   end
 
-  # Call Views: experience/new.html.erb
+  # GET /experiences/new
   def new
-    @experience_tag = ExperienceTag.new
+    set_view_instance_form
   end
 
-  # Call Views: experience/new.html.erb
+  # POST /experiences
   def create
-    @experience_tag = ExperienceTag.new(experience_tag_params)
+    @experience_tag = ExperienceTag.new(set_params_experience_tag)
     if @experience_tag.save
       flash[:notice] = '新しい記事を登録しました'
       redirect_to experiences_path
@@ -26,34 +25,22 @@ class ExperiencesController < ApplicationController
     end
   end
 
-  # Call Views: experience/show.html.erb
+  # GET /experiences/:id
   def show
-    @comment = ExperienceComment.new
+    set_view_instance_show(params[:id], set_params_like)
   end
 
-  # Call Views: experience/edit.html.erb
+  # GET /experiences/:id/edit
   def edit
-    @experience_tag = ExperienceTag.new(
-      title: @experience.title,
-      tags: @experience.tags.map { |tag| tag.name },
-      stress: @experience.stress,
-      category_id: @experience.category_id,
-      period_id: @experience.period_id,
-      content: @experience.content
-    )
+    @experience = Experience.find(params[:id])
+    set_view_instance_form(set_params_experience_tag_edit(@experience))
   end
 
-  # Call Views: experience/edit.html.erb
+  # PATCH/PUT /experiences/:id
   def update
-    @experience_tag = ExperienceTag.new(
-      title: experience_tag_params[:title],
-      tags: experience_tag_params[:tags],
-      stress: experience_tag_params[:stress],
-      category_id: experience_tag_params[:category_id],
-      period_id: experience_tag_params[:period_id],
-      content: experience_tag_params[:content]
-    )
-    @experience_tag.user_id = experience_tag_params[:user_id]
+    @experience     = Experience.find(params[:id])
+    @experience_tag = ExperienceTag.new(set_params_experience_tag)
+    @experience_tag.user_id = set_params_experience_tag[:user_id]
     if @experience_tag.update(@experience)
       flash[:notice] = '記事を更新しました'
       redirect_to experience_path(params[:id])
@@ -62,41 +49,31 @@ class ExperiencesController < ApplicationController
     end
   end
 
-  # Call Views: experience/show.html.erb
+  # DELETE /experiences/:id
   def destroy
+    @experience = Experience.find(params[:id])
     @experience.destroy
     flash[:hazard] = '記事を削除しました'
     redirect_to experiences_path
   end
 
-  # Call Views: experience/new.html.erb
+  # GET /experiences/search_tag
   def search_tag
     return nil if params[:keyword].blank?
 
-    tags = Tag.where(['name LIKE ?', "%#{params[:keyword]}%"])
+    tags = Tag.tags_serch(params[:keyword])
     render json: { keyword: tags }
   end
 
-  # Call Views: experience/index.html.erb
-  def search_article
+  # GET /experiences/search_index
+  def search_index
+    set_view_instance_index(params, set_params_search)
     render :index
   end
 
   private
 
-  def set_experience
-    @experience = Experience.find(params[:id])
-  end
-
-  def set_search_ransack
-    @q = Experience.eager_load(:user).ransack(search_params)
-    @q.sorts = (search_params.nil? ? 'updated_at desc' : search_params[:sorts])
-    @experiences = @q.result.with_rich_text_content
-                     .includes(:experience_tag_relations, :tags, :experience_likes)
-                     .page(params[:page])
-  end
-
-  def set_like_find_params
+  def set_params_like
     if user_signed_in?
       { experience_id: params[:id], user_id: current_user.id }
     else
@@ -104,18 +81,39 @@ class ExperiencesController < ApplicationController
     end
   end
 
-  def experience_tag_params
+  def set_params_experience_tag
     params.require(:experience_tag)
           .permit(:title, :tags, :stress, :category_id, :period_id, :content)
           .merge(user_id: current_user.id)
   end
 
-  def search_params
+  def set_params_search
     if params[:q].blank?
       params[:q]
     else
       params.require(:q)
-            .permit(:title_or_stress_or_content_body_cont, :tags_id_eq, :category_id_eq, :period_id_eq, :user_high_id_eq, :user_low_id_eq, :user_housemate_id_eq, :user_hobby_id_eq, :user_clean_status_id_eq, :user_range_with_store_id_eq, :sorts)
+            .permit(:title_or_stress_or_content_body_cont,
+                    :tags_id_eq,
+                    :category_id_eq,
+                    :period_id_eq,
+                    :user_high_id_eq,
+                    :user_low_id_eq,
+                    :user_housemate_id_eq,
+                    :user_hobby_id_eq,
+                    :user_clean_status_id_eq,
+                    :user_range_with_store_id_eq,
+                    :sorts)
     end
+  end
+
+  def set_params_experience_tag_edit(experience)
+    {
+      title: experience.title,
+      tags: experience.tags.map { |tag| tag.name },
+      stress: experience.stress,
+      category_id: experience.category_id,
+      period_id: experience.period_id,
+      content: experience.content
+    }
   end
 end

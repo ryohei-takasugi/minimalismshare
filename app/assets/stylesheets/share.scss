@@ -5,9 +5,6 @@
 //  共通変数
 // -----------------------------
 $line-color: #D8D8D8;
-$line-pale-color: #eeded6;
-$line-back-color: #f3d2c1;
-//$back-color: #fef6e4;
 $back-color: #eeeeee;
 $dark-back-color: #f3d2c1;
 $secondary-color: #8bd3dd;
@@ -48,6 +45,16 @@ $inactive-color: gray;
   align-items: center;
 }
 
+@mixin flex-center-justify {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin radius5-border {
+  border: 1px solid $line-color;
+  border-radius: 5px;
+}
+
 @mixin drop-down($width, $left) {
   position: relative;
   ul {
@@ -75,18 +82,16 @@ $inactive-color: gray;
 }
 
 @mixin basic-input() {
-  border: 1px solid $line-color;
-  border-radius: 5px;
+  @include radius5-border;
   margin: 5px 0 15px;
   padding: 10px;
 }
 
 @mixin submit-button() {
-  border: 1px solid $line-color;
+  @include radius5-border;
   box-shadow: 5px 5px $line-color;
   text-align: center;
   font-weight: bolder;
-  border-radius: 5px;
   &:active {
     box-shadow: none;
     position: relative;
@@ -138,8 +143,6 @@ $inactive-color: gray;
   }
 }
 @mixin show-experience() {
-  margin: 5px 5px 15px 5px;
-  padding: 15px 20px;
   border-bottom: 1px solid $line-color;
   //border-radius: 5px;
   //box-shadow: 5px 5px 0px 0 $dark-back-color;
@@ -201,10 +204,9 @@ $inactive-color: gray;
   }
 }
 @mixin cards-null() {
+  @include radius5-border;
   text-align: center;
   font-size: 18px;
-  border: 1px solid $line-color;
-  border-radius: 5px;
   padding: 100px 0;
   margin: 5px 10px;
   height: 250px;
@@ -234,9 +236,6 @@ a:hover {
   color: $font-color;
   text-decoration: underline;
 }
-// tbody td,tbody th {
-//   border-bottom: 1px solid $line-pale-color;
-// }
 .button.is-destructive {
   // $back-color, $text-color
   @include make-button(#f1929d, #fff);

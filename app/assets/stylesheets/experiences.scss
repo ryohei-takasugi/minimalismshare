@@ -5,261 +5,243 @@
 @import 'share';
 
 // -----------------------------
-//  新規投稿、編集
+//  レスポンシブデザイン（スマホ）
 // -----------------------------
-.forms-experience {
-  h1 {
-    text-align: center;
-    padding: 10px 0;
-  }
-  .forms {
-    width: 90%;
-    margin: 0 auto;
-    .search-result {
-      @include a-lists;
-      @include drop-down(400px, -20px);
-      top: -20px;
-      z-index: 5;
+body {
+  //  新規投稿、編集
+  .forms-experience {
+    h1 {
+      text-align: center;
+      padding: 10px 0;
     }
-    .field {
-      margin-bottom: 15px;
-    }
-    .flex {
-      display: flex;
-      align-items: center;
-      label {
-        width: 70px;
+    .forms {
+      width: 90%;
+      margin: 0 auto;
+      .search-result {
+        @include a-lists;
+        @include drop-down(400px, -20px);
+        top: -20px;
+        z-index: 5;
       }
-      select {
-        width: 45%;
+      .field {
+        margin-bottom: 15px;
       }
-    }
-    .actions {
-      margin: 30px 0;
-      text-align: right;
-    }
-  }
-}
-// -----------------------------
-//  一覧画面
-// -----------------------------
-.experience-index {
-  @include a-none;
-  h1 {
-    text-align: center;
-    padding: 10px 0;
-  }
-  .indexs {
-    margin: 0 auto;
-    display: flex;
-    .search-items {
-      @include make-sidebar(25%);
-      @include basic-input;
-      h2 {
-        font-size: 18px;
-        padding: 10px;
-        text-align: center;
-      }
-      details {
-        padding: 5px 0 15px;
-      }
-      input, select, button {
-        @include basic-input;
-        height: 120%;
-        width: 100%;
-        box-sizing: border-box;
-      }
-      #q_title_or_stress_or_content_body_cont {
-        padding-left: 30px;
-      }
-    }
-    .cards_null {
-      @include cards-null;
-    }
-    .cards {
-      @include cards;
-    }
-  }
-}
-// -----------------------------
-//  詳細表示
-// -----------------------------
-.experience-show {
-  @include a-none;
-  .card {
-    margin: 10px;
-    .nickname {
-      font-size: 14px;
-    }
-    .title {
-      font-size: 23px;
-      margin: 5px 0;
-    }
-    table {
-      tr {
-        line-height: normal;
-        width: calc(100% - 20px);
-        .header {
-          width: 20px;
-          padding: 10px;
+      .flex {
+        @include flex-center;
+        label {
+          width: 70px;
         }
-        .item {
-          width: calc(100% - 20px);
-          padding: 10px;
-          p {
-            margin-bottom: 0px;
-          }
-        }
-        .user-item {
-          display: inline-block;
-          margin-right: 10px;
+        select {
+          width: 45%;
         }
       }
-    }
-  }
-  .like {
-    display: flex;
-    justify-content: right;
-    margin: 10px;
-    border-bottom: 1px solid $line-color;
-    form {
-      button {
-        margin-right: 10px;
-        padding: 10px;
-        background-color: $back-color;
-        border: 1px solid $line-color;
-        border-radius: 30px;
-        .active {
-          width: 30px;
-          height: 30px;
-          color: $active-color;
-          &:hover {
-            color: $inactive-color;
-          }
-        }
-        .inactive {
-          width: 30px;
-          height: 30px;
-          color: $inactive-color;
-          &:hover {
-            color: $active-color;
-          }
-        }
-      }
-    }
-  }
-  .content {
-    margin: 10px;
-    padding: 15px 20px 30px;
-    border-bottom: 1px solid $line-color;
-  }
-  .edit {
-    display: flex;
-    justify-content: center;
-    a {
-      width: 30%;
-      margin: 20px 0 50px 10px;
-    }
-  }
-  .comment {
-    width: 100%;
-    margin: 0 auto;
-    padding: 15px 20px;
-    form {
-      text-align: right;
-      input {
-        width: 200px;
-        padding: 10px 15px;
+      .actions {
         margin: 30px 0;
+        text-align: right;
       }
     }
-    .comments {
+  }
+  // 一覧画面
+  .experience-index {
+    @include a-none;
+    h1 {
+      text-align: center;
+      padding: 10px 0;
+    }
+    .indexs {
+      margin: 0 auto;
+      display: flex;
+      .search-items {
+        @include make-sidebar(25%);
+        @include basic-input;
+        h2 {
+          font-size: 18px;
+          padding: 10px;
+          text-align: center;
+        }
+        details {
+          padding: 5px 0 15px;
+        }
+        input, select, button {
+          @include basic-input;
+          height: 120%;
+          width: 100%;
+          box-sizing: border-box;
+        }
+        #q_title_or_stress_or_content_body_cont {
+          padding-left: 30px;
+        }
+      }
+      .cards_null {
+        @include cards-null;
+      }
+      .cards {
+        @include cards;
+        .card {
+          margin: 5px 5px 15px 5px;
+          padding: 15px 20px;
+        }
+      }
+    }
+  }
+  // 詳細表示
+  .experience-show {
+    @include a-none;
+    .card {
+      margin: 5px 5px 15px 5px;
+      padding: 15px 20px;
+      @include show-experience;
+    }
+    .like {
+      display: flex;
+      justify-content: right;
+      margin: 10px;
+      border-bottom: 1px solid $line-color;
+      form {
+        button {
+          margin-right: 10px;
+          padding: 10px;
+          background-color: $back-color;
+          border: 1px solid $line-color;
+          border-radius: 30px;
+          .active {
+            width: 30px;
+            height: 30px;
+            color: $active-color;
+            &:hover {
+              color: $inactive-color;
+            }
+          }
+          .inactive {
+            width: 30px;
+            height: 30px;
+            color: $inactive-color;
+            &:hover {
+              color: $active-color;
+            }
+          }
+        }
+      }
+    }
+    .content {
+      margin: 10px;
+      padding: 15px 20px 30px;
+      border-bottom: 1px solid $line-color;
+    }
+    .edit {
+      @include flex-center-justify;
+      a {
+        width: 30%;
+        margin: 20px 0 50px 10px;
+      }
+    }
+    .comment {
+      width: 100%;
       margin: 0 auto;
       padding: 15px 20px;
-      border: 1px solid $line-color;
-      .header {
-        display: flex;
-        justify-content: space-between;
-      }
-      .contents {
-        width: 90%;
-        margin: 10px;
-        padding: 15px 20px;
-      }
-      .fotter {
-        display: flex;
-        justify-content: right;
-        margin-bottom: 20px;
-        border-bottom: 1px solid $line-color;
-        a {
+      form {
+        text-align: right;
+        input {
+          width: 200px;
           padding: 10px 15px;
+          margin: 30px 0;
+        }
+      }
+      .comments {
+        margin: 0 auto;
+        padding: 15px 20px;
+        border: 1px solid $line-color;
+        .header {
+          display: flex;
+          justify-content: space-between;
+        }
+        .contents {
+          width: 90%;
           margin: 10px;
-          border-radius: 5px;
+          padding: 15px 20px;
+        }
+        .footer {
+          display: flex;
+          justify-content: right;
+          margin-bottom: 20px;
+          border-bottom: 1px solid $line-color;
+          a {
+            padding: 10px 15px;
+            margin: 10px;
+            border-radius: 5px;
+          }
         }
       }
     }
   }
 }
-
 
 // -----------------------------
 //  レスポンシブデザイン（スマホ）
 // -----------------------------
 @media (max-width: 768px) {
-  // -----------------------------
-  //  新規投稿
-  // -----------------------------
-  .forms-experience {
-    .forms {
-      margin: 0 auto;
-      .search-result {
-        @include drop-down(90vw, -20px);
-        line-height: 40px;
-        ul {
-          background-color: $back-color;
+  body {
+    // 新規投稿
+    .forms-experience {
+      .forms {
+        margin: 0 auto;
+        .search-result {
+          @include drop-down(90vw, -20px);
+          line-height: 40px;
+          ul {
+            background-color: $back-color;
+          }
         }
       }
-    }
-    .flex {
-      display: block;
-      align-items: center;
-      label {
-        width: 100%;
-      }
-      select {
-        width: 100%;
-      }
-    }
-  }
-  // -----------------------------
-  //  一覧画面
-  // -----------------------------
-  .experience-index {
-    .indexs {
-      display: block;
-      .search-items {
-        @include make-sidebar(100%);
-        //width: 95%;
-        margin: 0 auto;
-      }
-      .cards {
-        //width: 90vw;
-        margin: 0 auto;
-        .card {
-          margin: 5px 0;
-        }
-      }
-    }
-  }
-  // -----------------------------
-  //  詳細表示
-  // -----------------------------
-  .experience-show {
-    .edit {
-      display: block;
-      a {
+      .flex {
         display: block;
-        width: 90%;
+        align-items: center;
+        label {
+          width: 100%;
+        }
+        select {
+          width: 100%;
+        }
+      }
+    }
+    // 一覧画面
+    .experience-index {
+      .indexs {
+        display: block;
+        .search-items {
+          @include make-sidebar(100%);
+          //width: 95%;
+          margin: 0 auto;
+        }
+        .cards {
+          margin: 0 auto;
+          .card {
+            padding: 10px;
+            margin: 5px 0;
+          }
+        }
+      }
+    }
+    // 詳細表示
+    .experience-show {
+      .card {
+        margin: 0;
+        padding: 5px;
+      }
+      .edit {
+        display: block;
+        a {
+          display: block;
+          width: 90%;
+        }
+      }
+      .comment {
+        .comments {
+          .header {
+            display: block;
+            font-size: 14px;
+          }
+        }
       }
     }
   }

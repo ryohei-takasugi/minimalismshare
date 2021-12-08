@@ -1,52 +1,29 @@
 module ExperiencesHelper
   # used
-  #   experiences/new
-  def set_tag
-    Tag.all
-  end
-
-  def set_category
-    Category.all
-  end
-
-  def set_period
-    Period.all
-  end
-
-  # used
-  #   experiences/index
-  def set_sort
-    [
-      ['更新日時 降順', 'updated_at desc'],
-      ['更新日時 昇順', 'updated_at asc']
-    ]
-  end
-
-  # used
   #   experiences/index -> shared/_show_experience.html
   #   experiences/show  -> shared/_show_experience.html
   #   user/:id          -> shared/_show_experience.html
   def user_liked?(experience)
-    if !experience.experience_likes.blank? && !experience.experience_likes.where(user_id: current_user.id).blank?
-      experience.experience_likes.where(user_id: current_user.id).first.like ? true : false
-    end
+    experience.experience_likes.where(user_id: current_user.id).first.like if check_likes_no_blank(experience.experience_likes)
   end
 
   def user_imitated?(experience)
-    if !experience.experience_likes.blank? && !experience.experience_likes.where(user_id: current_user.id).blank?
-      experience.experience_likes.where(user_id: current_user.id).first.imitate ? true : false
-    end
+    experience.experience_likes.where(user_id: current_user.id).first.imitate if check_likes_no_blank(experience.experience_likes)
   end
 
-  def experience_count_group_liked(like_group_list, experience)
-    like_group_list.blank? || like_group_list[experience.id].nil? ? 0 : like_group_list[experience.id]
+  def check_likes_no_blank(experience_likes)
+    experience_likes.blank? == false && experience_likes.where(user_id: current_user.id).blank? == false
   end
 
-  def experience_count_group_imitated(imitate_group_list, experience)
-    imitate_group_list.blank? || imitate_group_list[experience.id].nil? ? 0 : imitate_group_list[experience.id]
+  def count_liked(likes_count, experience)
+    likes_count.blank? || likes_count[experience.id].nil? ? 0 : likes_count[experience.id]
   end
 
-  def tags_join(tags)
+  def count_imitated(imitates_count, experience)
+    imitates_count.blank? || imitates_count[experience.id].nil? ? 0 : imitates_count[experience.id]
+  end
+
+  def join_tags(tags)
     if tags.blank? then nil
     elsif tags.instance_of?(Array)  then tags.join('、')
     elsif tags.instance_of?(String) then tags

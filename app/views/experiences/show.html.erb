@@ -1,6 +1,6 @@
 <div class="experience-show is-container-column">
   <%# 基本情報 %>
-  <%= render partial: 'shared/show_experience', locals: { experience: @experience, like_group_list: @like_group_list, imitate_group_list: @imitate_group_list } %>
+  <%= render partial: 'shared/show_experience', locals: { experience: @experience, likes_count: @likes_count, imitates_count: @imitates_count } %>
 
   <%# 評価機能 %>
   <div class="like">
@@ -68,7 +68,7 @@
         <div class="contents">
           <%= comment.comment %>
         </div>
-        <div class="fotter">
+        <div class="footer">
           <% if user_signed_in? && current_user.id == comment.user_id %>
             <%= link_to "編集", edit_experience_experience_comment_path(@experience, comment), class: "button is-secondary" %>
             <%= link_to "削除", experience_experience_comment_path(@experience, comment), class: "button is-destructive", data: { confirm: "この操作は取り消すことができません。本当にコメントの削除を実行しますか?" }, method: :delete %>
