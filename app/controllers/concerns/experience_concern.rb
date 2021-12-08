@@ -16,10 +16,10 @@ module ExperienceConcern
   def set_view_instance_show(experience_id, params_like)
     @like           = find_by_like(params_like) if user_signed_in?
     @experience     = Experience.find(experience_id)
+    @comment        = ExperienceComment.new
     # OPTIMIZE: ①テーブルの変更 : like とimitate を category カラムに統一して、groupで絞り込むことで1回のアクセスになるはず
     @likes_count    = ExperienceLike.count_likes
     @imitates_count = ExperienceLike.count_imitates
-    @comment        = ExperienceComment.new
   end
 
   def set_view_instance_form(params_experience = nil)
@@ -28,7 +28,7 @@ module ExperienceConcern
   end
 
   private
-  
+
   def find_by_like(params)
     like = ExperienceLike.find_by(params)
     like ||= ExperienceLike.new

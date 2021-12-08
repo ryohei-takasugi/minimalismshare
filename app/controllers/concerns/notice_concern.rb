@@ -18,7 +18,7 @@ module NoticeConcern
     user_notice = Notice.where(user_id: user_id)
     user_notice.update(read: true)
   end
-  
+
   private
 
   def set_params_notice(model, str)
