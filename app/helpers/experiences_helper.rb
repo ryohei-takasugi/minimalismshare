@@ -4,15 +4,11 @@ module ExperiencesHelper
   #   experiences/show  -> shared/_show_experience.html
   #   user/:id          -> shared/_show_experience.html
   def user_liked?(experience)
-    experience.experience_likes.where(user_id: current_user.id).first.like if check_likes_no_blank(experience.experience_likes)
+    experience.experience_likes.select { |s| s.user_id == current_user.id }.first.like if check_likes_no_blank(experience.experience_likes)
   end
 
   def user_imitated?(experience)
-    experience.experience_likes.where(user_id: current_user.id).first.imitate if check_likes_no_blank(experience.experience_likes)
-  end
-
-  def check_likes_no_blank(experience_likes)
-    experience_likes.blank? == false && experience_likes.where(user_id: current_user.id).blank? == false
+    experience.experience_likes.select { |s| s.user_id == current_user.id }.first.imitate if check_likes_no_blank(experience.experience_likes)
   end
 
   def count_liked(likes_count, experience)
@@ -36,5 +32,11 @@ module ExperiencesHelper
   #   experiences/show
   def confirm_author?(model)
     model.user_id == current_user.id
+  end
+
+  private 
+
+  def check_likes_no_blank(experience_likes)
+    experience_likes.blank? == false && experience_likes.select { |s| s.user_id == current_user.id }.blank? == false
   end
 end
