@@ -1,5 +1,6 @@
 require 'rails_helper'
 include ShowExperienceHelper
+include ActionTextHelper
 
 RSpec.describe '記事の投稿', type: :system do
   before do

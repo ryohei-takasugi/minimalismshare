@@ -139,59 +139,18 @@ RSpec.describe '真似したの投稿／取り消し', type: :system do
       expect(current_path).to eq(experience_path(@experience_tag2))
       # 真似したボタンをクリックする
       click_change_button(button_number: 1, change_count: 1)
-      # within('main') do
-      #   within('.like') do
-      #     expect{
-      #       all('button')[1].click
-      #     }.to change { ExperienceLike.count }.by(1)
-      #   end
-      # end
       # 閲覧ページに真似したの件数が追加される（1件）
       confirm_show(model: @experience_tag2, imitate_count: 1)
       confirm_imitate_button(status: false)
-      # within('main') do
-      #   within('.card') do
-      #     expect(page).to have_link(@experience_tag2.title, href: experience_path(@experience_tag2))
-      #     expect(all('tr')[5]).to have_content('0 いいね')
-      #     expect(all('tr')[6]).to have_content('1 真似した')
-      #   end
-      #   within('.like') do
-      #     expect(find('input[name="experiences_like[imitate]"]', visible: false).value).to eq("false")
-      #   end
-      # end
       # 真似したボタンをクリックする
       click_change_button(button_number: 1, change_count: 0)
-      # within('main') do
-      #   within('.like') do
-      #     expect{
-      #       all('button')[1].click
-      #     }.to change { ExperienceLike.count }.by(0)
-      #   end
-      # end
       # 閲覧ページに真似したの件数が現象する（0件）
       confirm_show(model: @experience_tag2)
       confirm_imitate_button(status: true)
-      # within('main') do
-      #   within('.card') do
-      #     expect(page).to have_link(@experience_tag2.title, href: experience_path(@experience_tag2))
-      #     expect(all('tr')[5]).to have_content('0 いいね')
-      #     expect(all('tr')[6]).to have_content('0 真似した')
-      #   end
-      #   within('.like') do
-      #     expect(find('input[name="experiences_like[imitate]"]', visible: false).value).to eq("true")
-      #   end
-      # end
       # 一覧ページに戻る
       visit experiences_path
       # 一覧ページでも真似したの件数が追加される（0件）
       confirm_index(model: @experience_tag2)
-      # within('main') do
-      #   all('.card')[0] do
-      #     expect(page).to have_link(@experience_tag2.title, href: experience_path(@experience_tag2))
-      #     expect(all('tr')[5]).to have_content('0 いいね')
-      #     expect(all('tr')[6]).to have_content('0 真似した')
-      #   end
-      # end
     end
   end
   context 'いいね できないとき' do
