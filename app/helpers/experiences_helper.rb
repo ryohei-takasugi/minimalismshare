@@ -4,11 +4,19 @@ module ExperiencesHelper
   #   experiences/show  -> shared/_show_experience.html
   #   user/:id          -> shared/_show_experience.html
   def user_liked?(experience)
-    experience.experience_likes.select { |s| s.user_id == current_user.id }.first.like if check_likes_no_blank(experience.experience_likes)
+    if check_likes_no_blank(experience.experience_likes)
+      experience.experience_likes.select do |s|
+        s.user_id == current_user.id
+      end.first.like
+    end
   end
 
   def user_imitated?(experience)
-    experience.experience_likes.select { |s| s.user_id == current_user.id }.first.imitate if check_likes_no_blank(experience.experience_likes)
+    if check_likes_no_blank(experience.experience_likes)
+      experience.experience_likes.select do |s|
+        s.user_id == current_user.id
+      end.first.imitate
+    end
   end
 
   def count_liked(likes_count, experience)
@@ -34,7 +42,7 @@ module ExperiencesHelper
     model.user_id == current_user.id
   end
 
-  private 
+  private
 
   def check_likes_no_blank(experience_likes)
     experience_likes.blank? == false && experience_likes.select { |s| s.user_id == current_user.id }.blank? == false
