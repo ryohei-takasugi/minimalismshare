@@ -3,13 +3,14 @@ class ExperienceTag
   attr_accessor :title, :category_id, :period_id, :tags, :stress, :user_id
 
   with_options presence: true do
-    validates :title
+    validates :title, length: { maximum: 100 }
     validates :category_id, numericality: { other_than: 0, message: 'を入力してください' }
     validates :period_id,   numericality: { other_than: 0, message: 'を入力してください' }
-    validates :stress
+    validates :stress, length: { maximum: 100 }
     validates :content
     validates :user_id
   end
+  validates :tags_size, numericality: { less_than: 11 }, if:
 
   def initialize(attributes = {})
     super
@@ -44,6 +45,10 @@ class ExperienceTag
   end
 
   private
+
+  def tags_size
+    tags.nil? ? 0 : tags.split('、').size
+  end
 
   def save_tags(tags, experience_id)
     tags.split('、').each do |tag_name|

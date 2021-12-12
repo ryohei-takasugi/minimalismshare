@@ -98,6 +98,16 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
+      it 'nicknameは50文字以上であれば登録できない' do
+        @user.nickname = '123456789012345678901234567890123456789012345678901'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Nickname is too long (maximum is 50 characters)')
+      end
+      it 'dreamは50文字以上であれば登録できない' do
+        @user.dream = '123456789012345678901234567890123456789012345678901'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Dream is too long (maximum is 50 characters)')
+      end
       # フォーマット違いでは登録できない
       it 'passwordが数字のみであれば登録できない' do
         @user.password = '123456'

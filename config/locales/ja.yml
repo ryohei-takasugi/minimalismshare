@@ -35,6 +35,7 @@ ja:
         category_id: カテゴリ
         stress: ストレス
         content: 本文
+        tags_size: タグの数
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"

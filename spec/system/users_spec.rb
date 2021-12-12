@@ -26,7 +26,13 @@ RSpec.describe 'ユーザーの新規作成', type: :system do
       # 「アカウント登録が完了しました」の文字があることを確認する
       expect(page).to have_content('アカウント登録が完了しました')
       # トップページにログアウトボタンが表示されることを確認する
-      expect(page).to have_link('ログアウト')
+      expect(
+        find('.user-info').find('span').hover
+      ).to have_content('ログアウト')
+      # トップページにニックネームが表示されることを確認する
+      expect(
+        find('.user-info').find('span').hover
+      ).to have_content(@user.nickname)
       # サインアップページへ遷移するボタンや、ログインページへ遷移するボタンが表示されていないことを確認する
       expect(page).to have_no_link('新規登録')
       expect(page).to have_no_link('ログイン')
@@ -59,7 +65,9 @@ RSpec.describe 'ユーザーの新規作成', type: :system do
       # 「アカウント登録が完了しました」の文字があることを確認する
       expect(page).to have_content('アカウント登録が完了しました')
       # トップページにログアウトボタンが表示されることを確認する
-      expect(page).to have_link('ログアウト')
+      expect(
+        find('.user-info').find('span').hover
+      ).to have_content('ログアウト')
       # サインアップページへ遷移するボタンや、ログインページへ遷移するボタンが表示されていないことを確認する
       expect(page).to have_no_link('新規登録')
       expect(page).to have_no_link('ログイン')
@@ -111,7 +119,13 @@ RSpec.describe 'ログイン', type: :system do
       # 「ログインしました」の文字があることを確認する
       expect(page).to have_content('ログインしました')
       # カーソルを合わせるとログアウトボタンが表示されることを確認する
-      expect(page).to have_link('ログアウト')
+      expect(
+        find('.user-info').find('span').hover
+      ).to have_content('ログアウト')
+      # トップページにニックネームが表示されることを確認する
+      expect(
+        find('.user-info').find('span').hover
+      ).to have_content(@user.nickname)
       # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
       expect(page).to have_no_link('新規登録')
       expect(page).to have_no_link('ログイン')

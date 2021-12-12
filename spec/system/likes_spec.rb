@@ -34,7 +34,7 @@ RSpec.describe 'いいねの投稿／取り消し', type: :system do
       # 一覧ページでもいいねの件数が追加される（1件）
       confirm_index(model: @experience_tag2, like_count: 1)
       # ログアウトする
-      click_link('ログアウト')
+      find('.user-info').find('span').hover.click_link('ログアウト')
       # いいね した記事のユーザーでログインする
       sign_in(user: @user2)
       # 通知が増えている（1件）
@@ -118,7 +118,7 @@ RSpec.describe '真似したの投稿／取り消し', type: :system do
       # 一覧ページでも真似したの件数が追加される（1件）
       confirm_index(model: @experience_tag2, imitate_count: 1)
       # ログアウトする
-      click_link('ログアウト')
+      find('.user-info').find('span').hover.click_link('ログアウト')
       # いいね した記事のユーザーでログインする
       sign_in(user: @user2)
       # 通知が増えている（1件）

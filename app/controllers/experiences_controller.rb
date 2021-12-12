@@ -45,6 +45,7 @@ class ExperiencesController < ApplicationController
       flash[:notice] = '記事を更新しました'
       redirect_to experience_path(params[:id])
     else
+      @exprience_hash = set_hash_exprience
       render :edit
     end
   end
