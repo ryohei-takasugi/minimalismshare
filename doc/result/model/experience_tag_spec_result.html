@@ -281,48 +281,48 @@ a {
 <div class="results">
 <div id="div_group_1" class="example_group passed">
   <dl style="margin-left: 0px;">
-  <dt id="example_group_1" class="passed">いいねの投稿／取り消し</dt>
+  <dt id="example_group_1" class="passed">ExperienceTag</dt>
   </dl>
 </div>
 <div id="div_group_2" class="example_group passed">
   <dl style="margin-left: 15px;">
-  <dt id="example_group_2" class="passed">いいね できるとき</dt>
-    <script type="text/javascript">moveProgressBar('16.6');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページに遷移して いいね することができる</span><span class='duration'>8.49864s</span></dd>
-    <script type="text/javascript">moveProgressBar('33.3');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページに遷移して いいね済みを取り消す ことができる</span><span class='duration'>2.70207s</span></dd>
+  <dt id="example_group_2" class="passed">経験の投稿</dt>
   </dl>
 </div>
 <div id="div_group_3" class="example_group passed">
-  <dl style="margin-left: 15px;">
-  <dt id="example_group_3" class="passed">いいね できないとき</dt>
-    <script type="text/javascript">moveProgressBar('50.0');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしていないユーザーは記事閲覧ページに遷移しても いいね ボタンが表示されない</span><span class='duration'>1.68732s</span></dd>
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_3" class="passed">投稿できる場合</dt>
+    <script type="text/javascript">moveProgressBar('9.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">title, tags, category_id, period_id, stress, user_id が存在すれば登録できる</span><span class='duration'>0.05900s</span></dd>
+    <script type="text/javascript">moveProgressBar('18.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">tags は無くても登録できる</span><span class='duration'>0.01473s</span></dd>
   </dl>
 </div>
 <div id="div_group_4" class="example_group passed">
-  <dl style="margin-left: 0px;">
-  <dt id="example_group_4" class="passed">真似したの投稿／取り消し</dt>
-  </dl>
-</div>
-<div id="div_group_5" class="example_group passed">
-  <dl style="margin-left: 15px;">
-  <dt id="example_group_5" class="passed">真似した できるとき</dt>
-    <script type="text/javascript">moveProgressBar('66.6');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページに遷移して 真似した することができる</span><span class='duration'>4.13378s</span></dd>
-    <script type="text/javascript">moveProgressBar('83.3');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページに遷移して 真似した済みを取り消す ことができる</span><span class='duration'>2.71283s</span></dd>
-  </dl>
-</div>
-<div id="div_group_6" class="example_group passed">
-  <dl style="margin-left: 15px;">
-  <dt id="example_group_6" class="passed">いいね できないとき</dt>
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_4" class="passed">投稿できない場合</dt>
+    <script type="text/javascript">moveProgressBar('27.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">title が空では登録できない</span><span class='duration'>0.01482s</span></dd>
+    <script type="text/javascript">moveProgressBar('36.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">category_id が空では登録できない</span><span class='duration'>0.01282s</span></dd>
+    <script type="text/javascript">moveProgressBar('45.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">period_id が空では登録できない</span><span class='duration'>0.01390s</span></dd>
+    <script type="text/javascript">moveProgressBar('54.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">stress が空では登録できない</span><span class='duration'>0.01363s</span></dd>
+    <script type="text/javascript">moveProgressBar('63.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">user_id が空では登録できない</span><span class='duration'>0.01384s</span></dd>
+    <script type="text/javascript">moveProgressBar('72.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">title が100文字以上では登録できない</span><span class='duration'>0.01309s</span></dd>
+    <script type="text/javascript">moveProgressBar('81.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">stress が100文字以上では登録できない</span><span class='duration'>0.01348s</span></dd>
+    <script type="text/javascript">moveProgressBar('90.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">category_id が0では登録できない</span><span class='duration'>0.01546s</span></dd>
     <script type="text/javascript">moveProgressBar('100.0');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしていないユーザーは記事閲覧ページに遷移しても いいね ボタンが表示されない</span><span class='duration'>1.63002s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">period_id が0では登録できない</span><span class='duration'>0.01365s</span></dd>
   </dl>
 </div>
-<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>21.36851 seconds</strong>";</script>
-<script type="text/javascript">document.getElementById('totals').innerHTML = "6 examples, 0 failures";</script>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>0.20076 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "11 examples, 0 failures";</script>
 </div>
 </div>
 </body>
