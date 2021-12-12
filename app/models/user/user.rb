@@ -17,8 +17,8 @@ class User < ApplicationRecord
   has_many :experience_comments, dependent: :destroy
   has_many :notices, dependent: :destroy
   # validations
-  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-  # PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W_])[!-~]{6,}+\z/
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d!-~]+\z/i.freeze
   validates :password, presence: true, format: { with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください' }
-  validates :nickname, presence: true, length: { maximum: 6, message: 'ニックネームは６文字以下です。' }
+  validates :nickname, presence: true, length: { maximum: 50 }
+  validates :dream, length: { maximum: 50 }
 end

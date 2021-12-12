@@ -36,8 +36,18 @@ body {
       margin: 0 0 0 auto;
       z-index: 10;
     }
+    .user-info {
+      @include drop-down(30px, -4vw);
+      div {
+        margin: 0 0 0 auto;
+        z-index: 10;
+      }
+    }
     .notice-mobile {
-      visibility: hidden;
+      display: none;
+    }
+    .user-info-mobile {
+      display: none;
     }
     .space {
       border-left: 1px solid $line-color;
@@ -75,11 +85,17 @@ body {
         height: 5px;
       }
       .notice {
-        visibility: hidden;
+        display: none;
+      }
+      .user-info {
+        display: none;
       }
       .notice-mobile {
-        visibility: visible;
+        display: inline;
         @include notice-badge;
+      }
+      .user-info-mobile {
+        display: inline;
       }
     }
   }

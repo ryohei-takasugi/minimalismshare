@@ -73,8 +73,20 @@
                   <% end %>
                 </li>
                 <li class="space"></li>
-                <li><%= link_to current_user.nickname, "/users/#{current_user.id}" %></li>
-                <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+                <li class="user-info">
+                  <div>
+                    <span>アカウント
+                      <ul>
+                        <li>
+                          <%= link_to current_user.nickname, "/users/#{current_user.id}" %>
+                          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                        </li>
+                      </ul>
+                    </span>
+                  </div>
+                </li>
+                <li class="user-info-mobile"><%= link_to current_user.nickname, "/users/#{current_user.id}" %></li>
+                <li class="user-info-mobile"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
                 <% else %>
                   <li><%= link_to "みんなの経験", experiences_path %></li>
                   <li><%= link_to 'ログイン', new_user_session_path %></li>

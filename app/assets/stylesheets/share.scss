@@ -70,14 +70,15 @@ $inactive-color: gray;
     border: 1px solid $line-color;
     background-color: $back-color;
     font-family: $main-font;
+    li {
+      margin-right: 28px;
+      word-break: break-all;
+    }
   }
   &:active, &:hover { 
     ul {
       visibility: visible;
       opacity: 1;
-      li {
-        margin-right: 28px;
-      }
     }
   }
 }
