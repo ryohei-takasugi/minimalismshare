@@ -10,7 +10,7 @@ class ExperienceTag
     validates :content
     validates :user_id
   end
-  validates :tags_size, numericality: { less_than: 11 }
+  validates :tags_size, numericality: { less_than: 11 }, if:
 
   def initialize(attributes = {})
     super
@@ -47,7 +47,7 @@ class ExperienceTag
   private
 
   def tags_size
-    tags.split('、').size
+    tags.nil? ? 0 : tags.split('、').size
   end
 
   def save_tags(tags, experience_id)
