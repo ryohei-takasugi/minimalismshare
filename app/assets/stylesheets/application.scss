@@ -37,8 +37,8 @@ body {
       z-index: 10;
     }
     .user-info {
-      @include drop-down(30px, -4vw);
       div {
+        @include drop-down(30px, -4vw);
         margin: 0 0 0 auto;
         z-index: 10;
       }
