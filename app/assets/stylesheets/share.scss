@@ -30,6 +30,7 @@ $inactive-color: gray;
   a {
     text-decoration: none;
     color: $font-color;
+    word-break: break-all;
   }
 }
 
