@@ -1,8 +1,8 @@
 module ShowExperienceHelper
   def edit_show(model:)
-    fill_in 'タイトル', with: "#{@experience_tag1.title}#{add_str}"
+    fill_in 'タイトル', with: set_str_edit(@experience_tag1.title)
     fill_in 'experience_tag[tags]', with: "#{set_tags_list(@experience_tag1.tags).join('、')}、#{add_str}"
-    fill_in 'ストレス', with: "#{@experience_tag1.stress}#{add_str}"
+    fill_in 'ストレス', with: set_str_edit(@experience_tag1.stress)
     select edit_category(model).name, from: 'experience_tag_category_id'
     select edit_period(model).name, from: 'experience_tag_period_id'
     fill_in_rich_text_area nil, with: "#{@experience_tag1.content}#{add_str}"
@@ -23,9 +23,9 @@ module ShowExperienceHelper
     category         = model.category.name
     period           = model.period.name
     if edit
-      title     = title     << add_str
+      title     = set_str_edit(title)
       tags_list = tags_list << add_str
-      stress    = stress    << add_str
+      stress    = set_str_edit(stress)
       category  = edit_category(model).name
       period    = edit_period(model).name
     end
@@ -96,12 +96,19 @@ module ShowExperienceHelper
 
   def set_tags_list(tags)
     if tags.instance_of?(Array)
-      tags
+      result = tags
     elsif tags.instance_of?(String)
-      tags.split('、')
+      result = tags.split('、')
     else
-      tags.map { |tag| tag.name }
+      result = tags.map { |tag| tag.name }
     end
+    result[0..8]
+  end
+
+  def set_str_edit(str)
+    result = str[0..95]
+    result << add_str
+    result
   end
 
   def edit_category(model)
