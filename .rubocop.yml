@@ -52,7 +52,7 @@ Metrics/BlockNesting:
 Metrics/ClassLength:
  Enabled: false
 
-# 空メソッドの場合に、1行のスタイルにしない　NG例：def style1; end
+# 空メソッドの場合に、1行のスタイルにしない NG例：def style1; end
 Style/EmptyMethod:
  EnforcedStyle: expanded
 
@@ -79,3 +79,7 @@ Style/FrozenStringLiteralComment:
 # メソッドパラメータ名の最小文字数を設定
 Naming/MethodParameterName:
  MinNameLength: 1
+
+# 正規表現で1文字だけ指定するとき文字クラスを使っていないかチェック（無効）
+Style/RedundantRegexpCharacterClass:
+  Enabled: false
