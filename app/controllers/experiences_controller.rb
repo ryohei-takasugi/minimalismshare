@@ -3,6 +3,7 @@ class ExperiencesController < ApplicationController
   include HashModelConcern
   include RansackConcern
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :confirm_identification, only: [:edit, :update, :destroy]
 
   # GET /experiences
   def index
@@ -116,5 +117,10 @@ class ExperiencesController < ApplicationController
       period_id: experience.period_id,
       content: experience.content
     }
+  end
+
+  def confirm_identification
+    experience = Experience.find(params[:id])
+    redirect_to experiences_path unless experience.user_id == current_user.id
   end
 end
