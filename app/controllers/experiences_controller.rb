@@ -17,6 +17,7 @@ class ExperiencesController < ApplicationController
 
   # POST /experiences
   def create
+    set_view_instance_form
     @experience_tag = ExperienceTag.new(set_params_experience_tag)
     if @experience_tag.save
       flash[:notice] = '新しい記事を登録しました'
