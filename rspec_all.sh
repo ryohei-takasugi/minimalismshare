@@ -9,6 +9,14 @@ bundle exec rspec --format p --format html --out doc/result/model/notice_spec_re
 bundle exec rspec --format p --format html --out doc/result/model/user_spec_result.html spec/models/user_spec.rb
 
 echo "-------------------"
+echo "requests spec"
+DIR=./spec/requests
+for pathfile in $DIR/*.rb; do
+  file_name=`basename $pathfile | sed -r 's/([a-z_]+).rb/\1/'`
+  bundle exec rspec --format p --format html --out doc/result/requests/${file_name}_spec.html $pathfile
+done
+
+echo "-------------------"
 echo "system spec"
 DIR=./spec/system
 for pathfile in $DIR/*.rb; do
