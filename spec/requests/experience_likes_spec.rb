@@ -23,7 +23,7 @@ RSpec.describe 'ExperienceLikes', type: :request do
           post "/experiences/#{@experience_tag.id}/experience_likes", params: like_params, headers: auth_login
         end.to change { ExperienceLike.count }.by(0)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq('experiences')
       end
       it 'returns http success(like)' do
         sign_in @user1
@@ -32,7 +32,7 @@ RSpec.describe 'ExperienceLikes', type: :request do
           post "/experiences/#{@experience_tag.id}/experience_likes", params: like_params, headers: auth_login
         end.to change { ExperienceLike.count }.by(1)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
       end
       it 'returns http success(imitate)' do
         sign_in @user1
@@ -41,7 +41,7 @@ RSpec.describe 'ExperienceLikes', type: :request do
           post "/experiences/#{@experience_tag.id}/experience_likes", params: like_params, headers: auth_login
         end.to change { ExperienceLike.count }.by(1)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
       end
     end
     context 'PATCH  /experiences/:experience_id/experience_likes/:id' do
@@ -64,26 +64,29 @@ RSpec.describe 'ExperienceLikes', type: :request do
         sign_in @user2
         like_params = { experiences_like: { like: true }, experience_id: @experience_tag.id, user_id: @user2.id }
         expect do
-          patch "/experiences/#{@experience_tag.id}/experience_likes/#{@experience_likes.id}", params: like_params, headers: auth_login
+          patch "/experiences/#{@experience_tag.id}/experience_likes/#{@experience_likes.id}", params: like_params,
+                                                                                               headers: auth_login
         end.to change { ExperienceLike.count }.by(0)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq('experiences')
       end
       it 'returns http success(like)' do
         like_params = { experiences_like: { like: false }, experience_id: @experience_tag.id, user_id: @user1.id }
         expect do
-          patch "/experiences/#{@experience_tag.id}/experience_likes/#{@experience_likes.id}", params: like_params, headers: auth_login
+          patch "/experiences/#{@experience_tag.id}/experience_likes/#{@experience_likes.id}", params: like_params,
+                                                                                               headers: auth_login
         end.to change { ExperienceLike.count }.by(0)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
       end
       it 'returns http success(imitate)' do
         like_params = { experiences_like: { imitate: false }, experience_id: @experience_tag.id, user_id: @user1.id }
         expect do
-          patch "/experiences/#{@experience_tag.id}/experience_likes/#{@experience_likes.id}", params: like_params, headers: auth_login
+          patch "/experiences/#{@experience_tag.id}/experience_likes/#{@experience_likes.id}", params: like_params,
+                                                                                               headers: auth_login
         end.to change { ExperienceLike.count }.by(0)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
       end
     end
     context 'PUT    /experiences/:experience_id/experience_likes/:id' do
@@ -106,26 +109,29 @@ RSpec.describe 'ExperienceLikes', type: :request do
         sign_in @user2
         like_params = { experiences_like: { like: true }, experience_id: @experience_tag.id, user_id: @user2.id }
         expect do
-          put "/experiences/#{@experience_tag.id}/experience_likes/#{@experience_likes.id}", params: like_params, headers: auth_login
+          put "/experiences/#{@experience_tag.id}/experience_likes/#{@experience_likes.id}", params: like_params,
+                                                                                             headers: auth_login
         end.to change { ExperienceLike.count }.by(0)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq('experiences')
       end
       it 'returns http success(like)' do
         like_params = { experiences_like: { like: false }, experience_id: @experience_tag.id, user_id: @user1.id }
         expect do
-          put "/experiences/#{@experience_tag.id}/experience_likes/#{@experience_likes.id}", params: like_params, headers: auth_login
+          put "/experiences/#{@experience_tag.id}/experience_likes/#{@experience_likes.id}", params: like_params,
+                                                                                             headers: auth_login
         end.to change { ExperienceLike.count }.by(0)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
       end
       it 'returns http success(imitate)' do
         like_params = { experiences_like: { imitate: false }, experience_id: @experience_tag.id, user_id: @user1.id }
         expect do
-          put "/experiences/#{@experience_tag.id}/experience_likes/#{@experience_likes.id}", params: like_params, headers: auth_login
+          put "/experiences/#{@experience_tag.id}/experience_likes/#{@experience_likes.id}", params: like_params,
+                                                                                             headers: auth_login
         end.to change { ExperienceLike.count }.by(0)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
       end
     end
   end

@@ -95,13 +95,13 @@ module ShowExperienceHelper
   end
 
   def set_tags_list(tags)
-    if tags.instance_of?(Array)
-      result = tags
-    elsif tags.instance_of?(String)
-      result = tags.split('、')
-    else
-      result = tags.map { |tag| tag.name }
-    end
+    result = if tags.instance_of?(Array)
+               tags
+             elsif tags.instance_of?(String)
+               tags.split('、')
+             else
+               tags.map { |tag| tag.name }
+             end
     result[0..8]
   end
 

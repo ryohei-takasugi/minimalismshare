@@ -42,7 +42,7 @@ RSpec.describe 'Experiences', type: :request do
         sign_in @user2
         get "/experiences/#{@experience_tag.id}/edit", params: { id: @experience_tag.id }, headers: auth_login
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq('experiences')
       end
       it 'returns http success' do
         sign_in @user1
@@ -84,23 +84,26 @@ RSpec.describe 'Experiences', type: :request do
         @keyword_params = { keyword: @tag2.name }
         get '/experiences/search_tag', params: @keyword_params, headers: auth_login
         expect(response).to have_http_status 200
-        expect(response.content_type).to eq "application/json; charset=utf-8"
-        expect(JSON.parse(response.body)["keyword"].size).to eq(0)
+        expect(response.content_type).to eq 'application/json; charset=utf-8'
+        expect(JSON.parse(response.body)['keyword'].size).to eq(0)
       end
       it 'returns http success' do
         @keyword_params = { keyword: @tag1.name }
         get '/experiences/search_tag', params: @keyword_params, headers: auth_login
         expect(response).to have_http_status 200
-        expect(response.content_type).to eq "application/json; charset=utf-8"
-        expect(JSON.parse(response.body)["keyword"].size).to eq(1)
-        JSON.parse(response.body)["keyword"].each do |word|
-          expect(word["name"]).to eq(@tag1.name)
+        expect(response.content_type).to eq 'application/json; charset=utf-8'
+        expect(JSON.parse(response.body)['keyword'].size).to eq(1)
+        JSON.parse(response.body)['keyword'].each do |word|
+          expect(word['name']).to eq(@tag1.name)
         end
       end
     end
     context 'GET    /experiences/search_index' do
       before do
-        @q_params = {"q"=>{"title_or_stress_or_content_body_cont"=>"", "tags_id_eq"=>"", "category_id_eq"=>"1", "period_id_eq"=>"", "user_high_id_eq"=>"", "user_low_id_eq"=>"", "user_housemate_id_eq"=>"", "user_hobby_id_eq"=>"", "user_clean_status_id_eq"=>"", "user_range_with_store_id_eq"=>"", "sorts"=>"created_at desc"}, "button"=>""}
+        @q_params = {
+          'q' => { 'title_or_stress_or_content_body_cont' => '', 'tags_id_eq' => '', 'category_id_eq' => '1', 'period_id_eq' => '',
+                   'user_high_id_eq' => '', 'user_low_id_eq' => '', 'user_housemate_id_eq' => '', 'user_hobby_id_eq' => '', 'user_clean_status_id_eq' => '', 'user_range_with_store_id_eq' => '', 'sorts' => 'created_at desc' }, 'button' => ''
+        }
       end
       it 'returns http error 401' do
         get '/experiences/search_index', params: @q_params, headers: nil
@@ -126,29 +129,29 @@ RSpec.describe 'Experiences', type: :request do
             stress: @experience_tag.stress,
             category_id: @experience_tag.category_id,
             period_id: @experience_tag.period_id,
-            content: "test"
+            content: 'test'
           },
           user_id: @user1.id
         }
       end
       it 'returns http error 401' do
         expect do
-          post "/experiences", params: @build_params, headers: nil
+          post '/experiences', params: @build_params, headers: nil
         end.to change { Experience.count }.by(0)
       end
       it 'render experiences/new' do
         @build_params[:experience_tag][:title] = nil
         expect do
-          post "/experiences", params: @build_params, headers: auth_login
+          post '/experiences', params: @build_params, headers: auth_login
         end.to change { Experience.count }.by(0)
-        expect(response.body).to include("記事の新規作成")
+        expect(response.body).to include('記事の新規作成')
         expect(response.redirect_url).to eq(nil)
       end
       it 'returns http success' do
         expect do
-          post "/experiences", params: @build_params, headers: auth_login
+          post '/experiences', params: @build_params, headers: auth_login
         end.to change { Experience.count }.by(1)
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq('experiences')
       end
     end
     context 'PATCH  /experiences/:id' do
@@ -162,7 +165,7 @@ RSpec.describe 'Experiences', type: :request do
             stress: @experience_tag2.stress,
             category_id: @experience_tag2.category_id,
             period_id: @experience_tag2.period_id,
-            content: "test"
+            content: 'test'
           },
           user_id: @user1.id
         }
@@ -179,7 +182,7 @@ RSpec.describe 'Experiences', type: :request do
         end.to change { Experience.count }.by(0)
         after_data = Experience.find(@experience_tag1.id)
         expect(after_data.title).to eq(@experience_tag1.title)
-        expect(response.body).to include("記事の編集")
+        expect(response.body).to include('記事の編集')
         expect(response.redirect_url).to eq(nil)
       end
       it 'returns http success' do
@@ -189,7 +192,7 @@ RSpec.describe 'Experiences', type: :request do
         expect(response).to have_http_status 302
         after_data = Experience.find(@experience_tag1.id)
         expect(after_data.title).to eq(@experience_tag2.title)
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences/#{@experience_tag1.id}")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq("experiences/#{@experience_tag1.id}")
       end
     end
     context 'PUT    /experiences/:id' do
@@ -203,7 +206,7 @@ RSpec.describe 'Experiences', type: :request do
             stress: @experience_tag2.stress,
             category_id: @experience_tag2.category_id,
             period_id: @experience_tag2.period_id,
-            content: "test"
+            content: 'test'
           },
           user_id: @user1.id
         }
@@ -220,7 +223,7 @@ RSpec.describe 'Experiences', type: :request do
         end.to change { Experience.count }.by(0)
         after_data = Experience.find(@experience_tag1.id)
         expect(after_data.title).to eq(@experience_tag1.title)
-        expect(response.body).to include("記事の編集")
+        expect(response.body).to include('記事の編集')
         expect(response.redirect_url).to eq(nil)
       end
       it 'returns http success' do
@@ -230,7 +233,7 @@ RSpec.describe 'Experiences', type: :request do
         expect(response).to have_http_status 302
         after_data = Experience.find(@experience_tag1.id)
         expect(after_data.title).to eq(@experience_tag2.title)
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences/#{@experience_tag1.id}")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq("experiences/#{@experience_tag1.id}")
       end
     end
     context 'DELETE /experiences/:id' do
@@ -242,7 +245,7 @@ RSpec.describe 'Experiences', type: :request do
           delete "/experiences/#{@experience_tag1.id}", params: nil, headers: auth_login
         end.to change { Experience.count }.by(-1)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq('experiences')
       end
     end
   end

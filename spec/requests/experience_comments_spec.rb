@@ -12,25 +12,27 @@ RSpec.describe 'ExperienceComments', type: :request do
         comment: Faker::Lorem.characters(number: rand(1..100))
       },
       user_id: @user2.id,
-      experience_id:@experience_tag.id
+      experience_id: @experience_tag.id
     }
   end
   describe 'GET' do
     before do
       @after_comment_params = {
         user_id: @user2.id,
-        experience_id:@experience_tag.id
+        experience_id: @experience_tag.id
       }
       post "/experiences/#{@experience_tag.id}/experience_comments", params: @post_comment_params, headers: auth_login
       @comment = ExperienceComment.find_by(comment: @post_comment_params[:experience_comment][:comment])
     end
     context 'GET    /experiences/:experience_id/experience_comments/:id/edit' do
       it 'returns http error 401' do
-        get "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}/edit", params: @after_comment_params, headers: nil
+        get "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}/edit", params: @after_comment_params,
+                                                                                          headers: nil
         expect(response).to have_http_status 401
       end
       it 'returns http success' do
-        get "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}/edit", params: @after_comment_params, headers: auth_login
+        get "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}/edit", params: @after_comment_params,
+                                                                                          headers: auth_login
         expect(response).to have_http_status 200
         expect(response.body).to include(@comment.comment)
         expect(response.redirect_url).to eq(nil)
@@ -58,7 +60,7 @@ RSpec.describe 'ExperienceComments', type: :request do
           post "/experiences/#{@experience_tag.id}/experience_comments", params: @post_comment_params, headers: auth_login
         end.to change { ExperienceComment.count }.by(1)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
       end
     end
   end
@@ -69,7 +71,7 @@ RSpec.describe 'ExperienceComments', type: :request do
           comment: Faker::Lorem.characters(number: rand(1..100))
         },
         user_id: @user2.id,
-        experience_id:@experience_tag.id
+        experience_id: @experience_tag.id
       }
       post "/experiences/#{@experience_tag.id}/experience_comments", params: @post_comment_params, headers: auth_login
       @comment = ExperienceComment.find_by(comment: @post_comment_params[:experience_comment][:comment])
@@ -77,24 +79,27 @@ RSpec.describe 'ExperienceComments', type: :request do
     context 'PATCH  /experiences/:experience_id/experience_comments/:id' do
       it 'returns http error 401' do
         expect do
-          patch "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}", params: @after_comment_params, headers: nil
+          patch "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}", params: @after_comment_params,
+                                                                                         headers: nil
         end.to change { ExperienceComment.count }.by(0)
         expect(response).to have_http_status 401
       end
       it 'error(render show)' do
         @after_comment_params[:experience_comment][:comment] = ''
         expect do
-          patch "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}", params: @after_comment_params, headers: auth_login
+          patch "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}", params: @after_comment_params,
+                                                                                         headers: auth_login
         end.to change { ExperienceComment.count }.by(0)
         expect(response).to have_http_status 200
         expect(response.redirect_url).to eq(nil)
       end
       it 'success(redirect show)' do
         expect do
-          patch "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}", params: @after_comment_params, headers: auth_login
+          patch "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}", params: @after_comment_params,
+                                                                                         headers: auth_login
         end.to change { ExperienceComment.count }.by(0)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
       end
     end
     context 'PUT    /experiences/:experience_id/experience_comments/:id' do
@@ -107,17 +112,19 @@ RSpec.describe 'ExperienceComments', type: :request do
       it 'error(render show)' do
         @after_comment_params[:experience_comment][:comment] = ''
         expect do
-          put "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}", params: @after_comment_params, headers: auth_login
+          put "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}", params: @after_comment_params,
+                                                                                       headers: auth_login
         end.to change { ExperienceComment.count }.by(0)
         expect(response).to have_http_status 200
         expect(response.redirect_url).to eq(nil)
       end
       it 'returns http success' do
         expect do
-          put "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}", params: @after_comment_params, headers: auth_login
+          put "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}", params: @after_comment_params,
+                                                                                       headers: auth_login
         end.to change { ExperienceComment.count }.by(0)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
       end
     end
     context 'DELETE /experiences/:experience_id/experience_comments/:id' do
@@ -132,7 +139,7 @@ RSpec.describe 'ExperienceComments', type: :request do
           delete "/experiences/#{@experience_tag.id}/experience_comments/#{@comment.id}", params: nil, headers: auth_login
         end.to change { ExperienceComment.count }.by(-1)
         expect(response).to have_http_status 302
-        expect(response.redirect_url.match("http://#{response.request.env["SERVER_NAME"]}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
+        expect(response.redirect_url.match("http://#{response.request.env['SERVER_NAME']}/(.*)")[1]).to eq("experiences/#{@experience_tag.id}")
       end
     end
   end
