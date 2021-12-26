@@ -48,12 +48,12 @@ RSpec.describe ExperienceTag, type: :model do
       it 'title が100文字以上では登録できない' do
         @experience_tag.title = '12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901'
         @experience_tag.valid?
-        expect(@experience_tag.errors.full_messages).to include("Title is too long (maximum is 100 characters)")
+        expect(@experience_tag.errors.full_messages).to include('Title is too long (maximum is 100 characters)')
       end
       it 'stress が100文字以上では登録できない' do
         @experience_tag.stress = '12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901'
         @experience_tag.valid?
-        expect(@experience_tag.errors.full_messages).to include("Stress is too long (maximum is 100 characters)")
+        expect(@experience_tag.errors.full_messages).to include('Stress is too long (maximum is 100 characters)')
       end
       # フォーマットエラー
       it 'category_id が0では登録できない' do

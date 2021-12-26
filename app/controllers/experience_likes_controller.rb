@@ -2,6 +2,7 @@ class ExperienceLikesController < ApplicationController
   include ExperienceConcern
   include NoticeConcern
   before_action :authenticate_user!
+  before_action :confirm_identification
 
   # POST /experiences/:experience_id/experience_likes
   def create
@@ -37,5 +38,10 @@ class ExperienceLikesController < ApplicationController
 
   def set_params_like
     { experience_id: params[:experience_id], user_id: current_user.id }
+  end
+
+  def confirm_identification
+    experience = Experience.find(params[:experience_id])
+    redirect_to experiences_path if experience.user_id == current_user.id
   end
 end

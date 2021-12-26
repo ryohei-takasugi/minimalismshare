@@ -1,4 +1,4 @@
-module BasicAuthHelper
+module BasicAuthSystemHelper
   def basic_visit(path = '/')
     username = ENV['BASIC_AUTH_USER']
     password = ENV['BASIC_AUTH_PASSWORD']

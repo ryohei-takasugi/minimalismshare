@@ -3,6 +3,7 @@ class ExperiencesController < ApplicationController
   include HashModelConcern
   include RansackConcern
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :confirm_identification, only: [:edit, :update, :destroy]
 
   # GET /experiences
   def index
@@ -16,6 +17,7 @@ class ExperiencesController < ApplicationController
 
   # POST /experiences
   def create
+    set_view_instance_form
     @experience_tag = ExperienceTag.new(set_params_experience_tag)
     if @experience_tag.save
       flash[:notice] = '新しい記事を登録しました'
@@ -116,5 +118,10 @@ class ExperiencesController < ApplicationController
       period_id: experience.period_id,
       content: experience.content
     }
+  end
+
+  def confirm_identification
+    experience = Experience.find(params[:id])
+    redirect_to experiences_path unless experience.user_id == current_user.id
   end
 end
