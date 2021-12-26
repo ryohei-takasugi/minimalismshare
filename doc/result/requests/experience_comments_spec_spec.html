@@ -281,27 +281,77 @@ a {
 <div class="results">
 <div id="div_group_1" class="example_group passed">
   <dl style="margin-left: 0px;">
-  <dt id="example_group_1" class="passed">コメント投稿</dt>
-    <script type="text/javascript">moveProgressBar('33.3');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページでコメント投稿できる</span><span class='duration'>7.38589s</span></dd>
+  <dt id="example_group_1" class="passed">ExperienceComments</dt>
   </dl>
 </div>
 <div id="div_group_2" class="example_group passed">
-  <dl style="margin-left: 0px;">
-  <dt id="example_group_2" class="passed">コメント編集</dt>
-    <script type="text/javascript">moveProgressBar('66.6');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページでコメントを編集できる</span><span class='duration'>2.36456s</span></dd>
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_2" class="passed">GET</dt>
   </dl>
 </div>
 <div id="div_group_3" class="example_group passed">
-  <dl style="margin-left: 0px;">
-  <dt id="example_group_3" class="passed">コメント削除</dt>
-    <script type="text/javascript">moveProgressBar('100.0');</script>
-    <dd class="example passed"><span class="passed_spec_name">ログインしたユーザーは記事閲覧ページでコメントを削除できる</span><span class='duration'>1.91348s</span></dd>
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_3" class="passed">GET    /experiences/:experience_id/experience_comments/:id/edit</dt>
+    <script type="text/javascript">moveProgressBar('7.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns http error 401</span><span class='duration'>0.18058s</span></dd>
+    <script type="text/javascript">moveProgressBar('15.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns http success</span><span class='duration'>0.76555s</span></dd>
   </dl>
 </div>
-<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>11.66573 seconds</strong>";</script>
-<script type="text/javascript">document.getElementById('totals').innerHTML = "3 examples, 0 failures";</script>
+<div id="div_group_4" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_4" class="passed">POST</dt>
+  </dl>
+</div>
+<div id="div_group_5" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_5" class="passed">POST   /experiences/:experience_id/experience_comments</dt>
+    <script type="text/javascript">moveProgressBar('23.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns http error 401</span><span class='duration'>0.04311s</span></dd>
+    <script type="text/javascript">moveProgressBar('30.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">error(render show)</span><span class='duration'>0.10776s</span></dd>
+    <script type="text/javascript">moveProgressBar('38.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">success(redirect show)</span><span class='duration'>0.07068s</span></dd>
+  </dl>
+</div>
+<div id="div_group_6" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_6" class="passed">PATCH/PUT/DELETE</dt>
+  </dl>
+</div>
+<div id="div_group_7" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_7" class="passed">PATCH  /experiences/:experience_id/experience_comments/:id</dt>
+    <script type="text/javascript">moveProgressBar('46.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns http error 401</span><span class='duration'>0.05380s</span></dd>
+    <script type="text/javascript">moveProgressBar('53.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">error(render show)</span><span class='duration'>0.12735s</span></dd>
+    <script type="text/javascript">moveProgressBar('61.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">success(redirect show)</span><span class='duration'>0.05398s</span></dd>
+  </dl>
+</div>
+<div id="div_group_8" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_8" class="passed">PUT    /experiences/:experience_id/experience_comments/:id</dt>
+    <script type="text/javascript">moveProgressBar('69.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns http error 401</span><span class='duration'>0.06466s</span></dd>
+    <script type="text/javascript">moveProgressBar('76.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">error(render show)</span><span class='duration'>0.19726s</span></dd>
+    <script type="text/javascript">moveProgressBar('84.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns http success</span><span class='duration'>0.06372s</span></dd>
+  </dl>
+</div>
+<div id="div_group_9" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_9" class="passed">DELETE /experiences/:experience_id/experience_comments/:id</dt>
+    <script type="text/javascript">moveProgressBar('92.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns http error 401</span><span class='duration'>0.06685s</span></dd>
+    <script type="text/javascript">moveProgressBar('100.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns http success</span><span class='duration'>0.05774s</span></dd>
+  </dl>
+</div>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>1.85585 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "13 examples, 0 failures";</script>
 </div>
 </div>
 </body>
